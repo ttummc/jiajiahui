@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>申请加入非营利性组织</title>
+    <link rel="stylesheet" href="jiajiahui/styles.css">
+    <style>
+        /* 额外的申请页面特定样式 */
+        .application-section {
+            padding: 80px 0;
+            background: #F8FCFF;
+            transition: background 0.3s;
+        }
+        
+        body.dark-mode .application-section {
+            background: #1a1a1a;
+        }
+        
+        .application-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+            transition: background 0.3s, box-shadow 0.3s;
+        }
+        
+        body.dark-mode .application-container {
+            background: #2a2a2a;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.4);
+        }
+        
+        .application-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: #0078D7;
+        }
+        
+        .application-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            color: #666;
+        }
+        
+        body.dark-mode .application-subtitle {
+            color: #999;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #333;
+            font-size: 1rem;
+        }
+        
+        body.dark-mode .form-label {
+            color: #f0f0f0;
+        }
+        
+        .form-input,
+        .form-textarea,
+        .form-select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            font-family: inherit;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            background: white;
+        }
+        
+        body.dark-mode .form-input,
+        body.dark-mode .form-textarea,
+        body.dark-mode .form-select {
+            background: #3a3a3a;
+            border-color: #555;
+            color: #f0f0f0;
+        }
+        
+        .form-input:focus,
+        .form-textarea:focus,
+        .form-select:focus {
+            outline: none;
+            border-color: #0078D7;
+            box-shadow: 0 0 0 3px rgba(0, 120, 215, 0.1);
+        }
+        
+        body.dark-mode .form-input:focus,
+        body.dark-mode .form-textarea:focus,
+        body.dark-mode .form-select:focus {
+            border-color: #0078D7;
+            box-shadow: 0 0 0 3px rgba(0, 120, 215, 0.2);
+        }
+        
+        .form-textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .submit-section {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 2px solid #f0f0f0;
+        }
+        
+        body.dark-mode .submit-section {
+            border-top-color: #444;
+        }
+        
+        .submit-btn {
+            background: #0078D7;
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+            min-width: 200px;
+        }
+        
+        .submit-btn:hover {
+            background: #005A9E;
+            transform: translateY(-2px);
+        }
+        
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+        
+        .required {
+            color: #e74c3c;
+        }
+        
+        .privacy-notice {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 20px;
+            text-align: center;
+            line-height: 1.5;
+        }
+        
+        body.dark-mode .privacy-notice {
+            color: #999;
+        }
+        
+        /* 成功提示样式 */
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #c3e6cb;
+            display: none;
+        }
+        
+        body.dark-mode .success-message {
+            background: #1a3d1a;
+            color: #90ee90;
+            border-color: #2d5a2d;
+        }
+        
+        @media (max-width: 768px) {
+            .application-container {
+                margin: 20px;
+                padding: 30px 20px;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .application-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header class="header">
+        <div class="container">
+            <a href="#" class="logo">公益组织</a>
+            <nav>
+                <ul class="nav-list">
+                    <li><a href="#home">首页</a></li>
+                    <li><a href="#services">服务</a></li>
+                    <li><a href="#activities">活动</a></li>
+                    <li><a href="#apply">申请加入</a></li>
+                </ul>
+            </nav>
+            <button class="mobile-menu">☰</button>
+        </div>
+    </header>
+
+    <!-- 申请部分 -->
+    <section id="apply" class="application-section">
+        <div class="container">
+            <div class="application-container">
+                <h1 class="application-title">申请加入我们的组织</h1>
+                <p class="application-subtitle">加入我们，一起为公益事业贡献力量</p>
+                
+                <div class="success-message" id="successMessage">
+                    ✅ 申请提交成功！我们会尽快与您联系。
+                </div>
+                
+                <form id="applicationForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName" class="form-label">
+                                姓名 <span class="required">*</span>
+                            </label>
+                            <input type="text" id="firstName" name="firstName" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName" class="form-label">
+                                姓氏 <span class="required">*</span>
+                            </label>
+                            <input type="text" id="lastName" name="lastName" class="form-input" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="gender" class="form-label">
+                                性别 <span class="required">*</span>
+                            </label>
+                            <select id="gender" name="gender" class="form-select" required>
+                                <option value="">请选择</option>
+                                <option value="男">男</option>
+                                <option value="女">女</option>
+                                <option value="其他">其他</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="birthDate" class="form-label">
+                                出生日期
+                            </label>
+                            <input type="date" id="birthDate" name="birthDate" class="form-input">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email" class="form-label">
+                            电子邮箱 <span class="required">*</span>
+                        </label>
+                        <input type="email" id="email" name="email" class="form-input" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone" class="form-label">
+                            联系电话 <span class="required">*</span>
+                        </label>
+                        <input type="tel" id="phone" name="phone" class="form-input" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="address" class="form-label">
+                            联系地址
+                        </label>
+                        <input type="text" id="address" name="address" class="form-input" placeholder="省市区详细地址">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="education" class="form-label">
+                            最高学历
+                        </label>
+                        <select id="education" name="education" class="form-select">
+                            <option value="">请选择</option>
+                            <option value="高中及以下">高中及以下</option>
+                            <option value="大专">大专</option>
+                            <option value="本科">本科</option>
+                            <option value="硕士">硕士</option>
+                            <option value="博士">博士</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="profession" class="form-label">
+                            职业
+                        </label>
+                        <input type="text" id="profession" name="profession" class="form-input" placeholder="请填写您的职业或专业">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="organization" class="form-label">
+                            工作单位/学校
+                        </label>
+                        <input type="text" id="organization" name="organization" class="form-input" placeholder="请填写您的工作单位或学校">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="motivation" class="form-label">
+                            申请动机 <span class="required">*</span>
+                        </label>
+                        <textarea id="motivation" name="motivation" class="form-textarea" required 
+                                  placeholder="请简要说明您为什么想要加入我们的组织，以及您希望参与哪些类型的活动？"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="skills" class="form-label">
+                            技能特长
+                        </label>
+                        <textarea id="skills" name="skills" class="form-textarea" 
+                                  placeholder="请描述您拥有的相关技能或特长（如组织能力、沟通能力、专业技能等）"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="availability" class="form-label">
+                            可参与时间 <span class="required">*</span>
+                        </label>
+                        <textarea id="availability" name="availability" class="form-textarea" required
+                                  placeholder="请说明您每周大约可以投入多少时间参与组织活动？（如：每周2-3小时，周末可用等）"></textarea>
+                    </div>
+                    
+                    <div class="submit-section">
+                        <button type="submit" class="submit-btn">提交申请</button>
+                        <p class="privacy-notice">
+                            我们承诺保护您的个人信息安全，所有信息仅用于组织管理和活动安排。<br>
+                            <span class="required">*</span> 标记为必填项
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- 底部 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>关于我们</h4>
+                    <p>致力于推动公益事业发展，为社区提供志愿服务和支持。</p>
+                </div>
+                <div class="footer-section">
+                    <h4>联系方式</h4>
+                    <p>邮箱: info@nonprofit.org</p>
+                    <p>电话: 400-123-4567</p>
+                </div>
+                <div class="footer-section">
+                    <h4>关注我们</h4>
+                    <div class="social-links">
+                        <a href="#">微信</a>
+                        <a href="#">微博</a>
+                        <a href="#">QQ</a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2024 非营利性组织. 保留所有权利.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 深色模式切换按钮 -->
+    <button class="theme-toggle" onclick="toggleTheme()">🌓</button>
+
+    <script>
+        // 主题切换功能
+        function toggleTheme() {
+            document.body.classList.toggle('dark-mode');
+            const isDarkMode = document.body.classList.contains('dark-mode');
+            localStorage.setItem('darkMode', isDarkMode);
+        }
+
+        // 加载保存的主题设置
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('darkMode');
+            if (savedTheme === 'true') {
+                document.body.classList.add('dark-mode');
+            }
+        });
+
+        // 表单提交处理
+        document.getElementById('applicationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // 获取表单数据
+            const formData = new FormData(this);
+            const applicationData = [];
+            
+            // 定义字段顺序和中文名称
+            const fields = [
+                '姓氏', '姓名', '性别', '出生日期', '电子邮箱', '联系电话', 
+                '联系地址', '最高学历', '职业', '工作单位/学校', '申请动机', 
+                '技能特长', '可参与时间'
+            ];
+            
+            // 按顺序收集数据
+            fields.forEach(field => {
+                let value = '';
+                switch(field) {
+                    case '姓氏':
+                        value = formData.get('lastName') || '';
+                        break;
+                    case '姓名':
+                        value = formData.get('firstName') || '';
+                        break;
+                    case '性别':
+                        value = formData.get('gender') || '';
+                        break;
+                    case '出生日期':
+                        value = formData.get('birthDate') || '';
+                        break;
+                    case '电子邮箱':
+                        value = formData.get('email') || '';
+                        break;
+                    case '联系电话':
+                        value = formData.get('phone') || '';
+                        break;
+                    case '联系地址':
+                        value = formData.get('address') || '';
+                        break;
+                    case '最高学历':
+                        value = formData.get('education') || '';
+                        break;
+                    case '职业':
+                        value = formData.get('profession') || '';
+                        break;
+                    case '工作单位/学校':
+                        value = formData.get('organization') || '';
+                        break;
+                    case '申请动机':
+                        value = formData.get('motivation') || '';
+                        break;
+                    case '技能特长':
+                        value = formData.get('skills') || '';
+                        break;
+                    case '可参与时间':
+                        value = formData.get('availability') || '';
+                        break;
+                }
+                applicationData.push(value);
+            });
+            
+            // 将数据转换为CSV格式的一行
+            const csvLine = applicationData.map(field => {
+                // 处理包含逗号的内容，用双引号包围
+                if (field.includes(',') || field.includes('"')) {
+                    return '"' + field.replace(/"/g, '""') + '"';
+                }
+                return field;
+            }).join(',');
+            
+            // 保存到本地文件（模拟，实际需要服务器端支持）
+            saveToFile(csvLine);
+            
+            // 显示成功消息
+            document.getElementById('successMessage').style.display = 'block';
+            this.reset();
+            
+            // 3秒后隐藏成功消息
+            setTimeout(() => {
+                document.getElementById('successMessage').style.display = 'none';
+            }, 5000);
+        });
+
+        // 保存数据到文件（实际项目中需要服务器端支持）
+        function saveToFile(dataLine) {
+            try {
+                // 获取现有数据
+                let existingData = '';
+                
+                // 尝试从localStorage读取现有数据（仅作演示）
+                const savedData = localStorage.getItem('applications');
+                if (savedData) {
+                    existingData = savedData + '\n';
+                }
+                
+                // 添加时间戳和分隔符
+                const timestamp = new Date().toLocaleString('zh-CN');
+                const newData = `=== 申请记录 ${timestamp} ===\n${dataLine}\n\n`;
+                
+                // 保存到localStorage（演示用）
+                localStorage.setItem('applications', existingData + newData);
+                
+                // 在实际环境中，您需要使用服务器端代码来保存到txt文件
+                // 这里提供一个模拟的下载功能作为演示
+                downloadAsText(newData, 'application_demo.txt');
+                
+                console.log('申请数据已保存:', dataLine);
+            } catch (error) {
+                console.error('保存数据时出错:', error);
+                alert('申请已提交，但数据保存遇到问题。请联系管理员。');
+            }
+        }
+
+        // 下载为文本文件（演示用）
+        function downloadAsText(content, filename) {
+            const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+        }
+
+        // 移动端菜单切换
+        document.querySelector('.mobile-menu').addEventListener('click', function() {
+            document.querySelector('.nav-list').classList.toggle('active');
+        });
+
+        // 点击导航链接后关闭移动端菜单
+        document.querySelectorAll('.nav-list a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.querySelector('.nav-list').classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>
