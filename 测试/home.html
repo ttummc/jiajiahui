@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>家家会会 - 家庭社区服务平台</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header class="header">
+        <div class="container">
+            <a href="#" class="logo">家家会会</a>
+            <nav class="nav">
+                <ul class="nav-list">
+                    <li><a href="#home">首页</a></li>
+                    <li><a href="#services">服务</a></li>
+                    <li><a href="#activities">活动</a></li>
+                    <li><a href="#members">会员</a></li>
+                    <li><a href="#contact">联系我们</a></li>
+                </ul>
+            </nav>
+            <div class="search-box">
+                <input type="text" placeholder="搜索社区内容...">
+                <button type="button" aria-label="搜索">搜索</button>
+            </div>
+            <button class="mobile-menu">☰</button>
+        </div>
+    </header>
+
+    <!-- 首页大图 -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>连接每个家庭的温暖社区</h1>
+            <p>邻里互助 | 活动组织 | 资源共享 | 亲子成长</p>
+            <a href="#activities" class="cta-button">查看最新活动</a>
+        </div>
+    </section>
+
+    <!-- 社区公告 -->
+    <section class="announcements">
+        <div class="container">
+            <h2>社区公告</h2>
+            <div class="announcement-list">
+                <div class="announcement-card">
+                    <h3>社区垃圾分类新规</h3>
+                    <p class="time">2025-08-15</p>
+                    <p class="desc">即日起实施新的垃圾分类标准，请居民们注意分类投放。</p>
+                </div>
+                <div class="announcement-card">
+                    <h3>中秋晚会筹备中</h3>
+                    <p class="time">2025-08-18</p>
+                    <p class="desc">欢迎报名参加中秋晚会表演，详情请联系社区服务中心。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 热门活动轮播 -->
+    <section class="hot-activities">
+        <div class="container">
+            <h2>热门活动</h2>
+            <div class="carousel">
+                <div class="carousel-item active">
+                    <img src="assets/images/亲子烘焙课.jpg" alt="亲子烘焙课">
+                    <h3>周末亲子烘焙课</h3>
+                </div>
+                <div class="carousel-item">
+                    <img src="assets/images/旧物改造市集.jpg" alt="旧物改造市集">
+                    <h3>旧物改造创意市集</h3>
+                </div>
+                <div class="carousel-item">
+                    <img src="assets/images/健康讲座.jpg" alt="健康讲座">
+                    <h3>秋季健康养生讲座</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 核心服务 -->
+    <section class="services" id="services">
+        <div class="container">
+            <h2>我们的服务</h2>
+            <div class="service-cards">
+                <div class="card">
+                    <i class="icon">👥</i>
+                    <h3>邻里互助</h3>
+                    <p>闲置物品交换、技能共享、生活难题求助，构建有温度的邻里关系</p>
+                </div>
+                <div class="card">
+                    <i class="icon">🎉</i>
+                    <h3>社区活动</h3>
+                    <p>亲子手工、节日庆典、健康讲座，定期组织多样化社区活动</p>
+                </div>
+                <div class="card">
+                    <i class="icon">📚</i>
+                    <h3>资源共享</h3>
+                    <p>社区图书馆、工具共享站、教育资源库，让资源高效流动</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 最新活动 -->
+    <section class="activities" id="activities">
+        <div class="container">
+            <h2>近期活动</h2>
+            <div class="activity-list">
+                <div class="activity-card">
+                    <button class="favorite-btn">❤️</button>
+                    <h3>周末亲子烘焙课</h3>
+                    <p class="time">2025-08-20 14:00-16:00</p>
+                    <p class="desc">专业烘焙师指导，制作卡通饼干&水果蛋糕，适合3-10岁儿童家庭</p>
+                    <a href="#" class="join-btn">立即报名</a>
+                </div>
+                <div class="activity-card">
+                    <button class="favorite-btn">❤️</button>
+                    <h3>旧物改造创意市集</h3>
+                    <p class="time">2025-08-25 09:30-12:00</p>
+                    <p class="desc">带一件闲置物品来改造，交换手作好物，还有环保主题讲座</p>
+                    <a href="#" class="join-btn">立即报名</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 快速导航悬浮按钮 -->
+    <div class="quick-nav">
+        <a href="#home" class="quick-nav-btn">🏠</a>
+        <a href="#activities" class="quick-nav-btn">🎯</a>
+        <a href="#contact" class="quick-nav-btn">📞</a>
+    </div>
+
+    <!-- 底部信息 -->
+    <footer class="footer" id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>关于我们</h4>
+                    <p>家家会会是专注于家庭社区服务的平台，致力于打造有温度的邻里关系，促进社区资源共享与文化交流。</p>
+                </div>
+                <div class="footer-section">
+                    <h4>联系我们</h4>
+                    <p>地址：XX市XX区XX街道社区服务中心3楼</p>
+                    <p>电话：010-12345678</p>
+                    <p>邮箱：family@jiajiahuihui.com</p>
+                </div>
+                <div class="footer-section">
+                    <h4>关注我们</h4>
+                    <div class="social-links">
+                        <a href="#">微信</a> | 
+                        <a href="#">微博</a> | 
+                        <a href="#">抖音</a>
+                    </div>
+                </div>
+            </div>
+            <div class="feedback-link">
+                <a href="#">意见反馈</a>
+            </div>
+            <div class="copyright">
+                <p>© 2025 家家会会 版权所有 | 京ICP备12345678号</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 深色模式切换按钮 -->
+    <button class="theme-toggle" id="themeToggle" aria-label="切换深色模式">🌙</button>
+
+    <script>
+        // 检测系统主题偏好
+        const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+
+        // 初始化主题（优先使用本地存储的设置，其次使用系统偏好）
+        const currentTheme = localStorage.getItem('theme') || 
+                            (prefersDarkScheme.matches ? 'dark' : 'light');
+        
+        if (currentTheme === 'dark') {
+            body.classList.add('dark-mode');
+            themeToggle.textContent = '☀️'; themeToggle.setAttribute('aria-label', '切换浅色模式');
+        }
+
+        // 监听系统主题变化
+        prefersDarkScheme.addEventListener('change', (e) => {
+            const newTheme = e.matches ? 'dark' : 'light';
+            body.classList.toggle('dark-mode', e.matches);
+            themeToggle.textContent = e.matches ? '☀️' : '🌙';
+            localStorage.setItem('theme', newTheme);
+        });
+
+        // 切换主题
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            const isDarkMode = body.classList.contains('dark-mode');
+            themeToggle.textContent = isDarkMode ? '☀️' : '🌙';
+            localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+        });
+
+        // 收藏按钮功能
+        document.querySelectorAll('.favorite-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                this.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+</html>
