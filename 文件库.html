@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>家家会 - 官方文件库</title>
+    <link rel="stylesheet" href="样式/styles.css">
+    <style>
+        /* 文件库特定样式 */
+        .file-library {
+            padding: 80px 0;
+            background: #fff;
+            transition: background 0.3s;
+        }
+        
+        body.dark-mode .file-library {
+            background: #1a1a1a;
+        }
+        
+        .file-library h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: #333;
+        }
+        
+        body.dark-mode .file-library h2 {
+            color: #f0f0f0;
+        }
+        
+        .file-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .category-card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+        
+        body.dark-mode .category-card {
+            background: #333;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.3);
+        }
+        
+        .category-card:hover {
+            transform: translateY(-5px);
+            border-color: #0078D7;
+            box-shadow: 0 5px 25px rgba(0,120,215,0.2);
+        }
+        
+        body.dark-mode .category-card:hover {
+            box-shadow: 0 5px 25px rgba(0,120,215,0.3);
+        }
+        
+        .category-icon {
+            font-size: 36px;
+            margin-bottom: 15px;
+            display: block;
+            text-align: center;
+        }
+        
+        .category-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: #0078D7;
+            text-align: center;
+        }
+        
+        .category-description {
+            color: #666;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        
+        body.dark-mode .category-description {
+            color: #999;
+        }
+        
+        .file-list {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+        
+        body.dark-mode .file-list {
+            background: #333;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.3);
+        }
+        
+        .file-list-header {
+            background: #f8f9fa;
+            padding: 20px 25px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        body.dark-mode .file-list-header {
+            background: #444;
+            border-bottom-color: #555;
+        }
+        
+        .file-list-header h3 {
+            color: #333;
+            font-size: 1.4rem;
+        }
+        
+        body.dark-mode .file-list-header h3 {
+            color: #f0f0f0;
+        }
+        
+        .file-count {
+            background: #0078D7;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        .file-items {
+            padding: 20px;
+        }
+        
+        .file-item {
+            display: flex;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #f0f0f0;
+            transition: background 0.2s;
+        }
+        
+        body.dark-mode .file-item {
+            border-bottom-color: #555;
+        }
+        
+        .file-item:last-child {
+            border-bottom: none;
+        }
+        
+        .file-item:hover {
+            background: #f8f9fa;
+            margin: 0 -25px;
+            padding-left: 25px;
+            padding-right: 25px;
+            border-radius: 8px;
+        }
+        
+        body.dark-mode .file-item:hover {
+            background: #444;
+        }
+        
+        .file-icon {
+            font-size: 20px;
+            margin-right: 15px;
+            color: #0078D7;
+            width: 24px;
+            text-align: center;
+        }
+        
+        .file-info {
+            flex: 1;
+        }
+        
+        .file-name {
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 4px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        
+        body.dark-mode .file-name {
+            color: #f0f0f0;
+        }
+        
+        .file-name:hover {
+            color: #0078D7;
+            text-decoration: underline;
+        }
+        
+        .file-meta {
+            font-size: 0.8rem;
+            color: #888;
+            display: flex;
+            gap: 15px;
+        }
+        
+        body.dark-mode .file-meta {
+            color: #999;
+        }
+        
+        .file-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .file-action-btn {
+            background: none;
+            border: 1px solid #ddd;
+            color: #666;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.2s;
+        }
+        
+        body.dark-mode .file-action-btn {
+            background: #555;
+            border-color: #666;
+            color: #ccc;
+        }
+        
+        .file-action-btn:hover {
+            background: #0078D7;
+            color: white;
+            border-color: #0078D7;
+        }
+        
+        .file-action-btn:hover i {
+            color: white;
+        }
+        
+        .search-file {
+            margin-bottom: 30px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .search-file input {
+            flex: 1;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            outline: none;
+            font-size: 0.9rem;
+        }
+        
+        body.dark-mode .search-file input {
+            background: #333;
+            color: #f0f0f0;
+            border-color: #555;
+        }
+        
+        .search-file input:focus {
+            border-color: #0078D7;
+        }
+        
+        .search-file button {
+            background: #0078D7;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background 0.2s;
+        }
+        
+        .search-file button:hover {
+            background: #005A9E;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .file-categories {
+                grid-template-columns: 1fr;
+            }
+            
+            .file-list-header {
+                flex-direction: column;
+                gap: 10px;
+                align-items: flex-start;
+            }
+            
+            .file-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .file-actions {
+                align-self: flex-end;
+            }
+            
+            .search-file {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .search-file input,
+            .search-file button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="logo">家家会会</a>
+            <nav class="nav">
+                <ul class="nav-list">
+                    <li><a href="index.html#home">首页</a></li>
+                    <li><a href="index.html#services">服务</a></li>
+                    <li><a href="#" class="active">文件库</a></li>
+                    <li><a href="index.html#activities">活动</a></li>
+                    <li><a href="/新闻.html">新闻</a></li>
+                    <li><a href="index.html#contact">联系我们</a></li>
+                </ul>
+            </nav>
+            <button class="mobile-menu">☰</button>
+        </div>
+    </header>
+
+    <!-- 文件库主内容 -->
+    <section class="file-library" id="fileLibrary">
+        <div class="container">
+            <h2>家家会官方文件库</h2>
+            <p style="text-align: center; font-size: 1.1rem; color: #666; margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto;">
+                统一文件编码查询系统 - 快速查找和下载家家会的各类官方文件和资料
+            </p>
+            
+            <!-- 搜索功能 -->
+            <div class="search-file">
+                <input type="text" id="fileSearchInput" placeholder="搜索文件名称、编码或关键词...">
+                <button onclick="searchFiles()">🔍 搜索</button>
+            </div>
+            
+            <!-- 文件分类 -->
+            <div class="file-categories">
+                <div class="category-card">
+                    <span class="category-icon">🏛️</span>
+                    <h3>代表大会文件</h3>
+                    <p class="category-description">家家会全国代表大会相关文件，包括会议决议、工作报告、选举结果等重要文档</p>
+                    <a href="#congress-files" class="cta-button" style="display: inline-block; margin-top: 15px; text-decoration: none;">查看文件</a>
+                </div>
+                
+                <div class="category-card">
+                    <span class="category-icon">⚖️</span>
+                    <h3>政务与法规</h3>
+                    <p class="category-description">家家会政务服务平台相关政策、规章制度、工作指南和行政文件</p>
+                    <a href="#government-files" class="cta-button" style="display: inline-block; margin-top: 15px; text-decoration: none;">查看文件</a>
+                </div>
+                
+                <div class="category-card">
+                    <span class="category-icon">🛡️</span>
+                    <h3>反腐倡廉</h3>
+                    <p class="category-description">安定事务和反腐倡廉相关文件，包括监督报告、廉政建设指导文件</p>
+                    <a href="#anti-corruption-files" class="cta-button" style="display: inline-block; margin-top: 15px; text-decoration: none;">查看文件</a>
+                </div>
+                
+                <div class="category-card">
+                    <span class="category-icon">📋</span>
+                    <h3>申请与注册</h3>
+                    <p class="category-description">会员申请、分会注册、活动审批等各类申请表格和审批文件</p>
+                    <a href="#application-files" class="cta-button" style="display: inline-block; margin-top: 15px; text-decoration: none;">查看文件</a>
+                </div>
+            </div>
+            
+            <!-- 代表大会文件 -->
+            <div class="file-list" id="congress-files">
+                <div class="file-list-header">
+                    <h3>🏛️ 代表大会文件</h3>
+                    <span class="file-count">4 个文件</span>
+                </div>
+                <div class="file-items">
+                    <div class="file-item">
+                        <span class="file-icon">📄</span>
+                        <div class="file-info">
+                            <a href="#" class="file-name" onclick="downloadFile('家家会第二届代表大会报名（海选）平台说明.pdf')">家家会第二届代表大会报名（海选）平台说明.pdf</a>
+                            <div class="file-meta">
+                                <span>📅 2025-09-01</span>
+                                <span>📊 文件大小: 2.1MB</span>
+                                <span>🏷️ 编码: CONG-2025-001</span>
+                            </div>
+                        </div>
+                        <div class="file-actions">
+                            <button class="file-action-btn" onclick="downloadFile('家家会第二届代表大会报名（海选）平台说明.pdf')" title="下载">⬇️ 下载</button>
+                            <button class="file-action-btn" onclick="previewFile('家家会第二届代表大会报名（海选）平台说明.pdf')" title="预览">👁️ 预览</button>
+                        </div>
+                    </div>
+                    
+                    <div class="file-item">
+                        <span class="file-icon">📄</span>
+                        <div class="file-info">
+                            <a href="#" class="file-name" onclick="downloadFile('家家会第二届代表大会专家组名单.docx')">家家会第二届代表大会专家组名单.docx</a>
+                            <div class="file-meta">
+                                <span>📅 2025-08-28</span>
+                                <span>📊 文件大小: 856KB</span>
+                                <span>🏷️ 编码: CONG-2025-002</span>
+                            </div>
+                        </div>
+                        <div class="file-actions">
+                            <button class="file-action-btn" onclick="downloadFile('家家会第二届代表大会专家组名单.docx')" title="下载">⬇️ 下载</button>
+                            <button class="file-action-btn" onclick="previewFile('家家会第二届代表大会专家组名单.docx')" title="预览">👁️ 预览</button>
+                        </div>
+                    </div>
+                    
+                    <div class="file-item">
+                        <span class="file-icon">📄</span>
+                        <div class="file-info">
+                            <a href="#" class="file-name" onclick="downloadFile('家家会章程修订草案.pdf')">家家会章程修订草案.pdf</a>
+                            <div class="file-meta">
+                                <span>📅 2025-08-25</span>
+                                <span>📊 文件大小: 1.8MB</span>
+                                <span>🏷️ 编码: CONG-2025-003</span>
+                            </div>
+                        </div>
+                        <div class="file-actions">
+                            <button class="file-action-btn" onclick="downloadFile('家家会章程修订草案.pdf')" title="下载">⬇️ 下载</button>
+                            <button class="file-action-btn" onclick="previewFile('家家会章程修订草案.pdf')" title="预览">👁️ 预览</button>
+                        </div>
+                    </div>
+                    
+                    <div class="file-item">
+                        <span class="file-icon">📄</span>
+                        <div class="file-info">
+                            <a href="#" class="file-name" onclick="downloadFile('代表选举工作指南.docx')">代表选举工作指南.docx</a>
+                            <div class="file-meta">
+                                <span>📅 2025-08-20</span>
+                                <span>📊 文件大小: 1.2MB</span>
+                                <span>🏷️ 编码: CONG-2025-004</span>
+                            </div>
+                        </div>
+                        <div class="file-actions">
+                            <button class="file-action-btn" onclick="downloadFile('代表选举工作指南.docx')" title="下载">⬇️ 下载</button>
+                            <button class="file-action-btn" onclick="previewFile('代表选举工作指南.docx')" title="预览">👁️ 预览</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 政务与法规文件 -->
+            <div class="file-list" id="government-files" style="display: none;">
+                <div class="file-list-header">
+                    <h3>⚖️ 政务与法规文件</h3>
+                    <span class="file-count">6 个文件</span>
+                </div>
+                <div class="file-items">
+                    <div class="file-item">
+                        <span class="file-icon">📄</span>
+                        <div class="file-info">
+                            <a href="#" class="file-name" onclick="downloadFile('家家会政务服务平台使用手册.pdf')">家家会政务服务平台使用手册.pdf</a>
+                            <div class="file-meta">
+                                <span>📅 2025-08-15</span>
+                                <span>📊 文件大小: 3.2MB</span>
+                                <span>🏷️ 编码: GOVT-2025-001</span>
+                            </div>
+                        </div>
+                        <div class="file-actions">
+                            <button class="file-action-btn" onclick="downloadFile('家家会政务服务平台使用手册.pdf')" title="下载">⬇️ 下载</button>
+                            <button class="file-action-btn" onclick="previewFile('家家会政务服务平台使用手册.pdf')" title="预览">👁️ 预览</button>
+                        </div>
+                    </div>
+                    
+                    <div class="file-item">
+                        <span class="file-icon">📄</span>
+                        <div class="file-info">
+                            <a href="#" class="file-name" onclick="downloadFile('家家会政务APP(Android)安装包.apk')">家家会政务APP(Android)安装包.apk</a>
+                            <div class="file-meta">
+                                <span>📅 2025-08-10</span>
+                                <span>📊 文件大小: 45.6MB</span>
+                                <span>🏷️ 编码: GOVT-2025-002</span>
+                            </div>
+                        </div>
+                        <div class="file-actions">
+                            <button class="file-action-btn" onclick="downloadFile('家家会政务APP(Android)安装包.apk')" title="下载">⬇️ 下载</button>
+                            <button class="file-action-btn" onclick="previewFile('家家会政务APP(Android)安装包.apk')" title="预览">👁️ 预览</button>
+                        </div>
+                    </div>
+                    
+                    <div class="file-item">
+                        <span class="file-icon">📄</span>
+                        <div class="file-info">
+                            <a href="#" class="file-name" onclick="downloadFile('政务服务管理办法.docx')">政务服务管理办法.docx</a>
+                            <div class="file-meta">
+                                <span>📅 2025-08-05</span>
+                                <span>📊 文件大小: 1.5MB</span>
+                                <span>🏷️ 编码: GOVT-2025-003</span>
+                            </div>
+                        </div>
+                        <div class="file-actions">
+                            <button class="file-action-btn" onclick="downloadFile('政务服务管理办法.docx')" title="下载">⬇️ 下载</button>
+                            <button class="file-action-btn" onclick="previewFile('政务服务管理办法.docx')" title="预览">👁️ 预览</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 反腐倡廉文件 -->
+            <div class="file-list" id="anti-corruption-files" style="display: none;">
+                <div class="file-list-header">
+                    <h3>🛡️ 反腐倡廉文件</h3>
+                    <span class="file-count">3 个文件</span>
+                </div>
+                <div class="file-items">
+                    <div class="file-item">
+                        <span class="file-icon">📄</span>
+                        <div class="file-info">
+                            <a href="#" class="file-name" onclick="downloadFile('安定事务和反腐倡廉工作指南.pdf')">安定事务和反腐倡廉工作指南.pdf</a>
+                            <div class="file-meta">
+                                <span>📅 2025-08-22</span>
+                                <span>📊 文件大小: 2.8MB</span>
+                                <span>🏷️ 编码: ANTI-2025-001</span>
+                            </div>
+                        </div>
+                        <div class="file-actions">
+                            <button class="file-action-btn" onclick="downloadFile('安定事务和反腐倡廉工作指南.pdf')" title="下载">⬇️ 下载</button>
+                            <button class="file-action-btn" onclick="previewFile('安定事务和反腐倡廉工作指南.pdf')" title="预览">👁️ 预览</button>
+                        </div>
+                    </div>
+                    
+                    <div class="file-item">
+                        <span class="file-icon">📄</span>
+                        <div class="file-info">
+                            <a href="#" class="file-name" onclick="downloadFile('廉政建设监督报告.docx')">廉政建设监督报告.docx</a>
+                            <div class="file-meta">
+                                <span>📅 2025-08-18</span>
+                                <span>📊 文件大小: 1.1MB</span>
+                                <span>🏷️ 编码: ANTI-2025-002</span>
+                            </div>
+                        </div>
+                        <div class="file-actions">
+                            <button class="file-action-btn" onclick="downloadFile('廉政建设监督报告.docx')" title="下载">⬇️ 下载</button>
+                            <button class="file-action-btn" onclick="previewFile('廉政建设监督报告.docx')" title="预览">👁️ 预览</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 申请与注册文件 -->
+            <div class="file-list" id="application-files" style="display: none;">
+                <div class="file-list-header">
+                    <h3>📋 申请与注册文件</h3>
+                    <span class="file-count">5 个文件</span>
+                </div>
+                <div class="file-items">
+                    <div class="file-item">
+                        <span class="file-icon">📄</span>
+                        <div class="file-info">
+                            <a href="#" class="file-name" onclick="downloadFile('会员申请表模板.docx')">会员申请表模板.docx</a>
+                            <div class="file-meta">
+                                <span>📅 2025-08-25</span>
+                                <span>📊 文件大小: 987KB</span>
+                                <span>🏷️ 编码: APP-2025-001</span>
+                            </div>
+                        </div>
+                        <div class="file-actions">
+                            <button class="file-action-btn" onclick="downloadFile('会员申请表模板.docx')" title="下载">⬇️ 下载</button>
+                            <button class="file-action-btn" onclick="previewFile('会员申请表模板.docx')" title="预览">👁️ 预览</button>
+                        </div>
+                    </div>
+                    
+                    <div class="file-item">
+                        <span class="file-icon">📄</span>
+                        <div class="file-info">
+                            <a href="#" class="file-name" onclick="downloadFile('分会注册申请流程.pdf')">分会注册申请流程.pdf</a>
+                            <div class="file-meta">
+                                <span>📅 2025-08-20</span>
+                                <span>📊 文件大小: 1.6MB</span>
+                                <span>🏷️ 编码: APP-2025-002</span>
+                            </div>
+                        </div>
+                        <div class="file-actions">
+                            <button class="file-action-btn" onclick="downloadFile('分会注册申请流程.pdf')" title="下载">⬇️ 下载</button>
+                            <button class="file-action-btn" onclick="previewFile('分会注册申请流程.pdf')" title="预览">👁️ 预览</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 底部信息 -->
+    <footer class="footer" id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>关于我们</h4>
+                    <p>家家会隶属于坐忘道，是一家公益平台。根据家家会章程规定，家家会机关分为权力机关/行政机关和检察机关。目前家家会在全国34个省级行政区（省/自治区/直辖市/特别行政区）中的1个建立了分会。</p>
+                </div>
+                <div class="footer-section">
+                    <h4>联系我们</h4>
+                    <p>地址：辽阳市</p>
+                    <p>电话：--</p>
+                    <p>邮箱：jiajiahuizhongyang@groups.outlook.com</p>
+                </div>
+                <div class="footer-section">
+                    <h4>关注我们</h4>
+                    <div class="social-links">
+                        <a href="#">微信公众号</a> | 
+                        <a href="#">微博</a> | 
+                        <a href="#">抖音</a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>© 2025 家家会 保留一切权力 | 家家会中央委员会</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 深色模式切换按钮 -->
+    <button class="theme-toggle" id="themeToggle">🌙</button>
+
+    <!-- 文件库特定JavaScript -->
+    <script>
+        // 文件搜索功能
+        function searchFiles() {
+            const query = document.getElementById('fileSearchInput').value.trim().toLowerCase();
+            const allFileItems = document.querySelectorAll('.file-item');
+            
+            if (query) {
+                let found = false;
+                allFileItems.forEach(item => {
+                    const fileName = item.querySelector('.file-name').textContent.toLowerCase();
+                    const fileMeta = item.querySelector('.file-meta').textContent.toLowerCase();
+                    
+                    if (fileName.includes(query) || fileMeta.includes(query)) {
+                        item.style.border = '2px solid #0078D7';
+                        item.style.backgroundColor = document.body.classList.contains('dark-mode') ? '#444' : '#f0f8ff';
+                        item.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        found = true;
+                    } else {
+                        item.style.border = 'none';
