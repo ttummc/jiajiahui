@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>阳光公益 - 新闻资讯</title>
+    <style>
+        /* 基础样式重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: '微软雅黑', 'PingFang SC', sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: #333;
+            background: #fff;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        body.dark-mode {
+            background: #1a1a1a;
+            color: #f0f0f0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* 导航栏样式 */
+        .header {
+            background: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: background 0.3s;
+        }
+
+        body.dark-mode .header {
+            background: #333;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #0078D7;
+            text-decoration: none;
+        }
+
+        .nav-list {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-list a {
+            color: #333;
+            text-decoration: none;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+
+        body.dark-mode .nav-list a {
+            color: #f0f0f0;
+        }
+
+        .nav-list a:hover {
+            color: #0078D7;
+        }
+
+        .mobile-menu {
+            display: none;
+            font-size: 24px;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* 首页大图 - 新闻展示区域 */
+        .hero {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            background-size: cover;
+            background-position: center;
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            color: #222;
+            margin-top: 70px;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        body.dark-mode .hero {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: #f0f0f0;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-align: center;
+            width: 100%;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+            color: #444;
+        }
+
+        body.dark-mode .hero p {
+            color: #ccc;
+        }
+
+        /* 统一按钮样式 */
+        .cta-button, .join-btn {
+            display: inline-block;
+            background: #0078D7;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover, .join-btn:hover {
+            background: #005A9E;
+        }
+
+        .join-btn {
+            background: transparent;
+            color: #0078D7;
+            border: 2px solid #0078D7;
+        }
+
+        .join-btn:hover {
+            background: #0078D7;
+            color: white;
+        }
+
+        /* 新闻区域样式 */
+        .news-section {
+            padding: 80px 0;
+            background: #F0F7FF;
+            transition: background 0.3s;
+        }
+
+        body.dark-mode .news-section {
+            background: #2a2a2a;
+        }
+
+        .news-section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: #333;
+        }
+
+        body.dark-mode .news-section h2 {
+            color: #f0f0f0;
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .news-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s, background 0.3s;
+        }
+
+        body.dark-mode .news-card {
+            background: #333;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.3);
+        }
+
+        .news-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .news-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(45deg, #0078D7, #40E0D0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+
+        body.dark-mode .news-image {
+            background: linear-gradient(45deg, #005A9E, #20B2AA);
+        }
+
+        .news-content {
+            padding: 25px;
+        }
+
+        .news-date {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        body.dark-mode .news-date {
+            color: #999;
+        }
+
+        .news-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #333;
+            line-height: 1.4;
+        }
+
+        body.dark-mode .news-title {
+            color: #f0f0f0;
+        }
+
+        .news-excerpt {
+            color: #444;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        body.dark-mode .news-excerpt {
+            color: #ccc;
+        }
+
+        .read-more {
+            color: #0078D7;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .read-more:hover {
+            color: #005A9E;
+        }
+
+        /* 特色服务区域 */
+        .services {
+            padding: 80px 0;
+            background: #fff;
+            transition: background 0.3s;
+        }
+
+        body.dark-mode .services {
+            background: #2a2a2a;
+        }
+
+        .services h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: #333;
+        }
+
+        body.dark-mode .services h2 {
+            color: #f0f0f0;
+        }
+
+        .service-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s, background 0.3s;
+        }
+
+        body.dark-mode .card {
+            background: #333;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.3);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+        }
+
+        .card .icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #0078D7;
+        }
+
+        /* 底部信息 */
+        .footer {
+            background: #333;
+            color: white;
+            padding: 60px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h4 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: #0078D7;
+        }
+
+        .footer-section p {
+            color: #ccc;
+            margin-bottom: 10px;
+        }
+
+        .social-links a {
+            color: #ccc;
+            text-decoration: none;
+            margin-right: 15px;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .nav-list {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+            }
+
+            body.dark-mode .nav-list {
+                background: #333;
+            }
+
+            .nav-list.active {
+                display: flex;
+            }
+
+            .nav-list li {
+                margin: 10px 0;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .news-grid,
+            .service-cards {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* 深色模式切换按钮 */
+        .theme-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #0078D7;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            transition: background 0.3s;
+        }
+
+        .theme-toggle:hover {
+            background: #005A9E;
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header class="header">
+        <div class="container">
+            <a href="#" class="logo">☀️ 家家新闻</a>
+            <nav>
+                <ul class="nav-list">
+                    <li><a href="/index">主站</a></li>
+                    <li><a href="#news">新闻</a></li>
+                    <li><a href="#services">报错</a></li>
+                    <li><a href="#activities">我要投稿</a></li>
+                    <li><a href="#about">关于我们</a></li>
+                </ul>
+            </nav>
+            <button class="mobile-menu">☰</button>
+        </div>
+    </header>
+
+    <!-- 主页面 - 新闻展示 -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>家家新闻</h1>
+            <p>关注家家会热点，了解最新的家家会动态，</p>
+            <a href="#news" class="cta-button">查看最新资讯</a>
+        </div>
+    </section>
+
+    <!-- 新闻资讯区域 -->
+    <section class="news-section" id="news">
+        <div class="container">
+            <h2>最新资讯</h2>
+            <div class="news-grid">
+                <!-- 新闻卡片 1 -->
+                <article class="news-card">
+                    <div class="news-image">📰</div>
+                    <div class="news-content">
+                        <div class="news-date">2024年8月15日</div>
+                        <h3 class="news-title">家家会第二届全国代表大会</h3>
+                        <p class="news-excerpt">
+                            将由家家会安定事务和反腐倡廉临时办公室与9月举办，将代替家家会第一届全国代表大会和家家会安定事务和反腐倡廉临时办公室职权。
+                        </p>
+                        <a href="#" class="read-more">阅读更多 →</a>
+                    </div>
+                </article>
+
+                <!-- 新闻卡片 2 -->
+                <article class="news-card">
+                    <div class="news-image">🌱</div>
+                    <div class="news-content">
+                        <div class="news-date">2024年8月10日</div>
+                        <h3 class="news-title">家家会第二届全国代表大会开启意见征集阶段</h3>
+                        <p class="news-excerpt">
+                            可访问家家会官方网站线上提交意见或来信来函到家家会中央委员会（转家家会安定事务和反腐倡廉临时办公室）。
+                        </p>
+                        <a href="#" class="read-more">阅读更多 →</a>
+                    </div>
+                </article>
+
+                <!-- 新闻卡片 3 -->
+                <article class="news-card">
+                    <div class="news-image">❤️</div>
+                    <div class="news-content">
+                        <div class="news-date">2024年8月15日</div>
+                        <h3 class="news-title">家家会中央监察委员会开展廉洁教育活动</h3>
+                        <p class="news-excerpt">
+                            根据《家家会中央委员会和家家会中央监察委员会关于深化贯彻学习中央八项规定精神的临时管理办法》，家家会中央监察委员会将在家家会第二届全国代表大会第一次会议前夕举行专题教育活动。
+                        </p>
+                        <a href="#" class="read-more">阅读更多 →</a>
+                    </div>
+                </article>
+
+                <!-- 新闻卡片 4 -->
+                <article class="news-card">
+                    <div class="news-image">🤝</div>
+                    <div class="news-content">
+                        <div class="news-date">2024年7月28日</div>
+                        <h3 class="news-title">公益合作新篇章：与多家企业签署长期合作协议</h3>
+                        <p class="news-excerpt">
+                            其实并没有
+                        </p>
+                        <a href="#" class="read-more">阅读更多 →</a>
+                    </div>
+                </article>
+
+                <!-- 新闻卡片 5 -->
+                <article class="news-card">
+                    <div class="news-image">🏥</div>
+                    <div class="news-content">
+                        <div class="news-date">2024年7月20日</div>
+                        <h3 class="news-title">医疗援助行动：为偏远地区提供免费健康服务</h3>
+                        <p class="news-excerpt">
+                            医疗团队深入偏远乡村，为300余名村民提供免费体检和基础医疗服务，建立健康档案，让优质医疗资源惠及更多需要帮助的人...
+                        </p>
+                        <a href="#" class="read-more">阅读更多 →</a>
+                    </div>
+                </article>
+
+                <!-- 新闻卡片 6 -->
+                <article class="news-card">
+                    <div class="news-image">🎓</div>
+                    <div class="news-content">
+                        <div class="news-date">2024年7月15日</div>
+                        <h3 class="news-title">暑期公益课堂：为留守儿童带来知识和欢乐</h3>
+                        <p class="news-excerpt">
+                            在暑假期间开设10个公益课堂，为200余名留守儿童提供学业辅导、兴趣培养和心理关怀，让孩子们度过一个充实而有意义的假期...
+                        </p>
+                        <a href="#" class="read-more">阅读更多 →</a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- 特色服务 -->
+    <section class="services">
+        <div class="container">
+            <h2>我们的服务</h2>
+            <div class="service-cards">
+                <div class="card">
+                    <span class="icon">📚</span>
+                    <h3>教育支持</h3>
+                    <p>为贫困地区的孩子们提供教育资源，包括学习用品、助学金和课外辅导，让每个孩子都有平等的学习机会。</p>
+                </div>
+                <div class="card">
+                    <span class="icon">🌍</span>
+                    <h3>环境保护</h3>
+                    <p>致力于环境保护和生态建设，通过植树造林、垃圾分类和环保宣传，共同守护我们美丽的地球家园。</p>
+                </div>
+                <div class="card">
+                    <span class="icon">❤️</span>
+                    <h3>关爱服务</h3>
+                    <p>关注弱势群体，为老人、儿童和残障人士提供关爱服务，用温暖的心传递社会的关怀与爱意。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 底部 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>关于阳光公益</h4>
+                    <p>我们致力于通过实际行动，为需要帮助的人群提供支持，让社会更加温暖和谐。</p>
+                </div>
+                <div class="footer-section">
+                    <h4>联系方式</h4>
+                    <p>电话：400-123-4567</p>
+                    <p>邮箱：info@sunshine-charity.org</p>
+                    <p>地址：北京市朝阳区公益路123号</p>
+                </div>
+                <div class="footer-section">
+                    <h4>关注我们</h4>
+                    <div class="social-links">
+                        <a href="#">微信</a>
+                        <a href="#">微博</a>
+                        <a href="#">抖音</a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2024 阳光公益组织. 保留所有权利.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 深色模式切换按钮 -->
+    <button class="theme-toggle" onclick="toggleTheme()">🌓</button>
+
+    <script>
+        // 深色模式切换功能
+        function toggleTheme() {
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            localStorage.setItem('darkMode', isDark);
+        }
+
+        // 页面加载时恢复深色模式设置
+        document.addEventListener('DOMContentLoaded', function() {
+            const isDark = localStorage.getItem('darkMode') === 'true';
+            if (isDark) {
+                document.body.classList.add('dark-mode');
+            }
+        });
+
+        // 移动端菜单切换（简单实现）
+        document.querySelector('.mobile-menu').addEventListener('click', function() {
+            document.querySelector('.nav-list').classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
