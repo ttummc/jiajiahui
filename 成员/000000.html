@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>会员信息认证 - 家家会会</title>
+    <link rel="stylesheet" href="成员/专用样式/styles.css">
+    <style>
+        .member-container {
+            max-width: 800px;
+            margin: 100px auto 50px;
+            padding: 30px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        body.dark-mode .member-container {
+            background: #333;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .member-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        body.dark-mode .member-header {
+            border-bottom-color: #444;
+        }
+
+        .member-header h1 {
+            color: #0078D7;
+            margin-bottom: 10px;
+        }
+
+        .member-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .info-group {
+            margin-bottom: 20px;
+        }
+
+        .info-group h3 {
+            color: #0078D7;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .info-item {
+            display: flex;
+            margin-bottom: 15px;
+        }
+
+        .info-label {
+            width: 120px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        body.dark-mode .info-label {
+            color: #aaa;
+        }
+
+        .info-value {
+            flex: 1;
+        }
+
+        .member-footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+
+        body.dark-mode .member-footer {
+            border-top-color: #444;
+        }
+
+        @media (max-width: 768px) {
+            .member-info {
+                grid-template-columns: 1fr;
+            }
+            
+            .member-container {
+                margin: 80px 20px 30px;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="logo">家家会会</a>
+            <nav class="nav">
+                <ul class="nav-list">
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="#">会员中心</a></li>
+                    <li><a href="member-info.html" class="active">会员认证</a></li>
+                </ul>
+            </nav>
+            <button class="mobile-menu">☰</button>
+        </div>
+    </header>
+
+    <!-- 会员信息内容 -->
+    <div class="member-container">
+        <div class="member-header">
+            <h1>会员信息认证</h1>
+            <p>以下是您的会员认证信息</p>
+        </div>
+
+        <div class="member-info">
+            <div class="info-column">
+                <div class="info-group">
+                    <h3>基本信息</h3>
+                    <div class="info-item">
+                        <div class="info-label">姓名：</div>
+                        <div class="info-value">张三</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">出生年份：</div>
+                        <div class="info-value">2000</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">加入日期：</div>
+                        <div class="info-value">2026-13-32</div>
+                    </div>
+                </div>
+
+                <div class="info-group">
+                    <h3>联系方式</h3>
+                    <div class="info-item">
+                        <div class="info-label">邮箱地址：</div>
+                        <div class="info-value">zhangsan@chibaba.com</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">地址：</div>
+                        <div class="info-value">美国.圣地亚哥</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-column">
+                <div class="info-group">
+                    <h3>会员编号</h3>
+                    <div class="info-item">
+                        <div class="info-label">登记表编号：</div>
+                        <div class="info-value">000000</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">会员证编号：</div>
+                        <div class="info-value">TEST1</div>
+                    </div>
+                </div>
+
+                <div class="info-group">
+                    <h3>分会信息</h3>
+                    <div class="info-item">
+                        <div class="info-label">所属分会：</div>
+                        <div class="info-value">不纯在的分会</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">分会负责人：</div>
+                        <div class="info-value">李四</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">分会联系方式：</div>
+                        <div class="info-value">buchunzai@anwis.tw</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="member-footer">
+            <p>如需修改信息，请联系您所在分会的负责人</p>
+            <p>©2025 家家会 家家会中央委员会办事处 会员服务中心.保留所有权利.</p>
+        </div>
+    </div>
+
+    <!-- 快速导航 -->
+    <div class="quick-nav">
+        <a href="index.html" class="quick-nav-btn">🏠</a>
+        <a href="#" class="quick-nav-btn">👤</a>
+    </div>
+
+    <!-- 深色模式切换按钮 -->
+    <button class="theme-toggle" id="themeToggle">🌙</button>
+
+    <script>
+        // 检测系统主题偏好
+        const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+
+        // 初始化主题（优先使用本地存储的设置，其次使用系统偏好）
+        const currentTheme = localStorage.getItem('theme') || 
+                            (prefersDarkScheme.matches ? 'dark' : 'light');
+        
+        if (currentTheme === 'dark') {
+            body.classList.add('dark-mode');
+            themeToggle.textContent = '☀️';
+        }
+
+        // 监听系统主题变化
+        prefersDarkScheme.addEventListener('change', (e) => {
+            const newTheme = e.matches ? 'dark' : 'light';
+            body.classList.toggle('dark-mode', e.matches);
+            themeToggle.textContent = e.matches ? '☀️' : '🌙';
+            localStorage.setItem('theme', newTheme);
+        });
+
+        // 切换主题
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            const isDarkMode = body.classList.contains('dark-mode');
+            themeToggle.textContent = isDarkMode ? '☀️' : '🌙';
+            localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+        });
+    </script>
+</body>
+</html>
