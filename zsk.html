@@ -1,0 +1,2143 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechKB - 技术知识库</title>
+    <meta name="description" content="基于 Material Design 3 的知识库模板">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+    <style>
+        /* ============================================
+           MATERIAL DESIGN 3 - DESIGN TOKENS
+           ============================================ */
+
+        /* --- Light Theme Tokens --- */
+        :root {
+            /* Primary - 蓝紫色系 */
+            --md-sys-color-primary: #6750A4;
+            --md-sys-color-on-primary: #FFFFFF;
+            --md-sys-color-primary-container: #EADDFF;
+            --md-sys-color-on-primary-container: #21005D;
+            --md-sys-color-primary-fixed: #EADDFF;
+            --md-sys-color-on-primary-fixed: #21005D;
+            --md-sys-color-primary-fixed-dim: #D0BCFF;
+            --md-sys-color-on-primary-fixed-variant: #4F378B;
+
+            /* Secondary - 蓝绿色系 */
+            --md-sys-color-secondary: #625B71;
+            --md-sys-color-on-secondary: #FFFFFF;
+            --md-sys-color-secondary-container: #E8DEF8;
+            --md-sys-color-on-secondary-container: #1D192B;
+            --md-sys-color-secondary-fixed: #E8DEF8;
+            --md-sys-color-on-secondary-fixed: #1D192B;
+            --md-sys-color-secondary-fixed-dim: #CCC2DC;
+            --md-sys-color-on-secondary-fixed-variant: #4A4458;
+
+            /* Tertiary - 暖珊瑚色 */
+            --md-sys-color-tertiary: #7D5260;
+            --md-sys-color-on-tertiary: #FFFFFF;
+            --md-sys-color-tertiary-container: #FFD8E4;
+            --md-sys-color-on-tertiary-container: #31111D;
+            --md-sys-color-tertiary-fixed: #FFD8E4;
+            --md-sys-color-on-tertiary-fixed: #31111D;
+
+            /* Error */
+            --md-sys-color-error: #BA1A1A;
+            --md-sys-color-on-error: #FFFFFF;
+            --md-sys-color-error-container: #FFDAD6;
+            --md-sys-color-on-error-container: #410002;
+
+            /* Surface */
+            --md-sys-color-surface: #FEF7FF;
+            --md-sys-color-on-surface: #1D1B20;
+            --md-sys-color-surface-variant: #E7E0EC;
+            --md-sys-color-on-surface-variant: #49454F;
+            --md-sys-color-surface-dim: #DED8E1;
+            --md-sys-color-surface-bright: #FEF7FF;
+            --md-sys-color-surface-container-lowest: #FFFFFF;
+            --md-sys-color-surface-container-low: #F7F2FA;
+            --md-sys-color-surface-container: #F3EDF7;
+            --md-sys-color-surface-container-high: #ECE6F0;
+            --md-sys-color-surface-container-highest: #E6E0E9;
+
+            /* Outline */
+            --md-sys-color-outline: #79747E;
+            --md-sys-color-outline-variant: #CAC4D0;
+            --md-sys-color-outline-light: #E0DCE4;
+
+            /* Shadow */
+            --md-sys-color-shadow: rgba(0, 0, 0, 0.18);
+            --md-sys-color-scrim: rgba(0, 0, 0, 0.45);
+
+            /* Inverse */
+            --md-sys-color-inverse-surface: #322F35;
+            --md-sys-color-inverse-on-surface: #F5EFF7;
+            --md-sys-color-inverse-primary: #D0BCFF;
+
+            /* Custom surface tint overlay for elevation in light mode */
+            --md-sys-elevation-surface-tint-color: 103, 80, 164;
+
+            /* Elevation - Box Shadows (Light) */
+            --md-sys-elevation-0: none;
+            --md-sys-elevation-1: 0px 1px 2px rgba(0, 0, 0, 0.20), 0px 1px 3px 1px rgba(0, 0, 0, 0.10);
+            --md-sys-elevation-2: 0px 1px 2px rgba(0, 0, 0, 0.22), 0px 2px 6px 2px rgba(0, 0, 0, 0.11);
+            --md-sys-elevation-3: 0px 1px 3px rgba(0, 0, 0, 0.24), 0px 4px 8px 3px rgba(0, 0, 0, 0.12);
+            --md-sys-elevation-4: 0px 2px 3px rgba(0, 0, 0, 0.26), 0px 6px 10px 4px rgba(0, 0, 0, 0.13);
+            --md-sys-elevation-5: 0px 4px 4px rgba(0, 0, 0, 0.28), 0px 8px 12px 6px rgba(0, 0, 0, 0.14);
+
+            /* Shape */
+            --md-sys-shape-corner-none: 0px;
+            --md-sys-shape-corner-extra-small: 4px;
+            --md-sys-shape-corner-small: 8px;
+            --md-sys-shape-corner-medium: 12px;
+            --md-sys-shape-corner-large: 16px;
+            --md-sys-shape-corner-extra-large: 24px;
+            --md-sys-shape-corner-full: 9999px;
+
+            /* State Layer Opacity */
+            --md-sys-state-hover-opacity: 0.08;
+            --md-sys-state-focus-opacity: 0.12;
+            --md-sys-state-press-opacity: 0.12;
+            --md-sys-state-drag-opacity: 0.16;
+            --md-sys-state-disabled-opacity: 0.38;
+
+            /* Typography Scale */
+            --md-sys-typescale-display-large: 57px/64px 'Roboto', 'Noto Sans SC', sans-serif;
+            --md-sys-typescale-display-medium: 45px/52px 'Roboto', 'Noto Sans SC', sans-serif;
+            --md-sys-typescale-display-small: 36px/44px 'Roboto', 'Noto Sans SC', sans-serif;
+            --md-sys-typescale-headline-large: 32px/40px 'Roboto', 'Noto Sans SC', sans-serif;
+            --md-sys-typescale-headline-medium: 28px/36px 'Roboto', 'Noto Sans SC', sans-serif;
+            --md-sys-typescale-headline-small: 24px/32px 'Roboto', 'Noto Sans SC', sans-serif;
+            --md-sys-typescale-title-large: 22px/28px 'Roboto', 'Noto Sans SC', sans-serif;
+            --md-sys-typescale-title-medium: 16px/24px 'Roboto', 'Noto Sans SC', sans-serif;
+            --md-sys-typescale-title-small: 14px/20px 'Roboto', 'Noto Sans SC', sans-serif;
+            --md-sys-typescale-body-large: 16px/24px 'Roboto', 'Noto Sans SC', sans-serif;
+            --md-sys-typescale-body-medium: 14px/20px 'Roboto', 'Noto Sans SC', sans-serif;
+            --md-sys-typescale-body-small: 12px/16px 'Roboto', 'Noto Sans SC', sans-serif;
+            --md-sys-typescale-label-large: 14px/20px 'Roboto', 'Noto Sans SC', sans-serif;
+            --md-sys-typescale-label-medium: 12px/16px 'Roboto', 'Noto Sans SC', sans-serif;
+            --md-sys-typescale-label-small: 11px/16px 'Roboto', 'Noto Sans SC', sans-serif;
+
+            /* Spacing */
+            --md-sys-spacing-xs: 4px;
+            --md-sys-spacing-sm: 8px;
+            --md-sys-spacing-md: 16px;
+            --md-sys-spacing-lg: 24px;
+            --md-sys-spacing-xl: 32px;
+            --md-sys-spacing-2xl: 40px;
+            --md-sys-spacing-3xl: 48px;
+
+            /* Layout */
+            --nav-drawer-width: 280px;
+            --top-bar-height: 64px;
+            --content-max-width: 1200px;
+
+            /* Transitions */
+            --md-sys-motion-duration-short: 200ms;
+            --md-sys-motion-duration-medium: 350ms;
+            --md-sys-motion-duration-long: 500ms;
+            --md-sys-motion-easing-standard: cubic-bezier(0.2, 0, 0, 1);
+            --md-sys-motion-easing-emphasized: cubic-bezier(0.05, 0.7, 0.1, 1);
+            --md-sys-motion-easing-decelerate: cubic-bezier(0, 0, 0, 1);
+            --md-sys-motion-easing-accelerate: cubic-bezier(0.3, 0, 1, 1);
+        }
+
+        /* --- Dark Theme Tokens --- */
+        [data-theme="dark"] {
+            --md-sys-color-primary: #D0BCFF;
+            --md-sys-color-on-primary: #381E72;
+            --md-sys-color-primary-container: #4F378B;
+            --md-sys-color-on-primary-container: #EADDFF;
+            --md-sys-color-primary-fixed: #EADDFF;
+            --md-sys-color-on-primary-fixed: #21005D;
+            --md-sys-color-primary-fixed-dim: #D0BCFF;
+            --md-sys-color-on-primary-fixed-variant: #4F378B;
+
+            --md-sys-color-secondary: #CCC2DC;
+            --md-sys-color-on-secondary: #332D41;
+            --md-sys-color-secondary-container: #4A4458;
+            --md-sys-color-on-secondary-container: #E8DEF8;
+            --md-sys-color-secondary-fixed: #E8DEF8;
+            --md-sys-color-on-secondary-fixed: #1D192B;
+
+            --md-sys-color-tertiary: #EFB8C8;
+            --md-sys-color-on-tertiary: #492532;
+            --md-sys-color-tertiary-container: #633B48;
+            --md-sys-color-on-tertiary-container: #FFD8E4;
+
+            --md-sys-color-error: #FFB4AB;
+            --md-sys-color-on-error: #690005;
+            --md-sys-color-error-container: #93000A;
+            --md-sys-color-on-error-container: #FFDAD6;
+
+            --md-sys-color-surface: #141218;
+            --md-sys-color-on-surface: #E6E0E9;
+            --md-sys-color-surface-variant: #49454F;
+            --md-sys-color-on-surface-variant: #CAC4D0;
+            --md-sys-color-surface-dim: #141218;
+            --md-sys-color-surface-bright: #3B383E;
+            --md-sys-color-surface-container-lowest: #0F0D13;
+            --md-sys-color-surface-container-low: #1D1B20;
+            --md-sys-color-surface-container: #211F26;
+            --md-sys-color-surface-container-high: #2B2930;
+            --md-sys-color-surface-container-highest: #36343B;
+
+            --md-sys-color-outline: #938F99;
+            --md-sys-color-outline-variant: #49454F;
+            --md-sys-color-outline-light: #3A3740;
+
+            --md-sys-color-shadow: rgba(0, 0, 0, 0.35);
+            --md-sys-color-scrim: rgba(0, 0, 0, 0.60);
+
+            --md-sys-color-inverse-surface: #E6E0E9;
+            --md-sys-color-inverse-on-surface: #322F35;
+            --md-sys-color-inverse-primary: #6750A4;
+
+            --md-sys-elevation-surface-tint-color: 208, 188, 255;
+
+            --md-sys-elevation-0: none;
+            --md-sys-elevation-1: 0px 1px 2px rgba(0, 0, 0, 0.35), 0px 1px 3px 1px rgba(0, 0, 0, 0.20);
+            --md-sys-elevation-2: 0px 1px 2px rgba(0, 0, 0, 0.38), 0px 2px 6px 2px rgba(0, 0, 0, 0.22);
+            --md-sys-elevation-3: 0px 1px 3px rgba(0, 0, 0, 0.40), 0px 4px 8px 3px rgba(0, 0, 0, 0.24);
+            --md-sys-elevation-4: 0px 2px 3px rgba(0, 0, 0, 0.42), 0px 6px 10px 4px rgba(0, 0, 0, 0.26);
+            --md-sys-elevation-5: 0px 4px 4px rgba(0, 0, 0, 0.44), 0px 8px 12px 6px rgba(0, 0, 0, 0.28);
+        }
+
+        /* ============================================
+           GLOBAL RESET & BASE STYLES
+           ============================================ */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            font-family: 'Roboto', 'Noto Sans SC', sans-serif;
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+            scroll-behavior: smooth;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--md-sys-color-surface);
+            color: var(--md-sys-color-on-surface);
+            font: var(--md-sys-typescale-body-medium);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            transition: background-color var(--md-sys-motion-duration-medium) var(--md-sys-motion-easing-standard),
+                color var(--md-sys-motion-duration-medium) var(--md-sys-motion-easing-standard);
+        }
+
+        a {
+            color: var(--md-sys-color-primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color var(--md-sys-motion-duration-short) var(--md-sys-motion-easing-standard);
+        }
+        a:hover {
+            color: var(--md-sys-color-on-primary-fixed-variant);
+            text-decoration: underline;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        ul,
+        ol {
+            list-style: none;
+        }
+
+        button {
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-family: inherit;
+            font-size: inherit;
+            color: inherit;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        input {
+            font-family: inherit;
+            font-size: inherit;
+            color: inherit;
+        }
+
+        /* Focus visible styles */
+        :focus-visible {
+            outline: 3px solid var(--md-sys-color-primary);
+            outline-offset: 2px;
+            border-radius: var(--md-sys-shape-corner-extra-small);
+        }
+
+        /* ============================================
+           UTILITY: STATE LAYER (MD3 Ripple/Interaction)
+           ============================================ */
+        .state-layer {
+            position: relative;
+            overflow: hidden;
+        }
+        .state-layer::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            transition: background-color var(--md-sys-motion-duration-short) var(--md-sys-motion-easing-standard);
+            border-radius: inherit;
+            z-index: 0;
+        }
+        .state-layer:hover::after {
+            background-color: currentColor;
+            opacity: var(--md-sys-state-hover-opacity);
+        }
+        .state-layer:active::after {
+            background-color: currentColor;
+            opacity: var(--md-sys-state-press-opacity);
+        }
+
+        /* Ripple effect */
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: currentColor;
+            opacity: 0.25;
+            transform: scale(0);
+            animation: ripple-animation 550ms var(--md-sys-motion-easing-standard) forwards;
+            pointer-events: none;
+            z-index: 1;
+        }
+        @keyframes ripple-animation {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+
+        /* ============================================
+           TOP APP BAR
+           ============================================ */
+        .top-app-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: var(--top-bar-height);
+            background-color: var(--md-sys-color-surface-container);
+            color: var(--md-sys-color-on-surface);
+            display: flex;
+            align-items: center;
+            padding: 0 var(--md-sys-spacing-md);
+            gap: var(--md-sys-spacing-sm);
+            z-index: 100;
+            border-bottom: 1px solid var(--md-sys-color-outline-variant);
+            transition: background-color var(--md-sys-motion-duration-medium) var(--md-sys-motion-easing-standard),
+                border-color var(--md-sys-motion-duration-medium) var(--md-sys-motion-easing-standard),
+                box-shadow var(--md-sys-motion-duration-medium) var(--md-sys-motion-easing-standard);
+        }
+        .top-app-bar.scrolled {
+            box-shadow: var(--md-sys-elevation-2);
+        }
+
+        .top-app-bar__nav-btn {
+            width: 48px;
+            height: 48px;
+            border-radius: var(--md-sys-shape-corner-full);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: var(--md-sys-color-on-surface);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        .top-app-bar__nav-btn .material-symbols-rounded {
+            font-size: 24px;
+            position: relative;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .top-app-bar__logo {
+            display: flex;
+            align-items: center;
+            gap: var(--md-sys-spacing-sm);
+            flex-shrink: 0;
+        }
+        .top-app-bar__logo-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: var(--md-sys-shape-corner-medium);
+            background: var(--md-sys-color-primary);
+            color: var(--md-sys-color-on-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+        .top-app-bar__title {
+            font: var(--md-sys-typescale-title-large);
+            font-weight: 600;
+            color: var(--md-sys-color-on-surface);
+            white-space: nowrap;
+            letter-spacing: -0.01em;
+        }
+
+        .top-app-bar__spacer {
+            flex: 1;
+            min-width: var(--md-sys-spacing-md);
+        }
+
+        /* Search in app bar */
+        .top-app-bar__search {
+            display: flex;
+            align-items: center;
+            background-color: var(--md-sys-color-surface-container-high);
+            border-radius: var(--md-sys-shape-corner-full);
+            padding: 0 var(--md-sys-spacing-sm);
+            height: 44px;
+            max-width: 420px;
+            width: 100%;
+            gap: var(--md-sys-spacing-xs);
+            border: 1px solid transparent;
+            transition: all var(--md-sys-motion-duration-short) var(--md-sys-motion-easing-standard);
+            cursor: text;
+            position: relative;
+            z-index: 1;
+        }
+        .top-app-bar__search:hover {
+            background-color: var(--md-sys-color-surface-container-highest);
+            border-color: var(--md-sys-color-outline-variant);
+        }
+        .top-app-bar__search:focus-within {
+            background-color: var(--md-sys-color-surface-container-highest);
+            border-color: var(--md-sys-color-primary);
+            box-shadow: 0 0 0 2px rgba(var(--md-sys-elevation-surface-tint-color), 0.25);
+        }
+        .top-app-bar__search .material-symbols-rounded {
+            font-size: 20px;
+            color: var(--md-sys-color-on-surface-variant);
+            flex-shrink: 0;
+            pointer-events: none;
+        }
+        .top-app-bar__search input {
+            flex: 1;
+            border: none;
+            background: transparent;
+            outline: none;
+            font: var(--md-sys-typescale-body-large);
+            color: var(--md-sys-color-on-surface);
+            min-width: 0;
+            height: 100%;
+        }
+        .top-app-bar__search input::placeholder {
+            color: var(--md-sys-color-on-surface-variant);
+        }
+        .top-app-bar__search-clear {
+            width: 28px;
+            height: 28px;
+            border-radius: var(--md-sys-shape-corner-full);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: var(--md-sys-color-on-surface-variant);
+            opacity: 0;
+            transition: opacity var(--md-sys-motion-duration-short);
+            pointer-events: none;
+            position: relative;
+            overflow: hidden;
+        }
+        .top-app-bar__search-clear.visible {
+            opacity: 1;
+            pointer-events: auto;
+            cursor: pointer;
+        }
+        .top-app-bar__search-clear .material-symbols-rounded {
+            font-size: 18px;
+            pointer-events: none;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Theme toggle & actions */
+        .top-app-bar__actions {
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            flex-shrink: 0;
+        }
+        .top-app-bar__action-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: var(--md-sys-shape-corner-full);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--md-sys-color-on-surface-variant);
+            position: relative;
+            overflow: hidden;
+            transition: color var(--md-sys-motion-duration-short);
+        }
+        .top-app-bar__action-btn .material-symbols-rounded {
+            font-size: 22px;
+            position: relative;
+            z-index: 2;
+            pointer-events: none;
+            font-variation-settings: 'FILL' 0;
+            transition: font-variation-settings var(--md-sys-motion-duration-short);
+        }
+        .top-app-bar__action-btn.active .material-symbols-rounded {
+            font-variation-settings: 'FILL' 1;
+            color: var(--md-sys-color-primary);
+        }
+
+        /* ============================================
+           NAVIGATION DRAWER (Sidebar)
+           ============================================ */
+        .nav-drawer-overlay {
+            position: fixed;
+            inset: 0;
+            background-color: var(--md-sys-color-scrim);
+            z-index: 150;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity var(--md-sys-motion-duration-medium) var(--md-sys-motion-easing-standard);
+        }
+        .nav-drawer-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .nav-drawer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: var(--nav-drawer-width);
+            height: 100%;
+            background-color: var(--md-sys-color-surface-container-low);
+            z-index: 200;
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid var(--md-sys-color-outline-variant);
+            transform: translateX(-100%);
+            transition: transform var(--md-sys-motion-duration-medium) var(--md-sys-motion-easing-emphasized),
+                background-color var(--md-sys-motion-duration-medium) var(--md-sys-motion-easing-standard),
+                border-color var(--md-sys-motion-duration-medium) var(--md-sys-motion-easing-standard);
+            will-change: transform;
+        }
+        .nav-drawer.open {
+            transform: translateX(0);
+        }
+
+        /* Drawer header */
+        .nav-drawer__header {
+            padding: var(--md-sys-spacing-lg) var(--md-sys-spacing-md);
+            display: flex;
+            align-items: center;
+            gap: var(--md-sys-spacing-md);
+            border-bottom: 1px solid var(--md-sys-color-outline-variant);
+            min-height: var(--top-bar-height);
+            flex-shrink: 0;
+        }
+        .nav-drawer__brand-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--md-sys-shape-corner-medium);
+            background: var(--md-sys-color-primary);
+            color: var(--md-sys-color-on-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+        .nav-drawer__brand-text {
+            font: var(--md-sys-typescale-title-medium);
+            font-weight: 600;
+            color: var(--md-sys-color-on-surface);
+        }
+
+        /* Drawer content */
+        .nav-drawer__content {
+            flex: 1;
+            overflow-y: auto;
+            padding: var(--md-sys-spacing-sm) var(--md-sys-spacing-sm);
+            overscroll-behavior: contain;
+        }
+        .nav-drawer__content::-webkit-scrollbar {
+            width: 4px;
+        }
+        .nav-drawer__content::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .nav-drawer__content::-webkit-scrollbar-thumb {
+            background: var(--md-sys-color-outline-variant);
+            border-radius: 2px;
+        }
+
+        /* Nav sections */
+        .nav-section {
+            margin-bottom: var(--md-sys-spacing-xs);
+        }
+        .nav-section__label {
+            font: var(--md-sys-typescale-label-large);
+            font-weight: 600;
+            color: var(--md-sys-color-on-surface-variant);
+            padding: var(--md-sys-spacing-sm) var(--md-sys-spacing-md);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-top: var(--md-sys-spacing-sm);
+        }
+        .nav-section__label:first-child {
+            margin-top: 0;
+        }
+
+        /* Nav items */
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: var(--md-sys-spacing-sm);
+            padding: 10px var(--md-sys-spacing-md);
+            border-radius: var(--md-sys-shape-corner-full);
+            cursor: pointer;
+            font: var(--md-sys-typescale-label-large);
+            font-weight: 500;
+            color: var(--md-sys-color-on-surface-variant);
+            transition: all var(--md-sys-motion-duration-short) var(--md-sys-motion-easing-standard);
+            position: relative;
+            overflow: hidden;
+            user-select: none;
+            min-height: 44px;
+        }
+        .nav-item .material-symbols-rounded {
+            font-size: 22px;
+            flex-shrink: 0;
+            position: relative;
+            z-index: 2;
+            pointer-events: none;
+            font-variation-settings: 'FILL' 0;
+        }
+        .nav-item .nav-item__text {
+            position: relative;
+            z-index: 2;
+            pointer-events: none;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .nav-item .nav-item__badge {
+            margin-left: auto;
+            background-color: var(--md-sys-color-primary-container);
+            color: var(--md-sys-color-on-primary-container);
+            font: var(--md-sys-typescale-label-small);
+            font-weight: 600;
+            padding: 2px 10px;
+            border-radius: var(--md-sys-shape-corner-full);
+            position: relative;
+            z-index: 2;
+            pointer-events: none;
+            min-width: 22px;
+            text-align: center;
+        }
+        .nav-item:hover {
+            background-color: var(--md-sys-color-surface-container-highest);
+            color: var(--md-sys-color-on-surface);
+        }
+        .nav-item.active {
+            background-color: var(--md-sys-color-secondary-container);
+            color: var(--md-sys-color-on-secondary-container);
+            font-weight: 600;
+        }
+        .nav-item.active .material-symbols-rounded {
+            font-variation-settings: 'FILL' 1;
+        }
+        .nav-item.active .nav-item__badge {
+            background-color: var(--md-sys-color-primary);
+            color: var(--md-sys-color-on-primary);
+        }
+
+        /* ============================================
+           MAIN CONTENT AREA
+           ============================================ */
+        .page-wrapper {
+            display: flex;
+            flex: 1;
+            padding-top: var(--top-bar-height);
+        }
+
+        .main-content {
+            flex: 1;
+            min-width: 0;
+            padding: var(--md-sys-spacing-lg);
+            max-width: var(--content-max-width);
+            margin: 0 auto;
+            width: 100%;
+            transition: padding var(--md-sys-motion-duration-medium) var(--md-sys-motion-easing-standard);
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: var(--md-sys-spacing-xs);
+            flex-wrap: wrap;
+            margin-bottom: var(--md-sys-spacing-lg);
+            font: var(--md-sys-typescale-label-medium);
+            color: var(--md-sys-color-on-surface-variant);
+        }
+        .breadcrumb a {
+            color: var(--md-sys-color-on-surface-variant);
+            font-weight: 400;
+            transition: color var(--md-sys-motion-duration-short);
+            white-space: nowrap;
+        }
+        .breadcrumb a:hover {
+            color: var(--md-sys-color-primary);
+            text-decoration: none;
+        }
+        .breadcrumb .material-symbols-rounded {
+            font-size: 16px;
+            color: var(--md-sys-color-on-surface-variant);
+        }
+        .breadcrumb .current {
+            color: var(--md-sys-color-on-surface);
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        /* Page header */
+        .page-header {
+            margin-bottom: var(--md-sys-spacing-lg);
+        }
+        .page-header__title {
+            font: var(--md-sys-typescale-headline-medium);
+            font-weight: 600;
+            color: var(--md-sys-color-on-surface);
+            letter-spacing: -0.02em;
+            margin-bottom: var(--md-sys-spacing-xs);
+        }
+        .page-header__subtitle {
+            font: var(--md-sys-typescale-body-large);
+            color: var(--md-sys-color-on-surface-variant);
+            max-width: 600px;
+        }
+
+        /* Chips filter row */
+        .chips-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--md-sys-spacing-sm);
+            margin-bottom: var(--md-sys-spacing-lg);
+        }
+        .chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 6px 18px;
+            border-radius: var(--md-sys-shape-corner-small);
+            font: var(--md-sys-typescale-label-large);
+            font-weight: 500;
+            cursor: pointer;
+            border: 1px solid var(--md-sys-color-outline);
+            background: transparent;
+            color: var(--md-sys-color-on-surface-variant);
+            transition: all var(--md-sys-motion-duration-short) var(--md-sys-motion-easing-standard);
+            user-select: none;
+            position: relative;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        .chip:hover {
+            background-color: var(--md-sys-color-surface-container-highest);
+            border-color: var(--md-sys-color-on-surface-variant);
+        }
+        .chip.active {
+            background-color: var(--md-sys-color-primary-container);
+            border-color: var(--md-sys-color-primary-container);
+            color: var(--md-sys-color-on-primary-container);
+            font-weight: 600;
+        }
+        .chip .material-symbols-rounded {
+            font-size: 18px;
+            pointer-events: none;
+            position: relative;
+            z-index: 2;
+        }
+        .chip .chip__text {
+            pointer-events: none;
+            position: relative;
+            z-index: 2;
+        }
+        .chip .chip__count {
+            font: var(--md-sys-typescale-label-small);
+            background: var(--md-sys-color-surface-container-high);
+            padding: 1px 8px;
+            border-radius: var(--md-sys-shape-corner-full);
+            pointer-events: none;
+            position: relative;
+            z-index: 2;
+        }
+        .chip.active .chip__count {
+            background: rgba(0, 0, 0, 0.12);
+        }
+
+        /* Results info */
+        .results-info {
+            font: var(--md-sys-typescale-label-large);
+            color: var(--md-sys-color-on-surface-variant);
+            margin-bottom: var(--md-sys-spacing-md);
+            display: flex;
+            align-items: center;
+            gap: var(--md-sys-spacing-sm);
+            flex-wrap: wrap;
+        }
+        .results-info__count {
+            font-weight: 600;
+            color: var(--md-sys-color-on-surface);
+        }
+        .results-info__clear {
+            color: var(--md-sys-color-primary);
+            cursor: pointer;
+            font-weight: 500;
+            font: var(--md-sys-typescale-label-large);
+            padding: 4px 8px;
+            border-radius: var(--md-sys-shape-corner-extra-small);
+            transition: background-color var(--md-sys-motion-duration-short);
+        }
+        .results-info__clear:hover {
+            background-color: var(--md-sys-color-surface-container-highest);
+        }
+
+        /* Articles Grid */
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: var(--md-sys-spacing-md);
+            margin-bottom: var(--md-sys-spacing-xl);
+        }
+
+        /* Article Card - MD3 Elevated Card */
+        .article-card {
+            background-color: var(--md-sys-color-surface-container-low);
+            border-radius: var(--md-sys-shape-corner-medium);
+            padding: var(--md-sys-spacing-lg);
+            cursor: pointer;
+            transition: all var(--md-sys-motion-duration-medium) var(--md-sys-motion-easing-standard);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            gap: var(--md-sys-spacing-sm);
+            border: 1px solid transparent;
+            box-shadow: var(--md-sys-elevation-0);
+        }
+        .article-card:hover {
+            background-color: var(--md-sys-color-surface-container);
+            box-shadow: var(--md-sys-elevation-2);
+            border-color: var(--md-sys-color-outline-variant);
+            transform: translateY(-2px);
+        }
+        .article-card:active {
+            box-shadow: var(--md-sys-elevation-1);
+            transform: translateY(0);
+        }
+        .article-card.hidden {
+            display: none;
+        }
+
+        .article-card__header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: var(--md-sys-spacing-sm);
+        }
+        .article-card__icon {
+            width: 44px;
+            height: 44px;
+            border-radius: var(--md-sys-shape-corner-small);
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            background-color: var(--md-sys-color-primary-container);
+            color: var(--md-sys-color-on-primary-container);
+        }
+        .article-card__icon .material-symbols-rounded {
+            font-size: 22px;
+        }
+        .article-card__bookmark {
+            width: 36px;
+            height: 36px;
+            border-radius: var(--md-sys-shape-corner-full);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: var(--md-sys-color-on-surface-variant);
+            position: relative;
+            overflow: hidden;
+            transition: color var(--md-sys-motion-duration-short);
+        }
+        .article-card__bookmark .material-symbols-rounded {
+            font-size: 20px;
+            pointer-events: none;
+            position: relative;
+            z-index: 2;
+            font-variation-settings: 'FILL' 0;
+        }
+        .article-card__bookmark.bookmarked .material-symbols-rounded {
+            font-variation-settings: 'FILL' 1;
+            color: var(--md-sys-color-primary);
+        }
+
+        .article-card__category-chip {
+            display: inline-block;
+            font: var(--md-sys-typescale-label-small);
+            font-weight: 600;
+            padding: 3px 10px;
+            border-radius: var(--md-sys-shape-corner-extra-small);
+            background-color: var(--md-sys-color-secondary-container);
+            color: var(--md-sys-color-on-secondary-container);
+            width: fit-content;
+            letter-spacing: 0.01em;
+            text-transform: uppercase;
+        }
+        .article-card__title {
+            font: var(--md-sys-typescale-title-medium);
+            font-weight: 600;
+            color: var(--md-sys-color-on-surface);
+            line-height: 1.35;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .article-card__summary {
+            font: var(--md-sys-typescale-body-medium);
+            color: var(--md-sys-color-on-surface-variant);
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            line-height: 1.55;
+        }
+        .article-card__tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+        .article-card__tag {
+            font: var(--md-sys-typescale-label-small);
+            color: var(--md-sys-color-primary);
+            background-color: rgba(var(--md-sys-elevation-surface-tint-color), 0.08);
+            padding: 2px 8px;
+            border-radius: var(--md-sys-shape-corner-extra-small);
+            white-space: nowrap;
+        }
+        .article-card__footer {
+            display: flex;
+            align-items: center;
+            gap: var(--md-sys-spacing-md);
+            margin-top: auto;
+            padding-top: var(--md-sys-spacing-xs);
+            font: var(--md-sys-typescale-label-small);
+            color: var(--md-sys-color-on-surface-variant);
+        }
+        .article-card__footer-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .article-card__footer-item .material-symbols-rounded {
+            font-size: 16px;
+        }
+
+        /* Empty state */
+        .empty-state {
+            text-align: center;
+            padding: var(--md-sys-spacing-3xl) var(--md-sys-spacing-lg);
+            color: var(--md-sys-color-on-surface-variant);
+        }
+        .empty-state .material-symbols-rounded {
+            font-size: 64px;
+            margin-bottom: var(--md-sys-spacing-md);
+            opacity: 0.5;
+            font-variation-settings: 'FILL' 0;
+        }
+        .empty-state__title {
+            font: var(--md-sys-typescale-title-large);
+            font-weight: 600;
+            color: var(--md-sys-color-on-surface);
+            margin-bottom: var(--md-sys-spacing-xs);
+        }
+        .empty-state__desc {
+            font: var(--md-sys-typescale-body-large);
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        /* ============================================
+           FAB - Floating Action Button
+           ============================================ */
+        .fab {
+            position: fixed;
+            bottom: var(--md-sys-spacing-lg);
+            right: var(--md-sys-spacing-lg);
+            width: 56px;
+            height: 56px;
+            border-radius: var(--md-sys-shape-corner-large);
+            background-color: var(--md-sys-color-primary-container);
+            color: var(--md-sys-color-on-primary-container);
+            box-shadow: var(--md-sys-elevation-3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 90;
+            transition: all var(--md-sys-motion-duration-medium) var(--md-sys-motion-easing-standard);
+            overflow: hidden;
+            cursor: pointer;
+        }
+        .fab:hover {
+            box-shadow: var(--md-sys-elevation-4);
+            background-color: var(--md-sys-color-primary-fixed-dim);
+            transform: scale(1.04);
+        }
+        .fab:active {
+            box-shadow: var(--md-sys-elevation-2);
+            transform: scale(0.97);
+        }
+        .fab .material-symbols-rounded {
+            font-size: 24px;
+            pointer-events: none;
+            position: relative;
+            z-index: 2;
+        }
+        .fab--extended {
+            width: auto;
+            padding: 0 var(--md-sys-spacing-lg);
+            gap: var(--md-sys-spacing-sm);
+            border-radius: var(--md-sys-shape-corner-large);
+            font: var(--md-sys-typescale-label-large);
+            font-weight: 600;
+        }
+
+        /* ============================================
+           SNACKBAR / TOAST
+           ============================================ */
+        .snackbar {
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%) translateY(120px);
+            background-color: var(--md-sys-color-inverse-surface);
+            color: var(--md-sys-color-inverse-on-surface);
+            padding: 12px var(--md-sys-spacing-lg);
+            border-radius: var(--md-sys-shape-corner-small);
+            font: var(--md-sys-typescale-label-large);
+            font-weight: 500;
+            z-index: 300;
+            box-shadow: var(--md-sys-elevation-3);
+            display: flex;
+            align-items: center;
+            gap: var(--md-sys-spacing-md);
+            transition: transform var(--md-sys-motion-duration-medium) var(--md-sys-motion-easing-emphasized);
+            pointer-events: auto;
+            white-space: nowrap;
+        }
+        .snackbar.show {
+            transform: translateX(-50%) translateY(0);
+        }
+        .snackbar__action {
+            color: var(--md-sys-color-inverse-primary);
+            font-weight: 600;
+            cursor: pointer;
+            padding: 4px 8px;
+            border-radius: var(--md-sys-shape-corner-extra-small);
+        }
+
+        /* ============================================
+           RESPONSIVE DESIGN
+           ============================================ */
+        @media (min-width: 1024px) {
+            .nav-drawer {
+                transform: translateX(0);
+                position: fixed;
+                top: var(--top-bar-height);
+                height: calc(100% - var(--top-bar-height));
+                z-index: 50;
+                border-top: none;
+            }
+            .nav-drawer__header {
+                display: none;
+            }
+            .nav-drawer-overlay {
+                display: none !important;
+            }
+            .page-wrapper {
+                padding-left: var(--nav-drawer-width);
+            }
+            .top-app-bar__nav-btn {
+                display: none;
+            }
+            .main-content {
+                padding: var(--md-sys-spacing-xl) var(--md-sys-spacing-2xl);
+            }
+            .articles-grid {
+                grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+                gap: var(--md-sys-spacing-lg);
+            }
+        }
+
+        @media (min-width: 1400px) {
+            .articles-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: var(--md-sys-spacing-lg);
+            }
+            .main-content {
+                padding: var(--md-sys-spacing-2xl) var(--md-sys-spacing-3xl);
+            }
+        }
+
+        @media (max-width: 1023px) {
+            .top-app-bar__search {
+                max-width: 280px;
+            }
+            .top-app-bar__title {
+                font: var(--md-sys-typescale-title-medium);
+                font-weight: 600;
+            }
+            .main-content {
+                padding: var(--md-sys-spacing-md);
+            }
+            .articles-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: var(--md-sys-spacing-sm);
+            }
+            .article-card {
+                padding: var(--md-sys-spacing-md);
+            }
+            .page-header__title {
+                font: var(--md-sys-typescale-headline-small);
+                font-weight: 600;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .top-app-bar {
+                padding: 0 var(--md-sys-spacing-sm);
+                gap: 4px;
+            }
+            .top-app-bar__search {
+                max-width: 100%;
+                height: 40px;
+                padding: 0 var(--md-sys-spacing-sm);
+            }
+            .top-app-bar__search input {
+                font: var(--md-sys-typescale-body-medium);
+            }
+            .top-app-bar__title {
+                display: none;
+            }
+            .top-app-bar__logo-icon {
+                width: 32px;
+                height: 32px;
+                font-size: 16px;
+            }
+            .articles-grid {
+                grid-template-columns: 1fr;
+                gap: var(--md-sys-spacing-sm);
+            }
+            .chips-row {
+                gap: 6px;
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                padding-bottom: var(--md-sys-spacing-xs);
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                mask-image: linear-gradient(to right, black 85%, transparent);
+                -webkit-mask-image: linear-gradient(to right, black 85%, transparent);
+            }
+            .chips-row::-webkit-scrollbar {
+                display: none;
+            }
+            .chip {
+                padding: 6px 14px;
+                font-size: 13px;
+                flex-shrink: 0;
+            }
+            .main-content {
+                padding: var(--md-sys-spacing-sm);
+            }
+            .page-header__title {
+                font: var(--md-sys-typescale-title-large);
+                font-weight: 600;
+            }
+            .page-header__subtitle {
+                font: var(--md-sys-typescale-body-medium);
+            }
+            .fab {
+                bottom: var(--md-sys-spacing-md);
+                right: var(--md-sys-spacing-md);
+                width: 48px;
+                height: 48px;
+                border-radius: var(--md-sys-shape-corner-medium);
+            }
+            .snackbar {
+                left: var(--md-sys-spacing-sm);
+                right: var(--md-sys-spacing-sm);
+                transform: translateY(120px);
+                font-size: 13px;
+                text-align: center;
+                justify-content: center;
+            }
+            .snackbar.show {
+                transform: translateY(0);
+            }
+        }
+
+        /* ============================================
+           ANIMATIONS
+           ============================================ */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .article-card {
+            animation: fadeInUp 400ms var(--md-sys-motion-easing-decelerate) both;
+        }
+        .article-card:nth-child(1) {
+            animation-delay: 40ms;
+        }
+        .article-card:nth-child(2) {
+            animation-delay: 80ms;
+        }
+        .article-card:nth-child(3) {
+            animation-delay: 120ms;
+        }
+        .article-card:nth-child(4) {
+            animation-delay: 160ms;
+        }
+        .article-card:nth-child(5) {
+            animation-delay: 200ms;
+        }
+        .article-card:nth-child(6) {
+            animation-delay: 240ms;
+        }
+        .article-card:nth-child(7) {
+            animation-delay: 280ms;
+        }
+        .article-card:nth-child(8) {
+            animation-delay: 320ms;
+        }
+        .article-card:nth-child(9) {
+            animation-delay: 360ms;
+        }
+        .article-card:nth-child(10) {
+            animation-delay: 400ms;
+        }
+
+        /* ============================================
+           SELECTION STYLES
+           ============================================ */
+        ::selection {
+            background-color: var(--md-sys-color-primary-container);
+            color: var(--md-sys-color-on-primary-container);
+        }
+    </style>
+</head>
+<body>
+    <!-- ============ SCROLL STATE DETECTION (for top bar shadow) ============ -->
+    <div id="scroll-detector" style="position:absolute;top:0;left:0;width:1px;height:1px;pointer-events:none;"></div>
+
+    <!-- ============ TOP APP BAR ============ -->
+    <header class="top-app-bar" id="topAppBar" role="banner">
+        <button class="top-app-bar__nav-btn state-layer" id="navToggleBtn" aria-label="打开导航菜单"
+        aria-expanded="false">
+        <span class="material-symbols-rounded">menu</span>
+    </button>
+
+    <div class="top-app-bar__logo">
+        <div class="top-app-bar__logo-icon">K</div>
+        <span class="top-app-bar__title">知识库</span>
+    </div>
+
+    <div class="top-app-bar__spacer"></div>
+
+    <!-- Search -->
+    <div class="top-app-bar__search" id="searchBar" role="search" tabindex="0">
+        <span class="material-symbols-rounded">search</span>
+        <input type="text" id="searchInput" placeholder="搜索文章..." aria-label="搜索文章">
+        <button class="top-app-bar__search-clear" id="searchClearBtn" aria-label="清除搜索">
+            <span class="material-symbols-rounded">close</span>
+        </button>
+    </div>
+
+    <div class="top-app-bar__actions">
+        <!-- Bookmark filter toggle -->
+        <button class="top-app-bar__action-btn state-layer" id="bookmarkFilterBtn"
+        aria-label="筛选收藏文章" title="已收藏的文章">
+        <span class="material-symbols-rounded">bookmark</span>
+    </button>
+    <!-- Theme toggle -->
+    <button class="top-app-bar__action-btn state-layer" id="themeToggleBtn" aria-label="切换深色模式"
+    title="切换主题">
+    <span class="material-symbols-rounded">dark_mode</span>
+</button>
+</div>
+</header>
+
+<!-- ============ NAVIGATION DRAWER OVERLAY (Mobile) ============ -->
+<div class="nav-drawer-overlay" id="navDrawerOverlay" aria-hidden="true"></div>
+
+<!-- ============ NAVIGATION DRAWER ============ -->
+<aside class="nav-drawer" id="navDrawer" role="navigation" aria-label="侧边导航">
+    <div class="nav-drawer__header">
+        <div class="nav-drawer__brand-icon">K</div>
+        <span class="nav-drawer__brand-text">TechKB 知识库</span>
+    </div>
+    <nav class="nav-drawer__content" id="navDrawerContent">
+        <!-- 主要导航 -->
+        <div class="nav-section">
+            <div class="nav-section__label">导航</div>
+            <div class="nav-item active" data-category="all">
+                <span class="material-symbols-rounded">home</span>
+                <span class="nav-item__text">全部文章</span>
+                <span class="nav-item__badge" id="navBadgeAll">10</span>
+            </div>
+            <div class="nav-item" data-category="getting-started">
+                <span class="material-symbols-rounded">rocket_launch</span>
+                <span class="nav-item__text">快速入门</span>
+                <span class="nav-item__badge">3</span>
+            </div>
+            <div class="nav-item" data-category="api-reference">
+                <span class="material-symbols-rounded">code</span>
+                <span class="nav-item__text">API 参考</span>
+                <span class="nav-item__badge">2</span>
+            </div>
+            <div class="nav-item" data-category="best-practices">
+                <span class="material-symbols-rounded">emoji_objects</span>
+                <span class="nav-item__text">最佳实践</span>
+                <span class="nav-item__badge">3</span>
+            </div>
+            <div class="nav-item" data-category="faq">
+                <span class="material-symbols-rounded">quiz</span>
+                <span class="nav-item__text">常见问题</span>
+                <span class="nav-item__badge">1</span>
+            </div>
+            <div class="nav-item" data-category="changelog">
+                <span class="material-symbols-rounded">update</span>
+                <span class="nav-item__text">更新日志</span>
+                <span class="nav-item__badge">1</span>
+            </div>
+        </div>
+        <!-- 标签 -->
+        <div class="nav-section">
+            <div class="nav-section__label">热门标签</div>
+            <div class="nav-item" data-tag="frontend">
+                <span class="material-symbols-rounded">tag</span>
+                <span class="nav-item__text">前端开发</span>
+            </div>
+            <div class="nav-item" data-tag="backend">
+                <span class="material-symbols-rounded">tag</span>
+                <span class="nav-item__text">后端服务</span>
+            </div>
+            <div class="nav-item" data-tag="database">
+                <span class="material-symbols-rounded">tag</span>
+                <span class="nav-item__text">数据库</span>
+            </div>
+            <div class="nav-item" data-tag="security">
+                <span class="material-symbols-rounded">tag</span>
+                <span class="nav-item__text">安全</span>
+            </div>
+            <div class="nav-item" data-tag="performance">
+                <span class="material-symbols-rounded">tag</span>
+                <span class="nav-item__text">性能优化</span>
+            </div>
+        </div>
+    </nav>
+</aside>
+
+<!-- ============ PAGE WRAPPER ============ -->
+<div class="page-wrapper">
+    <main class="main-content" id="mainContent" role="main">
+        <!-- Breadcrumb -->
+        <nav class="breadcrumb" aria-label="面包屑导航">
+            <a href="#">首页</a>
+            <span class="material-symbols-rounded">chevron_right</span>
+            <span class="current" id="breadcrumbCurrent">全部文章</span>
+        </nav>
+
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1 class="page-header__title" id="pageTitle">技术知识库</h1>
+            <p class="page-header__subtitle" id="pageSubtitle">
+                探索技术文档、API 参考、最佳实践与常见问题解答
+            </p>
+        </div>
+
+        <!-- Chips Filter -->
+        <div class="chips-row" id="chipsRow">
+            <button class="chip active" data-category="all">
+                <span class="material-symbols-rounded">apps</span>
+                <span class="chip__text">全部</span>
+                <span class="chip__count">10</span>
+            </button>
+            <button class="chip" data-category="getting-started">
+                <span class="material-symbols-rounded">rocket_launch</span>
+                <span class="chip__text">快速入门</span>
+                <span class="chip__count">3</span>
+            </button>
+            <button class="chip" data-category="api-reference">
+                <span class="material-symbols-rounded">code</span>
+                <span class="chip__text">API 参考</span>
+                <span class="chip__count">2</span>
+            </button>
+            <button class="chip" data-category="best-practices">
+                <span class="material-symbols-rounded">emoji_objects</span>
+                <span class="chip__text">最佳实践</span>
+                <span class="chip__count">3</span>
+            </button>
+            <button class="chip" data-category="faq">
+                <span class="material-symbols-rounded">quiz</span>
+                <span class="chip__text">常见问题</span>
+                <span class="chip__count">1</span>
+            </button>
+            <button class="chip" data-category="changelog">
+                <span class="material-symbols-rounded">update</span>
+                <span class="chip__text">更新日志</span>
+                <span class="chip__count">1</span>
+            </button>
+        </div>
+
+        <!-- Results info -->
+        <div class="results-info" id="resultsInfo">
+            <span>共</span>
+            <span class="results-info__count" id="resultsCount">10</span>
+            <span>篇文章</span>
+            <span class="results-info__clear" id="clearFilters" style="display:none;">清除筛选</span>
+        </div>
+
+        <!-- Articles Grid -->
+        <div class="articles-grid" id="articlesGrid">
+            <!-- Articles rendered by JS -->
+        </div>
+
+        <!-- Empty State (hidden by default) -->
+        <div class="empty-state" id="emptyState" style="display:none;">
+            <span class="material-symbols-rounded">search_off</span>
+            <div class="empty-state__title">未找到匹配的文章</div>
+            <p class="empty-state__desc">
+                尝试调整搜索关键词或清除筛选条件，查看知识库中的其他内容。
+            </p>
+        </div>
+    </main>
+</div>
+
+<!-- ============ FAB ============ -->
+<button class="fab state-layer" id="fabBtn" aria-label="回到顶部" title="回到顶部">
+    <span class="material-symbols-rounded">arrow_upward</span>
+</button>
+
+<!-- ============ SNACKBAR ============ -->
+<div class="snackbar" id="snackbar" aria-live="polite">
+    <span id="snackbarMessage"></span>
+</div>
+
+<script>
+    (function() {
+        // ============================================
+        // ARTICLE DATA
+        // ============================================
+        const articlesData = [{
+            id: 1,
+            title: '快速搭建开发环境',
+            summary: '本指南将帮助您在 10 分钟内完成开发环境的搭建，包括 Node.js、Git 和 VS Code 的安装与配置，以及推荐插件的安装。',
+            category: 'getting-started',
+            categoryLabel: '快速入门',
+            tags: ['frontend', '工具'],
+            icon: 'terminal',
+            date: '2025-12-20',
+            readTime: '8 分钟',
+            featured: true,
+        }, {
+            id: 2,
+            title: 'RESTful API 设计规范',
+            summary: '深入解析 RESTful API 的设计原则，包括资源命名、HTTP 方法选择、状态码使用、分页处理以及版本控制策略。',
+            category: 'api-reference',
+            categoryLabel: 'API 参考',
+            tags: ['backend', 'api'],
+            icon: 'api',
+            date: '2025-12-18',
+            readTime: '15 分钟',
+            featured: true,
+        }, {
+            id: 3,
+            title: '前端性能优化实战',
+            summary: '从代码分割、懒加载、CDN 优化到图片压缩，全面覆盖前端性能优化的核心策略，附带 Lighthouse 评分提升技巧。',
+            category: 'best-practices',
+            categoryLabel: '最佳实践',
+            tags: ['frontend', 'performance'],
+            icon: 'speed',
+            date: '2025-12-15',
+            readTime: '12 分钟',
+            featured: false,
+        }, {
+            id: 4,
+            title: '数据库索引优化指南',
+            summary: '详解 B-Tree 索引原理、复合索引最佳实践、EXPLAIN 执行计划分析以及慢查询优化的完整流程。',
+            category: 'best-practices',
+            categoryLabel: '最佳实践',
+            tags: ['database', 'performance'],
+            icon: 'storage',
+            date: '2025-12-10',
+            readTime: '20 分钟',
+            featured: true,
+        }, {
+            id: 5,
+            title: 'OAuth 2.0 认证流程详解',
+            summary: '图文并茂地讲解 OAuth 2.0 的四种授权模式：授权码模式、隐式模式、密码模式和客户端凭证模式。',
+            category: 'api-reference',
+            categoryLabel: 'API 参考',
+            tags: ['backend', 'security', 'api'],
+            icon: 'security',
+            date: '2025-12-05',
+            readTime: '18 分钟',
+            featured: false,
+        }, {
+            id: 6,
+            title: 'Git 工作流最佳实践',
+            summary: '介绍 Git Flow、GitHub Flow 和 Trunk-Based Development 三种主流工作流，帮助团队选择适合的协作模式。',
+            category: 'best-practices',
+            categoryLabel: '最佳实践',
+            tags: ['工具', '协作'],
+            icon: 'account_tree',
+            date: '2025-11-28',
+            readTime: '10 分钟',
+            featured: false,
+        }, {
+            id: 7,
+            title: '新手常见问题汇总',
+            summary: '收集了初学者最常遇到的 20 个问题，涵盖环境配置、语法错误、依赖管理和部署等方面。',
+            category: 'faq',
+            categoryLabel: '常见问题',
+            tags: ['frontend', 'backend', '工具'],
+            icon: 'help',
+            date: '2025-11-20',
+            readTime: '6 分钟',
+            featured: false,
+        }, {
+            id: 8,
+            title: 'v2.5 版本更新说明',
+            summary: '本次更新带来了全新的 UI 界面、性能提升 30%、新增暗色模式支持，以及修复了 15 个已知问题。',
+            category: 'changelog',
+            categoryLabel: '更新日志',
+            tags: ['frontend', '工具'],
+            icon: 'new_releases',
+            date: '2025-11-15',
+            readTime: '5 分钟',
+            featured: false,
+        }, {
+            id: 9,
+            title: '容器化部署入门',
+            summary: '从 Docker 基础概念到 Kubernetes 集群部署，循序渐进地讲解容器化技术的核心知识点和实操步骤。',
+            category: 'getting-started',
+            categoryLabel: '快速入门',
+            tags: ['backend', '部署'],
+            icon: 'deployed_code',
+            date: '2025-11-10',
+            readTime: '14 分钟',
+            featured: true,
+        }, {
+            id: 10,
+            title: 'Web 安全防护清单',
+            summary: '涵盖 XSS、CSRF、SQL 注入等常见攻击的防护策略，以及 CSP、HTTPS 和安全的 Cookie 配置方案。',
+            category: 'getting-started',
+            categoryLabel: '快速入门',
+            tags: ['security', 'frontend', 'backend'],
+            icon: 'shield',
+            date: '2025-11-01',
+            readTime: '16 分钟',
+            featured: false,
+        }, ];
+
+        // ============================================
+        // DOM REFERENCES
+        // ============================================
+        const topAppBar = document.getElementById('topAppBar');
+        const navDrawer = document.getElementById('navDrawer');
+        const navDrawerOverlay = document.getElementById('navDrawerOverlay');
+        const navToggleBtn = document.getElementById('navToggleBtn');
+        const articlesGrid = document.getElementById('articlesGrid');
+        const searchInput = document.getElementById('searchInput');
+        const searchClearBtn = document.getElementById('searchClearBtn');
+        const searchBar = document.getElementById('searchBar');
+        const chipsRow = document.getElementById('chipsRow');
+        const resultsCount = document.getElementById('resultsCount');
+        const clearFiltersBtn = document.getElementById('clearFilters');
+        const emptyState = document.getElementById('emptyState');
+        const themeToggleBtn = document.getElementById('themeToggleBtn');
+        const fabBtn = document.getElementById('fabBtn');
+        const snackbar = document.getElementById('snackbar');
+        const snackbarMessage = document.getElementById('snackbarMessage');
+        const bookmarkFilterBtn = document.getElementById('bookmarkFilterBtn');
+        const breadcrumbCurrent = document.getElementById('breadcrumbCurrent');
+        const pageTitle = document.getElementById('pageTitle');
+        const pageSubtitle = document.getElementById('pageSubtitle');
+        const navBadgeAll = document.getElementById('navBadgeAll');
+
+        // ============================================
+        // STATE
+        // ============================================
+        let activeCategory = 'all';
+        let activeTag = null;
+        let searchQuery = '';
+        let bookmarkedIds = new Set(JSON.parse(localStorage.getItem('kb_bookmarks') || '[]'));
+        let bookmarkFilterActive = false;
+        let isDrawerOpen = false;
+        const isDesktop = () => window.innerWidth >= 1024;
+
+        // ============================================
+        // FUNCTIONS
+        // ============================================
+
+        /** Render all articles based on current filters */
+        function renderArticles() {
+            const filtered = articlesData.filter(article => {
+                // Category filter
+                if (activeCategory !== 'all' && article.category !== activeCategory) return false;
+                // Tag filter
+                if (activeTag && !article.tags.includes(activeTag)) return false;
+                // Bookmark filter
+                if (bookmarkFilterActive && !bookmarkedIds.has(article.id)) return false;
+                // Search filter
+                if (searchQuery.trim()) {
+                    const q = searchQuery.trim().toLowerCase();
+                    const searchable = [
+                        article.title,
+                        article.summary,
+                        article.categoryLabel,
+                        ...article.tags,
+                    ].join(' ').toLowerCase();
+                    if (!searchable.includes(q)) return false;
+                }
+                return true;
+            });
+
+            // Update results count
+            resultsCount.textContent = filtered.length;
+            navBadgeAll.textContent = articlesData.length;
+
+            // Show/hide clear filters
+            const hasActiveFilters = activeCategory !== 'all' || activeTag || searchQuery.trim() ||
+                bookmarkFilterActive;
+            clearFiltersBtn.style.display = hasActiveFilters ? 'inline' : 'none';
+
+            // Show/hide empty state
+            if (filtered.length === 0) {
+                articlesGrid.innerHTML = '';
+                emptyState.style.display = 'block';
+            } else {
+                emptyState.style.display = 'none';
+                articlesGrid.innerHTML = filtered.map((article, index) => {
+                    const isBookmarked = bookmarkedIds.has(article.id);
+                    const iconContent = article.icon ?
+                        `<span class="material-symbols-rounded">${article.icon}</span>` :
+                        article.categoryLabel.charAt(0);
+
+                    return `
+                            <article class="article-card" data-id="${article.id}" data-category="${article.category}" 
+                                 style="animation-delay: ${index * 50}ms;" tabindex="0">
+                                <div class="article-card__header">
+                                    <div class="article-card__icon">${iconContent}</div>
+                                    <button class="article-card__bookmark state-layer ${isBookmarked ? 'bookmarked' : ''}" 
+                                            data-bookmark-id="${article.id}" 
+                                            aria-label="${isBookmarked ? '取消收藏' : '收藏文章'}"
+                                            title="${isBookmarked ? '取消收藏' : '收藏文章'}">
+                                        <span class="material-symbols-rounded">bookmark</span>
+                                    </button>
+                                </div>
+                                <span class="article-card__category-chip">${article.categoryLabel}</span>
+                                <h3 class="article-card__title">${escapeHtml(article.title)}</h3>
+                                <p class="article-card__summary">${escapeHtml(article.summary)}</p>
+                                <div class="article-card__tags">
+                                    ${article.tags.map(tag => `<span class="article-card__tag" data-tag="${tag}">#${escapeHtml(tag)}</span>`).join('')}
+                                </div>
+                                <div class="article-card__footer">
+                                    <span class="article-card__footer-item">
+                                        <span class="material-symbols-rounded">calendar_today</span>
+                                        ${article.date}
+                                    </span>
+                                    <span class="article-card__footer-item">
+                                        <span class="material-symbols-rounded">schedule</span>
+                                        ${article.readTime}
+                                    </span>
+                                </div>
+                            </article>
+                        `;
+                }).join('');
+
+                // Attach event listeners to bookmark buttons
+                articlesGrid.querySelectorAll('.article-card__bookmark').forEach(btn => {
+                    btn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        const articleId = parseInt(this.getAttribute('data-bookmark-id'));
+                        toggleBookmark(articleId, this);
+                    });
+                });
+
+                // Attach event listeners to tag spans
+                articlesGrid.querySelectorAll('.article-card__tag').forEach(tagEl => {
+                    tagEl.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        const tag = this.getAttribute('data-tag');
+                        filterByTag(tag);
+                    });
+                });
+
+                // Attach click to article cards
+                articlesGrid.querySelectorAll('.article-card').forEach(card => {
+                    card.addEventListener('click', function() {
+                        const id = this.getAttribute('data-id');
+                        const article = articlesData.find(a => a.id === parseInt(id));
+                        if (article) {
+                            showSnackbar(`正在打开: ${article.title}`);
+                        }
+                    });
+                });
+            }
+
+            // Update bookmark filter button state
+            if (bookmarkFilterActive) {
+                bookmarkFilterBtn.classList.add('active');
+            } else {
+                bookmarkFilterBtn.classList.remove('active');
+            }
+        }
+
+        /** Toggle bookmark for an article */
+        function toggleBookmark(articleId, btnElement) {
+            if (bookmarkedIds.has(articleId)) {
+                bookmarkedIds.delete(articleId);
+                if (btnElement) btnElement.classList.remove('bookmarked');
+                showSnackbar('已取消收藏');
+            } else {
+                bookmarkedIds.add(articleId);
+                if (btnElement) btnElement.classList.add('bookmarked');
+                showSnackbar('已添加到收藏');
+            }
+            saveBookmarks();
+            if (bookmarkFilterActive) {
+                renderArticles();
+            }
+        }
+
+        /** Save bookmarks to localStorage */
+        function saveBookmarks() {
+            localStorage.setItem('kb_bookmarks', JSON.stringify([...bookmarkedIds]));
+        }
+
+        /** Filter by tag */
+        function filterByTag(tag) {
+            activeTag = tag;
+            activeCategory = 'all';
+            updateChipActiveState();
+            updateNavActiveState();
+            updateBreadcrumb();
+            renderArticles();
+            closeDrawer();
+        }
+
+        /** Update chip active states */
+        function updateChipActiveState() {
+            chipsRow.querySelectorAll('.chip').forEach(chip => {
+                const cat = chip.getAttribute('data-category');
+                if (cat === activeCategory && !activeTag) {
+                    chip.classList.add('active');
+                } else {
+                    chip.classList.remove('active');
+                }
+            });
+        }
+
+        /** Update nav item active states */
+        function updateNavActiveState() {
+            document.querySelectorAll('.nav-item[data-category]').forEach(item => {
+                const cat = item.getAttribute('data-category');
+                if (cat === activeCategory && !activeTag) {
+                    item.classList.add('active');
+                } else {
+                    item.classList.remove('active');
+                }
+            });
+            document.querySelectorAll('.nav-item[data-tag]').forEach(item => {
+                const tag = item.getAttribute('data-tag');
+                if (tag === activeTag) {
+                    item.classList.add('active');
+                } else {
+                    item.classList.remove('active');
+                }
+            });
+        }
+
+        /** Update breadcrumb */
+        function updateBreadcrumb() {
+            let label = '全部文章';
+            if (activeTag) {
+                const tagMap = {
+                    'frontend': '前端开发',
+                    'backend': '后端服务',
+                    'database': '数据库',
+                    'security': '安全',
+                    'performance': '性能优化',
+                    'api': 'API',
+                    '部署': '部署',
+                    '工具': '工具',
+                    '协作': '协作',
+                };
+                label = `标签: ${tagMap[activeTag] || activeTag}`;
+                pageTitle.textContent = `标签: ${tagMap[activeTag] || activeTag}`;
+                pageSubtitle.textContent = `浏览与"${tagMap[activeTag] || activeTag}"相关的文章`;
+            } else if (activeCategory !== 'all') {
+                const catMap = {
+                    'getting-started': '快速入门',
+                    'api-reference': 'API 参考',
+                    'best-practices': '最佳实践',
+                    'faq': '常见问题',
+                    'changelog': '更新日志',
+                };
+                label = catMap[activeCategory] || activeCategory;
+                pageTitle.textContent = catMap[activeCategory] || activeCategory;
+                pageSubtitle.textContent = `浏览"${catMap[activeCategory] || activeCategory}"分类下的文章`;
+            } else {
+                pageTitle.textContent = '技术知识库';
+                pageSubtitle.textContent = '探索技术文档、API 参考、最佳实践与常见问题解答';
+            }
+            breadcrumbCurrent.textContent = label;
+        }
+
+        /** Escape HTML entities */
+        function escapeHtml(str) {
+            const div = document.createElement('div');
+            div.textContent = str;
+            return div.innerHTML;
+        }
+
+        /** Show snackbar */
+        function showSnackbar(message, duration = 2500) {
+            snackbarMessage.textContent = message;
+            snackbar.classList.add('show');
+            clearTimeout(snackbar._timeout);
+            snackbar._timeout = setTimeout(() => {
+                snackbar.classList.remove('show');
+            }, duration);
+        }
+
+        /** Open drawer */
+        function openDrawer() {
+            if (isDesktop()) return;
+            navDrawer.classList.add('open');
+            navDrawerOverlay.classList.add('active');
+            navDrawerOverlay.setAttribute('aria-hidden', 'false');
+            navToggleBtn.setAttribute('aria-expanded', 'true');
+            document.body.style.overflow = 'hidden';
+            isDrawerOpen = true;
+        }
+
+        /** Close drawer */
+        function closeDrawer() {
+            if (isDesktop()) return;
+            navDrawer.classList.remove('open');
+            navDrawerOverlay.classList.remove('active');
+            navDrawerOverlay.setAttribute('aria-hidden', 'true');
+            navToggleBtn.setAttribute('aria-expanded', 'false');
+            document.body.style.overflow = '';
+            isDrawerOpen = false;
+        }
+
+        /** Clear all filters */
+        function clearAllFilters() {
+            activeCategory = 'all';
+            activeTag = null;
+            searchQuery = '';
+            searchInput.value = '';
+            searchClearBtn.classList.remove('visible');
+            bookmarkFilterActive = false;
+            updateChipActiveState();
+            updateNavActiveState();
+            updateBreadcrumb();
+            renderArticles();
+            searchInput.focus();
+        }
+
+        /** Add ripple effect to an element */
+        function addRippleEffect(e, el) {
+            const ripple = document.createElement('span');
+            ripple.classList.add('ripple');
+            const rect = el.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            ripple.style.width = ripple.style.height = `${size}px`;
+            ripple.style.left = `${e.clientX - rect.left - size / 2}px`;
+            ripple.style.top = `${e.clientY - rect.top - size / 2}px`;
+            el.appendChild(ripple);
+            ripple.addEventListener('animationend', () => {
+                ripple.remove();
+            });
+        }
+
+        // ============================================
+        // EVENT LISTENERS
+        // ============================================
+
+        // Nav toggle
+        navToggleBtn.addEventListener('click', (e) => {
+            addRippleEffect(e, navToggleBtn);
+            if (isDrawerOpen) {
+                closeDrawer();
+            } else {
+                openDrawer();
+            }
+        });
+
+        // Overlay click to close drawer
+        navDrawerOverlay.addEventListener('click', closeDrawer);
+
+        // Nav items (category)
+        document.querySelectorAll('.nav-item[data-category]').forEach(item => {
+            item.addEventListener('click', function(e) {
+                addRippleEffect(e, this);
+                activeCategory = this.getAttribute('data-category');
+                activeTag = null;
+                updateChipActiveState();
+                updateNavActiveState();
+                updateBreadcrumb();
+                renderArticles();
+                closeDrawer();
+            });
+        });
+
+        // Nav items (tag)
+        document.querySelectorAll('.nav-item[data-tag]').forEach(item => {
+            item.addEventListener('click', function(e) {
+                addRippleEffect(e, this);
+                const tag = this.getAttribute('data-tag');
+                filterByTag(tag);
+            });
+        });
+
+        // Chips
+        chipsRow.querySelectorAll('.chip').forEach(chip => {
+            chip.addEventListener('click', function(e) {
+                addRippleEffect(e, this);
+                activeCategory = this.getAttribute('data-category');
+                activeTag = null;
+                updateChipActiveState();
+                updateNavActiveState();
+                updateBreadcrumb();
+                renderArticles();
+            });
+        });
+
+        // Search input
+        searchInput.addEventListener('input', function() {
+            searchQuery = this.value;
+            if (searchQuery.trim()) {
+                searchClearBtn.classList.add('visible');
+            } else {
+                searchClearBtn.classList.remove('visible');
+            }
+            renderArticles();
+        });
+
+        // Search clear
+        searchClearBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            searchQuery = '';
+            searchInput.value = '';
+            searchClearBtn.classList.remove('visible');
+            renderArticles();
+            searchInput.focus();
+        });
+
+        // Search bar click focuses input
+        searchBar.addEventListener('click', function(e) {
+            if (e.target === searchBar || e.target.classList.contains('material-symbols-rounded')) {
+                searchInput.focus();
+            }
+        });
+
+        // Clear filters
+        clearFiltersBtn.addEventListener('click', clearAllFilters);
+
+        // Bookmark filter toggle
+        bookmarkFilterBtn.addEventListener('click', function(e) {
+            addRippleEffect(e, this);
+            bookmarkFilterActive = !bookmarkFilterActive;
+            if (bookmarkFilterActive) {
+                showSnackbar('已筛选收藏文章');
+            }
+            renderArticles();
+        });
+
+        // Theme toggle
+        themeToggleBtn.addEventListener('click', function(e) {
+            addRippleEffect(e, this);
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('kb_theme', newTheme);
+            updateThemeIcon(newTheme);
+            showSnackbar(newTheme === 'dark' ? '已切换至深色模式' : '已切换至亮色模式');
+        });
+
+        function updateThemeIcon(theme) {
+            const icon = themeToggleBtn.querySelector('.material-symbols-rounded');
+            if (theme === 'dark') {
+                icon.textContent = 'light_mode';
+                themeToggleBtn.setAttribute('aria-label', '切换亮色模式');
+                themeToggleBtn.setAttribute('title', '切换亮色模式');
+            } else {
+                icon.textContent = 'dark_mode';
+                themeToggleBtn.setAttribute('aria-label', '切换深色模式');
+                themeToggleBtn.setAttribute('title', '切换深色模式');
+            }
+        }
+
+        // FAB - scroll to top
+        fabBtn.addEventListener('click', function(e) {
+            addRippleEffect(e, this);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Show/hide FAB based on scroll
+        let fabTimeout;
+        window.addEventListener('scroll', function() {
+            // Top bar shadow
+            if (window.scrollY > 8) {
+                topAppBar.classList.add('scrolled');
+            } else {
+                topAppBar.classList.remove('scrolled');
+            }
+
+            // FAB visibility
+            if (window.scrollY > 400) {
+                fabBtn.style.opacity = '1';
+                fabBtn.style.pointerEvents = 'auto';
+                fabBtn.style.transform = 'scale(1)';
+            } else {
+                fabBtn.style.opacity = '0';
+                fabBtn.style.pointerEvents = 'none';
+                fabBtn.style.transform = 'scale(0.8)';
+            }
+        }, { passive: true });
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            // Ctrl/Cmd + K to focus search
+            if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+                e.preventDefault();
+                searchInput.focus();
+                searchInput.select();
+            }
+            // Escape to clear filters or close drawer
+            if (e.key === 'Escape') {
+                if (isDrawerOpen) {
+                    closeDrawer();
+                } else if (searchQuery || activeCategory !== 'all' || activeTag || bookmarkFilterActive) {
+                    clearAllFilters();
+                }
+            }
+        });
+
+        // Resize handler
+        let resizeTimeout;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                if (isDesktop()) {
+                    closeDrawer();
+                    document.body.style.overflow = '';
+                }
+            }, 200);
+        });
+
+        // Global click for ripple on state-layer elements
+        document.addEventListener('click', function(e) {
+            const stateLayerEl = e.target.closest('.state-layer');
+            if (stateLayerEl && !e.target.closest('.article-card__bookmark') && !e.target.closest(
+                    '#searchClearBtn')) {
+                addRippleEffect(e, stateLayerEl);
+            }
+        });
+
+        // ============================================
+        // INITIALIZATION
+        // ============================================
+
+        function init() {
+            // Load theme
+            const savedTheme = localStorage.getItem('kb_theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const initialTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+            document.documentElement.setAttribute('data-theme', initialTheme);
+            updateThemeIcon(initialTheme);
+
+            // Initial render
+            updateBreadcrumb();
+            renderArticles();
+            updateChipActiveState();
+            updateNavActiveState();
+
+            // Initial FAB state
+            fabBtn.style.opacity = '0';
+            fabBtn.style.pointerEvents = 'none';
+            fabBtn.style.transform = 'scale(0.8)';
+            fabBtn.style.transition =
+                'all var(--md-sys-motion-duration-medium) var(--md-sys-motion-easing-standard)';
+
+            // Listen for system theme changes
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+                if (!localStorage.getItem('kb_theme')) {
+                    const newTheme = e.matches ? 'dark' : 'light';
+                    document.documentElement.setAttribute('data-theme', newTheme);
+                    updateThemeIcon(newTheme);
+                }
+            });
+
+            console.log('%c📚 TechKB 知识库已就绪 %c| %cMaterial Design 3',
+                'font-weight:bold;font-size:14px;color:#6750A4;',
+                '',
+                'color:#7D5260;');
+            console.log('%c💡 提示：按 Ctrl+K 快速聚焦搜索框', 'color:#79747E;font-size:12px;');
+        }
+
+        init();
+    })();
+</script>
+</body>
+</html>
