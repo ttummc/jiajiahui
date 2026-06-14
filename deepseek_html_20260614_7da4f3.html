@@ -1,0 +1,2027 @@
+1<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文件下载中心</title>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@fluentui/web-components/dist/web-components.min.js">
+    </script>
+    <style>
+        :root {
+            /* Fluent UI Light Mode Tokens */
+            --colorNeutralBackground1: #FAF9F8;
+            --colorNeutralBackground2: #F3F2F1;
+            --colorNeutralBackground3: #EDEBE9;
+            --colorNeutralBackground4: #E1DFDD;
+            --colorNeutralForeground1: #1B1A19;
+            --colorNeutralForeground2: #3B3A39;
+            --colorNeutralForeground3: #605E5C;
+            --colorNeutralForegroundDisabled: #A19F9D;
+            --colorNeutralStroke1: #D1D1D1;
+            --colorNeutralStroke2: #E1DFDD;
+            --colorNeutralStroke3: #EDEBE9;
+            --colorBrandBackground: #0078D4;
+            --colorBrandBackgroundHover: #106EBE;
+            --colorBrandBackgroundPressed: #005A9E;
+            --colorBrandForeground1: #0078D4;
+            --colorBrandForeground2: #106EBE;
+            --colorSurfaceCard: #FFFFFF;
+            --colorSurfaceOverlay: #FFFFFF;
+            --colorShadowSmall: 0 0 2px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.06);
+            --colorShadowMedium: 0 0 4px rgba(0, 0, 0, 0.04), 0 2px 8px rgba(0, 0, 0, 0.08);
+            --colorShadowLarge: 0 0 8px rgba(0, 0, 0, 0.04), 0 4px 16px rgba(0, 0, 0, 0.10);
+            --borderRadiusSmall: 4px;
+            --borderRadiusMedium: 6px;
+            --borderRadiusLarge: 8px;
+            --borderRadiusXLarge: 12px;
+            --spacingHorizontalXXS: 2px;
+            --spacingHorizontalXS: 4px;
+            --spacingHorizontalS: 8px;
+            --spacingHorizontalM: 12px;
+            --spacingHorizontalL: 16px;
+            --spacingHorizontalXL: 20px;
+            --spacingHorizontalXXL: 24px;
+            --spacingHorizontalXXXL: 32px;
+            --spacingVerticalXXS: 2px;
+            --spacingVerticalXS: 4px;
+            --spacingVerticalS: 8px;
+            --spacingVerticalM: 12px;
+            --spacingVerticalL: 16px;
+            --spacingVerticalXL: 20px;
+            --spacingVerticalXXL: 24px;
+            --fontSizeBase100: 12px;
+            --fontSizeBase200: 13px;
+            --fontSizeBase300: 14px;
+            --fontSizeBase400: 16px;
+            --fontSizeBase500: 18px;
+            --fontSizeBase600: 20px;
+            --fontWeightRegular: 400;
+            --fontWeightMedium: 500;
+            --fontWeightSemibold: 600;
+            --fontWeightBold: 700;
+            --transitionFast: 100ms cubic-bezier(0.33, 0.00, 0.67, 1.00);
+            --transitionNormal: 200ms cubic-bezier(0.33, 0.00, 0.67, 1.00);
+            --transitionSlow: 300ms cubic-bezier(0.33, 0.00, 0.67, 1.00);
+            --nav-width-desktop: 320px;
+            --nav-width-tablet: 280px;
+            --header-height: 52px;
+            --colorFilePDF: #E74856;
+            --colorFilePDFBg: #FDE7E9;
+            --colorFileWord: #0078D4;
+            --colorFileWordBg: #DEECF9;
+            --colorFileExcel: #107C10;
+            --colorFileExcelBg: #DFF6DD;
+            --colorFilePPT: #D83B01;
+            --colorFilePPTBg: #FED9CC;
+            --colorFileImage: #881798;
+            --colorFileImageBg: #F3E5F5;
+            --colorFileVideo: #E3008C;
+            --colorFileVideoBg: #FCE4F1;
+            --colorFileAudio: #0099BC;
+            --colorFileAudioBg: #E0F4F8;
+            --colorFileCode: #0063B1;
+            --colorFileCodeBg: #E0EDF7;
+            --colorFileArchive: #8E562E;
+            --colorFileArchiveBg: #F2E4D8;
+            --colorFileExe: #4F6BED;
+            --colorFileExeBg: #E8EBFD;
+            --colorFileMarkdown: #00A1F1;
+            --colorFileMarkdownBg: #E0F4FD;
+            --colorFileDefault: #69797E;
+            --colorFileDefaultBg: #EFF1F2;
+            --colorFolder: #FFB900;
+            --colorFolderBg: #FFF4CE;
+            --colorFolderOpen: #FF8C00;
+            --colorFolderOpenBg: #FFE8CC;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --colorNeutralBackground1: #1B1A19;
+                --colorNeutralBackground2: #252423;
+                --colorNeutralBackground3: #292827;
+                --colorNeutralBackground4: #323130;
+                --colorNeutralForeground1: #F3F2F1;
+                --colorNeutralForeground2: #D2D0CE;
+                --colorNeutralForeground3: #A19F9D;
+                --colorNeutralForegroundDisabled: #605E5C;
+                --colorNeutralStroke1: #605E5C;
+                --colorNeutralStroke2: #484644;
+                --colorNeutralStroke3: #3B3A39;
+                --colorBrandBackground: #2899F5;
+                --colorBrandBackgroundHover: #3AA0F3;
+                --colorBrandBackgroundPressed: #1A85D9;
+                --colorBrandForeground1: #2899F5;
+                --colorBrandForeground2: #3AA0F3;
+                --colorSurfaceCard: #252423;
+                --colorSurfaceOverlay: #292827;
+                --colorShadowSmall: 0 0 2px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.4);
+                --colorShadowMedium: 0 0 4px rgba(0, 0, 0, 0.3), 0 2px 8px rgba(0, 0, 0, 0.45);
+                --colorShadowLarge: 0 0 8px rgba(0, 0, 0, 0.3), 0 4px 16px rgba(0, 0, 0, 0.5);
+                --colorFilePDF: #F1707B;
+                --colorFilePDFBg: #3D1E20;
+                --colorFileWord: #4DA3E0;
+                --colorFileWordBg: #1A2D3D;
+                --colorFileExcel: #5CB85C;
+                --colorFileExcelBg: #1A2E1A;
+                --colorFilePPT: #E8734D;
+                --colorFilePPTBg: #3D1F14;
+                --colorFileImage: #B97AC4;
+                --colorFileImageBg: #2E1A32;
+                --colorFileVideo: #E85DAA;
+                --colorFileVideoBg: #3D1A2C;
+                --colorFileAudio: #4DB8C9;
+                --colorFileAudioBg: #1A2D31;
+                --colorFileCode: #4D94D1;
+                --colorFileCodeBg: #1A2532;
+                --colorFileArchive: #C49A6C;
+                --colorFileArchiveBg: #2E2018;
+                --colorFileExe: #7B8FF0;
+                --colorFileExeBg: #1E2240;
+                --colorFileMarkdown: #4DC8F5;
+                --colorFileMarkdownBg: #1A2D36;
+                --colorFileDefault: #8A9599;
+                --colorFileDefaultBg: #232628;
+                --colorFolder: #FFC83D;
+                --colorFolderBg: #332A10;
+                --colorFolderOpen: #FFA040;
+                --colorFolderOpenBg: #332214;
+            }
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", "Segoe UI Web (West European)", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", "Microsoft YaHei", "PingFang SC", sans-serif;
+            background-color: var(--colorNeutralBackground1);
+            color: var(--colorNeutralForeground1);
+            font-size: var(--fontSizeBase300);
+            line-height: 1.5;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: background-color var(--transitionNormal), color var(--transitionNormal);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* ========== HEADER ========== */
+        .app-header {
+            height: var(--header-height);
+            background-color: var(--colorSurfaceCard);
+            border-bottom: 1px solid var(--colorNeutralStroke2);
+            display: flex;
+            align-items: center;
+            padding: 0 var(--spacingHorizontalXL);
+            gap: var(--spacingHorizontalM);
+            flex-shrink: 0;
+            z-index: 100;
+            box-shadow: var(--colorShadowSmall);
+            transition: background-color var(--transitionNormal), border-color var(--transitionNormal);
+            user-select: none;
+        }
+        .app-header .logo-icon {
+            width: 28px;
+            height: 28px;
+            flex-shrink: 0;
+            color: var(--colorBrandForeground1);
+            transition: color var(--transitionNormal);
+        }
+        .app-header .app-title {
+            font-size: var(--fontSizeBase400);
+            font-weight: var(--fontWeightSemibold);
+            color: var(--colorNeutralForeground1);
+            letter-spacing: -0.01em;
+            white-space: nowrap;
+            transition: color var(--transitionNormal);
+        }
+        .app-header .header-spacer {
+            flex: 1;
+            min-width: 8px;
+        }
+        .app-header .header-actions {
+            display: flex;
+            align-items: center;
+            gap: var(--spacingHorizontalS);
+            flex-shrink: 0;
+        }
+        .header-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            height: 34px;
+            padding: 0 var(--spacingHorizontalM);
+            border-radius: var(--borderRadiusMedium);
+            border: 1px solid var(--colorNeutralStroke2);
+            background: var(--colorSurfaceCard);
+            color: var(--colorNeutralForeground2);
+            cursor: pointer;
+            font-size: var(--fontSizeBase200);
+            font-family: inherit;
+            font-weight: var(--fontWeightMedium);
+            white-space: nowrap;
+            transition: all var(--transitionFast);
+            text-decoration: none;
+            user-select: none;
+            outline: none;
+        }
+        .header-btn:hover {
+            background: var(--colorNeutralBackground3);
+            border-color: var(--colorNeutralStroke1);
+            color: var(--colorNeutralForeground1);
+        }
+        .header-btn:active {
+            background: var(--colorNeutralBackground4);
+            border-color: var(--colorNeutralStroke1);
+            transform: scale(0.97);
+        }
+        .header-btn:focus-visible {
+            box-shadow: 0 0 0 2px var(--colorBrandForeground1);
+            border-color: var(--colorBrandForeground1);
+        }
+        .header-btn svg {
+            width: 16px;
+            height: 16px;
+            flex-shrink: 0;
+        }
+        .header-btn-collapse {
+            display: none;
+        }
+
+        /* ========== MAIN LAYOUT ========== */
+        .app-main {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* ========== SIDEBAR / FILE NAV ========== */
+        .file-nav {
+            width: var(--nav-width-desktop);
+            flex-shrink: 0;
+            background-color: var(--colorSurfaceCard);
+            border-right: 1px solid var(--colorNeutralStroke2);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transition: all var(--transitionNormal);
+            z-index: 50;
+            box-shadow: var(--colorShadowSmall);
+        }
+        .file-nav-header {
+            padding: var(--spacingHorizontalL) var(--spacingHorizontalXL) var(--spacingHorizontalM);
+            flex-shrink: 0;
+            border-bottom: 1px solid var(--colorNeutralStroke3);
+            transition: border-color var(--transitionNormal);
+        }
+        .file-nav-title {
+            font-size: var(--fontSizeBase200);
+            font-weight: var(--fontWeightSemibold);
+            color: var(--colorNeutralForeground2);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin-bottom: var(--spacingVerticalS);
+            transition: color var(--transitionNormal);
+        }
+        .file-nav-search {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        .file-nav-search input {
+            width: 100%;
+            height: 34px;
+            padding: 0 var(--spacingHorizontalM) 0 34px;
+            border-radius: var(--borderRadiusMedium);
+            border: 1px solid var(--colorNeutralStroke2);
+            background: var(--colorNeutralBackground2);
+            color: var(--colorNeutralForeground1);
+            font-size: var(--fontSizeBase200);
+            font-family: inherit;
+            outline: none;
+            transition: all var(--transitionFast);
+        }
+        .file-nav-search input::placeholder {
+            color: var(--colorNeutralForegroundDisabled);
+        }
+        .file-nav-search input:focus {
+            border-color: var(--colorBrandForeground1);
+            box-shadow: 0 0 0 2px rgba(0, 120, 212, 0.15);
+            background: var(--colorSurfaceCard);
+        }
+        .file-nav-search .search-icon {
+            position: absolute;
+            left: 10px;
+            width: 16px;
+            height: 16px;
+            color: var(--colorNeutralForeground3);
+            pointer-events: none;
+            transition: color var(--transitionFast);
+        }
+        .file-nav-search input:focus~.search-icon,
+        .file-nav-search input:focus+.search-icon {
+            color: var(--colorBrandForeground1);
+        }
+        .file-nav-tree {
+            flex: 1;
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding: var(--spacingVerticalS) var(--spacingHorizontalS);
+            scroll-behavior: smooth;
+        }
+        .file-nav-tree::-webkit-scrollbar {
+            width: 6px;
+        }
+        .file-nav-tree::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .file-nav-tree::-webkit-scrollbar-thumb {
+            background: var(--colorNeutralStroke1);
+            border-radius: 3px;
+        }
+        .file-nav-tree::-webkit-scrollbar-thumb:hover {
+            background: var(--colorNeutralForeground3);
+        }
+        .file-nav-footer {
+            flex-shrink: 0;
+            padding: var(--spacingVerticalS) var(--spacingHorizontalM);
+            border-top: 1px solid var(--colorNeutralStroke3);
+            display: flex;
+            gap: var(--spacingHorizontalXS);
+            transition: border-color var(--transitionNormal);
+        }
+        .nav-footer-btn {
+            flex: 1;
+            height: 30px;
+            border-radius: var(--borderRadiusSmall);
+            border: 1px solid transparent;
+            background: transparent;
+            color: var(--colorNeutralForeground3);
+            cursor: pointer;
+            font-size: var(--fontSizeBase100);
+            font-family: inherit;
+            font-weight: var(--fontWeightMedium);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            transition: all var(--transitionFast);
+            outline: none;
+            white-space: nowrap;
+        }
+        .nav-footer-btn:hover {
+            background: var(--colorNeutralBackground3);
+            color: var(--colorNeutralForeground1);
+        }
+        .nav-footer-btn:focus-visible {
+            box-shadow: 0 0 0 2px var(--colorBrandForeground1);
+        }
+        .nav-footer-btn svg {
+            width: 14px;
+            height: 14px;
+            flex-shrink: 0;
+        }
+
+        /* ========== CONTENT PANEL ========== */
+        .content-panel {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            background-color: var(--colorNeutralBackground1);
+            transition: background-color var(--transitionNormal);
+        }
+        .content-panel-inner {
+            flex: 1;
+            overflow-y: auto;
+            padding: var(--spacingHorizontalXXL);
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacingVerticalXL);
+        }
+        .content-panel-inner::-webkit-scrollbar {
+            width: 6px;
+        }
+        .content-panel-inner::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .content-panel-inner::-webkit-scrollbar-thumb {
+            background: var(--colorNeutralStroke1);
+            border-radius: 3px;
+        }
+
+        /* ========== CARD ========== */
+        .fluent-card {
+            background: var(--colorSurfaceCard);
+            border: 1px solid var(--colorNeutralStroke2);
+            border-radius: var(--borderRadiusLarge);
+            box-shadow: var(--colorShadowSmall);
+            transition: all var(--transitionNormal);
+            overflow: hidden;
+        }
+        .fluent-card-header {
+            padding: var(--spacingHorizontalL) var(--spacingHorizontalXL);
+            border-bottom: 1px solid var(--colorNeutralStroke3);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: var(--spacingHorizontalM);
+            transition: border-color var(--transitionNormal);
+            user-select: none;
+        }
+        .fluent-card-title {
+            font-size: var(--fontSizeBase300);
+            font-weight: var(--fontWeightSemibold);
+            color: var(--colorNeutralForeground1);
+            transition: color var(--transitionNormal);
+            display: flex;
+            align-items: center;
+            gap: var(--spacingHorizontalS);
+        }
+        .fluent-card-title svg {
+            width: 18px;
+            height: 18px;
+            color: var(--colorBrandForeground1);
+            flex-shrink: 0;
+        }
+        .fluent-card-body {
+            padding: var(--spacingHorizontalL) var(--spacingHorizontalXL);
+            transition: padding var(--transitionNormal);
+        }
+        .fluent-card-body.no-padding {
+            padding: 0;
+        }
+        .card-badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: var(--fontSizeBase100);
+            font-weight: var(--fontWeightMedium);
+            background: var(--colorBrandBackground);
+            color: #fff;
+            letter-spacing: 0.02em;
+            transition: background var(--transitionNormal);
+        }
+
+        /* ========== MARKDOWN EDITOR ========== */
+        .md-editor-wrapper {
+            position: relative;
+        }
+        .md-editor-wrapper textarea {
+            width: 100%;
+            min-height: 220px;
+            max-height: 400px;
+            padding: var(--spacingHorizontalL);
+            border-radius: var(--borderRadiusMedium);
+            border: 1px solid var(--colorNeutralStroke2);
+            background: var(--colorNeutralBackground2);
+            color: var(--colorNeutralForeground1);
+            font-family: "Cascadia Code", "Fira Code", "Consolas", "Segoe UI Mono", "SF Mono", monospace;
+            font-size: var(--fontSizeBase200);
+            line-height: 1.6;
+            resize: vertical;
+            outline: none;
+            transition: all var(--transitionFast);
+            tab-size: 2;
+        }
+        .md-editor-wrapper textarea:focus {
+            border-color: var(--colorBrandForeground1);
+            box-shadow: 0 0 0 2px rgba(0, 120, 212, 0.15);
+            background: var(--colorSurfaceCard);
+        }
+        .md-editor-wrapper textarea::placeholder {
+            color: var(--colorNeutralForegroundDisabled);
+        }
+        .md-editor-actions {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: var(--spacingHorizontalS);
+            margin-top: var(--spacingVerticalM);
+            flex-wrap: wrap;
+        }
+        .fluent-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            height: 34px;
+            padding: 0 var(--spacingHorizontalL);
+            border-radius: var(--borderRadiusMedium);
+            border: 1px solid transparent;
+            cursor: pointer;
+            font-size: var(--fontSizeBase200);
+            font-family: inherit;
+            font-weight: var(--fontWeightMedium);
+            white-space: nowrap;
+            transition: all var(--transitionFast);
+            outline: none;
+            text-decoration: none;
+            user-select: none;
+        }
+        .fluent-btn-primary {
+            background: var(--colorBrandBackground);
+            color: #fff;
+            border-color: transparent;
+        }
+        .fluent-btn-primary:hover {
+            background: var(--colorBrandBackgroundHover);
+            box-shadow: var(--colorShadowSmall);
+        }
+        .fluent-btn-primary:active {
+            background: var(--colorBrandBackgroundPressed);
+            transform: scale(0.97);
+        }
+        .fluent-btn-primary:focus-visible {
+            box-shadow: 0 0 0 2px var(--colorBrandForeground1);
+            outline: 2px solid rgba(0, 120, 212, 0.3);
+            outline-offset: 2px;
+        }
+        .fluent-btn-secondary {
+            background: var(--colorSurfaceCard);
+            color: var(--colorNeutralForeground2);
+            border-color: var(--colorNeutralStroke2);
+        }
+        .fluent-btn-secondary:hover {
+            background: var(--colorNeutralBackground3);
+            border-color: var(--colorNeutralStroke1);
+            color: var(--colorNeutralForeground1);
+        }
+        .fluent-btn-secondary:active {
+            background: var(--colorNeutralBackground4);
+            transform: scale(0.97);
+        }
+        .fluent-btn-secondary:focus-visible {
+            box-shadow: 0 0 0 2px var(--colorBrandForeground1);
+            border-color: var(--colorBrandForeground1);
+        }
+        .fluent-btn svg {
+            width: 16px;
+            height: 16px;
+            flex-shrink: 0;
+        }
+
+        /* ========== FILE DETAIL PANEL ========== */
+        .file-detail-empty {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 48px 24px;
+            color: var(--colorNeutralForeground3);
+            gap: var(--spacingVerticalM);
+            transition: color var(--transitionNormal);
+        }
+        .file-detail-empty svg {
+            width: 56px;
+            height: 56px;
+            opacity: 0.5;
+        }
+        .file-detail-empty .empty-title {
+            font-size: var(--fontSizeBase400);
+            font-weight: var(--fontWeightSemibold);
+            color: var(--colorNeutralForeground2);
+        }
+        .file-detail-info {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacingVerticalM);
+        }
+        .file-detail-row {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--spacingHorizontalM);
+            padding: var(--spacingVerticalS) 0;
+        }
+        .file-detail-label {
+            font-size: var(--fontSizeBase200);
+            font-weight: var(--fontWeightSemibold);
+            color: var(--colorNeutralForeground3);
+            min-width: 70px;
+            flex-shrink: 0;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            transition: color var(--transitionNormal);
+        }
+        .file-detail-value {
+            font-size: var(--fontSizeBase300);
+            color: var(--colorNeutralForeground1);
+            word-break: break-all;
+            transition: color var(--transitionNormal);
+        }
+        .file-detail-actions {
+            display: flex;
+            gap: var(--spacingHorizontalS);
+            flex-wrap: wrap;
+            margin-top: var(--spacingVerticalS);
+        }
+
+        /* ========== TREE NODES ========== */
+        .tree-node {
+            list-style: none;
+            user-select: none;
+        }
+        .tree-node ul {
+            padding-left: 20px;
+            border-left: 1px solid var(--colorNeutralStroke3);
+            margin-left: 10px;
+            transition: border-color var(--transitionNormal);
+        }
+        .tree-node-item {
+            display: flex;
+            align-items: center;
+            gap: var(--spacingHorizontalXS);
+            padding: 6px 8px;
+            border-radius: var(--borderRadiusMedium);
+            cursor: pointer;
+            transition: all var(--transitionFast);
+            position: relative;
+            min-height: 36px;
+            text-decoration: none;
+            color: inherit;
+        }
+        .tree-node-item:hover {
+            background: var(--colorNeutralBackground3);
+        }
+        .tree-node-item:active {
+            background: var(--colorNeutralBackground4);
+            transform: scale(0.985);
+        }
+        .tree-node-item:focus-visible {
+            box-shadow: inset 0 0 0 2px var(--colorBrandForeground1);
+            outline: none;
+        }
+        .tree-node-item.selected {
+            background: var(--colorNeutralBackground4);
+            box-shadow: inset 3px 0 0 var(--colorBrandForeground1);
+        }
+        .tree-node-arrow {
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform var(--transitionFast);
+            color: var(--colorNeutralForeground3);
+            font-size: 10px;
+            border-radius: var(--borderRadiusSmall);
+        }
+        .tree-node-arrow:hover {
+            background: var(--colorNeutralBackground4);
+            color: var(--colorNeutralForeground1);
+        }
+        .tree-node-arrow.expanded {
+            transform: rotate(90deg);
+        }
+        .tree-node-arrow svg {
+            width: 12px;
+            height: 12px;
+        }
+        .tree-node-icon {
+            width: 32px;
+            height: 32px;
+            flex-shrink: 0;
+            border-radius: var(--borderRadiusSmall);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all var(--transitionFast);
+            position: relative;
+        }
+        .tree-node-icon svg {
+            width: 18px;
+            height: 18px;
+            position: relative;
+            z-index: 1;
+        }
+        .tree-node-name {
+            flex: 1;
+            font-size: var(--fontSizeBase200);
+            color: var(--colorNeutralForeground1);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            min-width: 0;
+            transition: color var(--transitionNormal);
+            line-height: 1.3;
+        }
+        .tree-node-meta {
+            font-size: var(--fontSizeBase100);
+            color: var(--colorNeutralForeground3);
+            white-space: nowrap;
+            flex-shrink: 0;
+            transition: color var(--transitionNormal);
+        }
+        .tree-node-download {
+            width: 26px;
+            height: 26px;
+            flex-shrink: 0;
+            border-radius: var(--borderRadiusSmall);
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--colorNeutralForeground3);
+            transition: all var(--transitionFast);
+            outline: none;
+            opacity: 0;
+        }
+        .tree-node-item:hover .tree-node-download {
+            opacity: 1;
+        }
+        .tree-node-download:hover {
+            background: var(--colorBrandBackground);
+            color: #fff;
+        }
+        .tree-node-download:focus-visible {
+            opacity: 1;
+            box-shadow: 0 0 0 2px var(--colorBrandForeground1);
+        }
+        .tree-node-download svg {
+            width: 14px;
+            height: 14px;
+        }
+        .tree-node-count {
+            font-size: var(--fontSizeBase100);
+            color: var(--colorNeutralForegroundDisabled);
+            flex-shrink: 0;
+            padding: 1px 7px;
+            border-radius: 10px;
+            background: var(--colorNeutralBackground3);
+            transition: all var(--transitionNormal);
+        }
+        .tree-children {
+            overflow: hidden;
+            transition: max-height var(--transitionSlow), opacity var(--transitionSlow);
+            max-height: 0;
+            opacity: 0;
+        }
+        .tree-children.open {
+            max-height: 3000px;
+            opacity: 1;
+        }
+        .tree-children.collapsing {
+            max-height: 0;
+            opacity: 0;
+        }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 1024px) {
+            .file-nav {
+                width: var(--nav-width-tablet);
+            }
+            :root {
+                --nav-width-desktop: 280px;
+            }
+            .content-panel-inner {
+                padding: var(--spacingHorizontalL);
+            }
+            .app-header {
+                padding: 0 var(--spacingHorizontalL);
+            }
+            .header-btn-text {
+                display: none;
+            }
+            .header-btn {
+                padding: 0 var(--spacingHorizontalS);
+                gap: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .file-nav {
+                position: absolute;
+                left: 0;
+                top: 0;
+                height: 100%;
+                z-index: 60;
+                width: 300px;
+                transform: translateX(-100%);
+                box-shadow: var(--colorShadowLarge);
+            }
+            .file-nav.mobile-open {
+                transform: translateX(0);
+            }
+            .mobile-overlay {
+                display: none;
+                position: absolute;
+                inset: 0;
+                background: rgba(0, 0, 0, 0.4);
+                z-index: 55;
+            }
+            .mobile-overlay.active {
+                display: block;
+            }
+            .header-btn-collapse {
+                display: inline-flex;
+            }
+            .content-panel-inner {
+                padding: var(--spacingHorizontalM);
+                gap: var(--spacingVerticalM);
+            }
+            .fluent-card-header {
+                padding: var(--spacingHorizontalM);
+                flex-wrap: wrap;
+            }
+            .fluent-card-body {
+                padding: var(--spacingHorizontalM);
+            }
+            .md-editor-wrapper textarea {
+                min-height: 160px;
+                font-size: var(--fontSizeBase100);
+            }
+            .file-nav-footer {
+                padding: var(--spacingVerticalXS) var(--spacingHorizontalS);
+            }
+            .nav-footer-btn {
+                font-size: 11px;
+                height: 28px;
+            }
+            .app-header .app-title {
+                font-size: var(--fontSizeBase300);
+            }
+            .app-header {
+                padding: 0 var(--spacingHorizontalM);
+                gap: var(--spacingHorizontalS);
+            }
+            .header-btn {
+                height: 30px;
+                padding: 0 var(--spacingHorizontalXS);
+                font-size: var(--fontSizeBase100);
+            }
+            .header-btn svg {
+                width: 14px;
+                height: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .file-nav {
+                width: 100%;
+                max-width: 320px;
+            }
+            .app-header .app-title {
+                font-size: var(--fontSizeBase200);
+            }
+            .content-panel-inner {
+                padding: var(--spacingHorizontalS);
+                gap: var(--spacingVerticalS);
+            }
+            .fluent-card-header {
+                padding: var(--spacingHorizontalS);
+            }
+            .fluent-card-body {
+                padding: var(--spacingHorizontalS);
+            }
+            .tree-node-item {
+                padding: 5px 6px;
+                min-height: 32px;
+                gap: 4px;
+            }
+            .tree-node-icon {
+                width: 26px;
+                height: 26px;
+            }
+            .tree-node-icon svg {
+                width: 15px;
+                height: 15px;
+            }
+            .tree-node-name {
+                font-size: var(--fontSizeBase100);
+            }
+            .file-detail-label {
+                min-width: 55px;
+                font-size: var(--fontSizeBase100);
+            }
+            .file-detail-value {
+                font-size: var(--fontSizeBase200);
+            }
+            .fluent-btn {
+                height: 30px;
+                padding: 0 var(--spacingHorizontalM);
+                font-size: var(--fontSizeBase100);
+            }
+            .md-editor-actions {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .md-editor-actions .fluent-btn {
+                justify-content: center;
+            }
+        }
+
+        /* ========== TOOLTIP STYLE ========== */
+        [data-tooltip] {
+            position: relative;
+        }
+        [data-tooltip]:hover::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: calc(100% + 6px);
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--colorNeutralForeground1);
+            color: var(--colorNeutralBackground1);
+            padding: 4px 10px;
+            border-radius: var(--borderRadiusSmall);
+            font-size: var(--fontSizeBase100);
+            white-space: nowrap;
+            pointer-events: none;
+            z-index: 200;
+            letter-spacing: 0.02em;
+            box-shadow: var(--colorShadowMedium);
+            transition: background var(--transitionNormal), color var(--transitionNormal);
+        }
+
+        /* ========== NOTIFICATION TOAST ========== */
+        .toast-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 300;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            pointer-events: none;
+        }
+        .toast {
+            pointer-events: auto;
+            padding: 10px 16px;
+            border-radius: var(--borderRadiusMedium);
+            background: var(--colorNeutralForeground1);
+            color: var(--colorNeutralBackground1);
+            font-size: var(--fontSizeBase200);
+            font-weight: var(--fontWeightMedium);
+            box-shadow: var(--colorShadowLarge);
+            animation: toastIn 0.35s cubic-bezier(0.33, 0.00, 0.67, 1.00), toastOut 0.3s 2s cubic-bezier(0.33, 0.00, 0.67, 1.00) forwards;
+            white-space: nowrap;
+            max-width: 360px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            transition: background var(--transitionNormal), color var(--transitionNormal);
+        }
+        @keyframes toastIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        @keyframes toastOut {
+            from {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            to {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==================== HEADER ==================== -->
+    <header class="app-header">
+        <!-- Folder icon -->
+        <svg class="logo-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M2 6.5A2.5 2.5 0 014.5 4h5.67a2.5 2.5 0 011.77.73l1.33 1.34a1.5 1.5 0 001.06.43H19.5A2.5 2.5 0 0122 9v8.5a2.5 2.5 0 01-2.5 2.5h-15A2.5 2.5 0 012 17.5V6.5z"/>
+        </svg>
+        <span class="app-title">文件下载中心</span>
+        <span class="header-spacer"></span>
+        <div class="header-actions">
+            <button class="header-btn header-btn-collapse" id="btnToggleNav" data-tooltip="目录" aria-label="切换文件目录">
+                <svg viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="4" width="18" height="2" rx="1"/><rect x="3" y="11" width="18" height="2" rx="1"/><rect x="3" y="18" width="18" height="2" rx="1"/></svg>
+                <span class="header-btn-text">目录</span>
+            </button>
+            <button class="header-btn" id="btnExpandAll" data-tooltip="全部展开" aria-label="全部展开">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+                <span class="header-btn-text">展开</span>
+            </button>
+            <button class="header-btn" id="btnCollapseAll" data-tooltip="全部折叠" aria-label="全部折叠">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6 1.41 1.41z"/></svg>
+                <span class="header-btn-text">折叠</span>
+            </button>
+            <button class="header-btn" id="btnReset" data-tooltip="重置为示例" aria-label="重置">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.65 6.35A7.96 7.96 0 0012 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08A5.99 5.99 0 0112 18c-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg>
+                <span class="header-btn-text">重置</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- ==================== MOBILE OVERLAY ==================== -->
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+
+    <!-- ==================== MAIN LAYOUT ==================== -->
+    <main class="app-main">
+        <!-- ========== FILE NAVIGATION SIDEBAR ========== -->
+        <aside class="file-nav" id="fileNav">
+            <div class="file-nav-header">
+                <div class="file-nav-title">文件目录</div>
+                <div class="file-nav-search">
+                    <input type="text" id="searchInput" placeholder="搜索文件..." aria-label="搜索文件">
+                    <svg class="search-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="file-nav-tree" id="fileTreeContainer" role="tree" aria-label="文件目录树">
+                <!-- Dynamically rendered -->
+            </div>
+            <div class="file-nav-footer">
+                <button class="nav-footer-btn" id="btnExpandAll2" aria-label="全部展开">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 5l-6 6h4v4h4v-4h4l-6-6z"/></svg> 展开
+                </button>
+                <button class="nav-footer-btn" id="btnCollapseAll2" aria-label="全部折叠">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 19l6-6h-4V9H8v4H4l6 6z"/></svg> 折叠
+                </button>
+            </div>
+        </aside>
+
+        <!-- ========== CONTENT PANEL ========== -->
+        <section class="content-panel" id="contentPanel">
+            <div class="content-panel-inner" id="contentPanelInner">
+                <!-- Markdown Config Card -->
+                <div class="fluent-card md-editor-wrapper" id="mdEditorCard">
+                    <div class="fluent-card-header" id="mdEditorHeader" style="cursor:pointer;" role="button" aria-expanded="true" tabindex="0">
+                        <span class="fluent-card-title">
+                            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM6 7h12v2H6V7zm0 4h12v2H6v-2zm0 4h8v2H6v-2z"/></svg>
+                            Markdown 配置
+                        </span>
+                        <span class="card-badge" id="mdStatusBadge">已加载</span>
+                    </div>
+                    <div class="fluent-card-body" id="mdEditorBody">
+                        <textarea id="mdEditor" aria-label="Markdown文件目录配置" spellcheck="false"></textarea>
+                        <div class="md-editor-actions">
+                            <button class="fluent-btn fluent-btn-secondary" id="btnResetMd" aria-label="重置为默认配置">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.65 6.35A7.96 7.96 0 0012 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08A5.99 5.99 0 0112 18c-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg>
+                                重置默认
+                            </button>
+                            <button class="fluent-btn fluent-btn-primary" id="btnApplyMd" aria-label="应用配置">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+                                应用配置
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- File Detail Card -->
+                <div class="fluent-card" id="fileDetailCard">
+                    <div class="fluent-card-header">
+                        <span class="fluent-card-title">
+                            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 2h9l5 5v13.5A1.5 1.5 0 0118.5 22h-13A1.5 1.5 0 014 20.5V3.5A1.5 1.5 0 015.5 2H6z"/></svg>
+                            文件详情
+                        </span>
+                    </div>
+                    <div class="fluent-card-body" id="fileDetailBody">
+                        <div class="file-detail-empty" id="fileDetailEmpty">
+                            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                            <span class="empty-title">请从左侧目录选择文件</span>
+                            <span style="font-size:var(--fontSizeBase200);">点击文件可查看详情与下载</span>
+                        </div>
+                        <div class="file-detail-info" id="fileDetailInfo" style="display:none;">
+                            <div class="file-detail-row">
+                                <span class="file-detail-label">文件名</span>
+                                <span class="file-detail-value" id="detailName">-</span>
+                            </div>
+                            <div class="file-detail-row">
+                                <span class="file-detail-label">类型</span>
+                                <span class="file-detail-value" id="detailType">-</span>
+                            </div>
+                            <div class="file-detail-row">
+                                <span class="file-detail-label">路径</span>
+                                <span class="file-detail-value" id="detailPath">-</span>
+                            </div>
+                            <div class="file-detail-row">
+                                <span class="file-detail-label">大小</span>
+                                <span class="file-detail-value" id="detailSize">-</span>
+                            </div>
+                            <div class="file-detail-row">
+                                <span class="file-detail-label">下载地址</span>
+                                <span class="file-detail-value" style="word-break:break-all;" id="detailUrl">-</span>
+                            </div>
+                            <div class="file-detail-actions">
+                                <a class="fluent-btn fluent-btn-primary" id="btnDownload" href="#" target="_blank" rel="noopener" aria-label="下载文件">
+                                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                                    下载文件
+                                </a>
+                                <button class="fluent-btn fluent-btn-secondary" id="btnCopyUrl" aria-label="复制下载链接">
+                                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                                    复制链接
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ==================== TOAST CONTAINER ==================== -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script>
+        (function() {
+            // ==================== DEFAULT MARKDOWN ====================
+            const DEFAULT_MD = `# 文件下载中心
+
+        ## 文档资料
+        - [用户手册.pdf](https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf)
+        - [安装指南.docx](https://calibre-ebook.com/downloads/dummy/dummy.docx)
+        - [发布说明.md](https://raw.githubusercontent.com/microsoft/fluentui/master/README.md)
+        - [API参考.html](https://example.com/files/api-reference.html)
+
+        ## 软件工具
+        - [安装包.exe](https://example.com/files/setup.exe)
+        - [配置工具.zip](https://example.com/files/config-tool.zip)
+        - **插件目录**
+          - [插件A.js](https://example.com/files/plugin-a.js)
+          - [插件B.css](https://example.com/files/plugin-b.css)
+          - [主题包.json](https://example.com/files/theme.json)
+
+        ## 媒体资源
+        - [演示视频.mp4](https://example.com/files/demo.mp4)
+        - [架构图.png](https://example.com/files/architecture.png)
+        - [产品截图.gif](https://example.com/files/screenshot.gif)
+        - [背景音乐.mp3](https://example.com/files/bgm.mp3)
+        - [宣传海报.svg](https://example.com/files/poster.svg)
+
+        ## 数据表格
+        - [销售报表.xlsx](https://example.com/files/sales-report.xlsx)
+        - [项目计划.pptx](https://example.com/files/project-plan.pptx)
+        - [数据库备份.sql](https://example.com/files/backup.sql)`;
+
+            // ==================== DOM REFS ====================
+            const fileNav = document.getElementById('fileNav');
+            const mobileOverlay = document.getElementById('mobileOverlay');
+            const btnToggleNav = document.getElementById('btnToggleNav');
+            const fileTreeContainer = document.getElementById('fileTreeContainer');
+            const searchInput = document.getElementById('searchInput');
+            const mdEditor = document.getElementById('mdEditor');
+            const mdStatusBadge = document.getElementById('mdStatusBadge');
+            const mdEditorBody = document.getElementById('mdEditorBody');
+            const mdEditorHeader = document.getElementById('mdEditorHeader');
+            const fileDetailEmpty = document.getElementById('fileDetailEmpty');
+            const fileDetailInfo = document.getElementById('fileDetailInfo');
+            const detailName = document.getElementById('detailName');
+            const detailType = document.getElementById('detailType');
+            const detailPath = document.getElementById('detailPath');
+            const detailSize = document.getElementById('detailSize');
+            const detailUrl = document.getElementById('detailUrl');
+            const btnDownload = document.getElementById('btnDownload');
+            const btnCopyUrl = document.getElementById('btnCopyUrl');
+            const toastContainer = document.getElementById('toastContainer');
+
+            // ==================== STATE ====================
+            let fileTreeData = [];
+            let selectedFileNode = null;
+            let isNavOpen = false;
+            let isMdCollapsed = false;
+            const expandedFolders = new Set();
+
+            // ==================== FILE TYPE UTILS ====================
+            function getFileExtension(filename) {
+                const lastDot = filename.lastIndexOf('.');
+                if (lastDot === -1 || lastDot === filename.length - 1) return '';
+                return filename.slice(lastDot + 1).toLowerCase();
+            }
+
+            function getFileTypeInfo(filename, isFolder) {
+                if (isFolder) {
+                    return {
+                        type: 'folder',
+                        color: 'var(--colorFolder)',
+                        bgColor: 'var(--colorFolderBg)',
+                        label: '文件夹',
+                        iconSvg: 'folder'
+                    };
+                }
+                const ext = getFileExtension(filename);
+                const map = {
+                    pdf: { type: 'pdf', color: 'var(--colorFilePDF)', bgColor: 'var(--colorFilePDFBg)',
+                        label: 'PDF 文档', iconSvg: 'pdf' },
+                    doc: { type: 'word', color: 'var(--colorFileWord)', bgColor: 'var(--colorFileWordBg)',
+                        label: 'Word 文档', iconSvg: 'word' },
+                    docx: { type: 'word', color: 'var(--colorFileWord)', bgColor: 'var(--colorFileWordBg)',
+                        label: 'Word 文档', iconSvg: 'word' },
+                    xls: { type: 'excel', color: 'var(--colorFileExcel)', bgColor: 'var(--colorFileExcelBg)',
+                        label: 'Excel 表格', iconSvg: 'excel' },
+                    xlsx: { type: 'excel', color: 'var(--colorFileExcel)', bgColor: 'var(--colorFileExcelBg)',
+                        label: 'Excel 表格', iconSvg: 'excel' },
+                    ppt: { type: 'ppt', color: 'var(--colorFilePPT)', bgColor: 'var(--colorFilePPTBg)',
+                        label: 'PowerPoint 演示', iconSvg: 'ppt' },
+                    pptx: { type: 'ppt', color: 'var(--colorFilePPT)', bgColor: 'var(--colorFilePPTBg)',
+                        label: 'PowerPoint 演示', iconSvg: 'ppt' },
+                    png: { type: 'image', color: 'var(--colorFileImage)', bgColor: 'var(--colorFileImageBg)',
+                        label: '图片', iconSvg: 'image' },
+                    jpg: { type: 'image', color: 'var(--colorFileImage)', bgColor: 'var(--colorFileImageBg)',
+                        label: '图片', iconSvg: 'image' },
+                    jpeg: { type: 'image', color: 'var(--colorFileImage)', bgColor: 'var(--colorFileImageBg)',
+                        label: '图片', iconSvg: 'image' },
+                    gif: { type: 'image', color: 'var(--colorFileImage)', bgColor: 'var(--colorFileImageBg)',
+                        label: '图片', iconSvg: 'image' },
+                    svg: { type: 'image', color: 'var(--colorFileImage)', bgColor: 'var(--colorFileImageBg)',
+                        label: '矢量图', iconSvg: 'image' },
+                    webp: { type: 'image', color: 'var(--colorFileImage)', bgColor: 'var(--colorFileImageBg)',
+                        label: '图片', iconSvg: 'image' },
+                    mp4: { type: 'video', color: 'var(--colorFileVideo)', bgColor: 'var(--colorFileVideoBg)',
+                        label: '视频', iconSvg: 'video' },
+                    avi: { type: 'video', color: 'var(--colorFileVideo)', bgColor: 'var(--colorFileVideoBg)',
+                        label: '视频', iconSvg: 'video' },
+                    mov: { type: 'video', color: 'var(--colorFileVideo)', bgColor: 'var(--colorFileVideoBg)',
+                        label: '视频', iconSvg: 'video' },
+                    mkv: { type: 'video', color: 'var(--colorFileVideo)', bgColor: 'var(--colorFileVideoBg)',
+                        label: '视频', iconSvg: 'video' },
+                    mp3: { type: 'audio', color: 'var(--colorFileAudio)', bgColor: 'var(--colorFileAudioBg)',
+                        label: '音频', iconSvg: 'audio' },
+                    wav: { type: 'audio', color: 'var(--colorFileAudio)', bgColor: 'var(--colorFileAudioBg)',
+                        label: '音频', iconSvg: 'audio' },
+                    flac: { type: 'audio', color: 'var(--colorFileAudio)', bgColor: 'var(--colorFileAudioBg)',
+                        label: '音频', iconSvg: 'audio' },
+                    js: { type: 'code', color: 'var(--colorFileCode)', bgColor: 'var(--colorFileCodeBg)',
+                        label: 'JavaScript', iconSvg: 'code' },
+                    ts: { type: 'code', color: 'var(--colorFileCode)', bgColor: 'var(--colorFileCodeBg)',
+                        label: 'TypeScript', iconSvg: 'code' },
+                    py: { type: 'code', color: 'var(--colorFileCode)', bgColor: 'var(--colorFileCodeBg)',
+                        label: 'Python', iconSvg: 'code' },
+                    html: { type: 'code', color: 'var(--colorFileCode)', bgColor: 'var(--colorFileCodeBg)',
+                        label: 'HTML', iconSvg: 'code' },
+                    css: { type: 'code', color: 'var(--colorFileCode)', bgColor: 'var(--colorFileCodeBg)',
+                        label: 'CSS', iconSvg: 'code' },
+                    json: { type: 'code', color: 'var(--colorFileCode)', bgColor: 'var(--colorFileCodeBg)',
+                        label: 'JSON', iconSvg: 'code' },
+                    sql: { type: 'code', color: 'var(--colorFileCode)', bgColor: 'var(--colorFileCodeBg)',
+                        label: 'SQL', iconSvg: 'code' },
+                    zip: { type: 'archive', color: 'var(--colorFileArchive)', bgColor: 'var(--colorFileArchiveBg)',
+                        label: '压缩包', iconSvg: 'archive' },
+                    rar: { type: 'archive', color: 'var(--colorFileArchive)', bgColor: 'var(--colorFileArchiveBg)',
+                        label: '压缩包', iconSvg: 'archive' },
+                    '7z': { type: 'archive', color: 'var(--colorFileArchive)', bgColor: 'var(--colorFileArchiveBg)',
+                        label: '压缩包', iconSvg: 'archive' },
+                    tar: { type: 'archive', color: 'var(--colorFileArchive)', bgColor: 'var(--colorFileArchiveBg)',
+                        label: '压缩包', iconSvg: 'archive' },
+                    gz: { type: 'archive', color: 'var(--colorFileArchive)', bgColor: 'var(--colorFileArchiveBg)',
+                        label: '压缩包', iconSvg: 'archive' },
+                    exe: { type: 'exe', color: 'var(--colorFileExe)', bgColor: 'var(--colorFileExeBg)',
+                    label: '可执行文件', iconSvg: 'exe' },
+                    msi: { type: 'exe', color: 'var(--colorFileExe)', bgColor: 'var(--colorFileExeBg)',
+                        label: '安装包', iconSvg: 'exe' },
+                    md: { type: 'markdown', color: 'var(--colorFileMarkdown)', bgColor: 'var(--colorFileMarkdownBg)',
+                        label: 'Markdown', iconSvg: 'markdown' },
+                };
+                return map[ext] || { type: 'default', color: 'var(--colorFileDefault)',
+                    bgColor: 'var(--colorFileDefaultBg)', label: '文件', iconSvg: 'default' };
+            }
+
+            function getFileIconSVG(iconSvg, color) {
+                const svgs = {
+                    folder: `<svg viewBox="0 0 24 24" fill="${color}" aria-hidden="true"><path d="M2 6.5A2.5 2.5 0 014.5 4h5.67a2.5 2.5 0 011.77.73l1.33 1.34a1.5 1.5 0 001.06.43H19.5A2.5 2.5 0 0122 9v8.5a2.5 2.5 0 01-2.5 2.5h-15A2.5 2.5 0 012 17.5V6.5z"/></svg>`,
+                    pdf: `<svg viewBox="0 0 24 24" fill="${color}" aria-hidden="true"><path d="M6 2h9l5 5v13.5A1.5 1.5 0 0118.5 22h-13A1.5 1.5 0 014 20.5V3.5A1.5 1.5 0 015.5 2H6zm8 1.5V8h4.5L14 3.5zM8 13h2v2H8v-2zm0-3h2v2H8v-2zm0 6h2v2H8v-2zm3-3h2v2h-2v-2zm0-3h2v2h-2v-2zm0 6h2v2h-2v-2zm3-3h2v2h-2v-2zm0-3h2v2h-2v-2zm0 6h2v2h-2v-2z"/></svg>`,
+                    word: `<svg viewBox="0 0 24 24" fill="${color}" aria-hidden="true"><path d="M6 2h9l5 5v13.5A1.5 1.5 0 0118.5 22h-13A1.5 1.5 0 014 20.5V3.5A1.5 1.5 0 015.5 2H6zm8 1.5V8h4.5L14 3.5zM8 10l1.5 6h1L12 13l1.5 3h1L16 10h-1.2l-.9 3.5L12.5 10h-1l-1.4 3.5L9.2 10H8z"/></svg>`,
+                    excel: `<svg viewBox="0 0 24 24" fill="${color}" aria-hidden="true"><path d="M6 2h9l5 5v13.5A1.5 1.5 0 0118.5 22h-13A1.5 1.5 0 014 20.5V3.5A1.5 1.5 0 015.5 2H6zm8 1.5V8h4.5L14 3.5zM8 10l1.8 6h1.2L12 13.5l1 2.5h1.2L16 10h-1.3l-.7 3.5L13 10h-1l-1 3.5L10.3 10H8z"/></svg>`,
+                    ppt: `<svg viewBox="0 0 24 24" fill="${color}" aria-hidden="true"><path d="M6 2h9l5 5v13.5A1.5 1.5 0 0118.5 22h-13A1.5 1.5 0 014 20.5V3.5A1.5 1.5 0 015.5 2H6zm8 1.5V8h4.5L14 3.5zM8 10h3v1H9v1h2v1H9v1h2v1H8v-5zm4 0h3v1h-2v1h2v1h-2v2h-1v-5z"/></svg>`,
+                    image: `<svg viewBox="0 0 24 24" fill="${color}" aria-hidden="true"><path d="M6 2h9l5 5v13.5A1.5 1.5 0 0118.5 22h-13A1.5 1.5 0 014 20.5V3.5A1.5 1.5 0 015.5 2H6zm8 1.5V8h4.5L14 3.5zM8 14l2-2.5 2 2.5 1.5-2L16 15H8l2-3 1 1.5L8 14z"/></svg>`,
+                    video: `<svg viewBox="0 0 24 24" fill="${color}" aria-hidden="true"><path d="M6 2h9l5 5v13.5A1.5 1.5 0 0118.5 22h-13A1.5 1.5 0 014 20.5V3.5A1.5 1.5 0 015.5 2H6zm8 1.5V8h4.5L14 3.5zM10 10l4 3-4 3v-6z"/></svg>`,
+                    audio: `<svg viewBox="0 0 24 24" fill="${color}" aria-hidden="true"><path d="M6 2h9l5 5v13.5A1.5 1.5 0 0118.5 22h-13A1.5 1.5 0 014 20.5V3.5A1.5 1.5 0 015.5 2H6zm8 1.5V8h4.5L14 3.5zM12 10a3 3 0 100 6 3 3 0 000-6zm-1 3a1 1 0 112 0 1 1 0 01-2 0z"/></svg>`,
+                    code: `<svg viewBox="0 0 24 24" fill="${color}" aria-hidden="true"><path d="M6 2h9l5 5v13.5A1.5 1.5 0 0118.5 22h-13A1.5 1.5 0 014 20.5V3.5A1.5 1.5 0 015.5 2H6zm8 1.5V8h4.5L14 3.5zM9.5 11l-2 3 2 3H11l-2-3 2-3H9.5zm5 0l-2 3 2 3h1.5l-2-3 2-3H14.5z"/></svg>`,
+                    archive: `<svg viewBox="0 0 24 24" fill="${color}" aria-hidden="true"><path d="M6 2h9l5 5v13.5A1.5 1.5 0 0118.5 22h-13A1.5 1.5 0 014 20.5V3.5A1.5 1.5 0 015.5 2H6zm8 1.5V8h4.5L14 3.5zM9 10v2h6v-2H9zm0 3v2h6v-2H9zm0 3v2h6v-2H9z"/></svg>`,
+                    exe: `<svg viewBox="0 0 24 24" fill="${color}" aria-hidden="true"><path d="M6 2h9l5 5v13.5A1.5 1.5 0 0118.5 22h-13A1.5 1.5 0 014 20.5V3.5A1.5 1.5 0 015.5 2H6zm8 1.5V8h4.5L14 3.5zM8 12l2 4h1l2-4h-1.2l-1.2 2.5L9.2 12H8z"/></svg>`,
+                    markdown: `<svg viewBox="0 0 24 24" fill="${color}" aria-hidden="true"><path d="M6 2h9l5 5v13.5A1.5 1.5 0 0118.5 22h-13A1.5 1.5 0 014 20.5V3.5A1.5 1.5 0 015.5 2H6zm8 1.5V8h4.5L14 3.5zM8 10h1.5v6H8v-6zm3.5 0H13l1.5 4 1.5-4h1.5l-2.5 6h-1l-2.5-6z"/></svg>`,
+                    default: `<svg viewBox="0 0 24 24" fill="${color}" aria-hidden="true"><path d="M6 2h9l5 5v13.5A1.5 1.5 0 0118.5 22h-13A1.5 1.5 0 014 20.5V3.5A1.5 1.5 0 015.5 2H6zm8 1.5V8h4.5L14 3.5zM8 10h8v2H8v-2zm0 3h8v2H8v-2zm0 3h5v2H8v-2z"/></svg>`,
+                };
+                return svgs[iconSvg] || svgs['default'];
+            }
+
+            function getFileSizeString(filename) {
+                const hash = filename.split('').reduce((a, c) => a + c.charCodeAt(0), 0);
+                const sizes = ['128 KB', '256 KB', '512 KB', '1.2 MB', '3.4 MB', '5.7 MB', '8.1 MB', '15 MB',
+                '24 MB'];
+                return sizes[hash % sizes.length];
+            }
+
+            function getFileModifiedDate(filename) {
+                const hash = filename.split('').reduce((a, c) => a + c.charCodeAt(0), 0);
+                const now = new Date();
+                const daysAgo = hash % 60;
+                const d = new Date(now.getTime() - daysAgo * 86400000);
+                return d.toISOString().slice(0, 10);
+            }
+
+            // ==================== MARKDOWN PARSER ====================
+            function parseMarkdownToTree(mdText) {
+                const lines = mdText.split('\n');
+                const rootNodes = [];
+                const stack = [{ depth: -1, children: rootNodes, node: null }];
+
+                for (let i = 0; i < lines.length; i++) {
+                    const rawLine = lines[i];
+                    const trimmed = rawLine.trim();
+                    if (!trimmed) continue;
+                    if (/^#{1,6}\s/.test(trimmed)) continue;
+
+                    const listMatch = trimmed.match(/^([-*+])\s+(.*)$/);
+                    if (!listMatch) continue;
+
+                    const content = listMatch[2].trim();
+                    const leadingSpaces = rawLine.match(/^\s*/)[0].length;
+                    const depth = leadingSpaces;
+
+                    const linkMatch = content.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
+                    const boldFolderMatch = content.match(/^\*\*(.+)\*\*$/);
+                    const plainText = content.replace(/^\[([^\]]+)\]\([^)]+\)$/, '$1').replace(/^\*\*(.+)\*\*$/, '$1');
+
+                    const isLink = !!linkMatch;
+                    const isBoldFolder = !!boldFolderMatch && !isLink;
+                    const isPlainFolder = !isLink && !isBoldFolder && (content.endsWith('/') || !content.includes(
+                        '['));
+
+                    let nodeType, nodeName, nodeUrl;
+                    if (isLink) {
+                        nodeType = 'file';
+                        nodeName = linkMatch[1];
+                        nodeUrl = linkMatch[2];
+                    } else if (isBoldFolder) {
+                        nodeType = 'folder';
+                        nodeName = boldFolderMatch[1];
+                        nodeUrl = null;
+                    } else if (isPlainFolder) {
+                        nodeType = 'folder';
+                        nodeName = plainText.replace(/\/$/, '');
+                        nodeUrl = null;
+                    } else {
+                        nodeType = 'file';
+                        nodeName = plainText;
+                        nodeUrl = null;
+                    }
+
+                    const newNode = {
+                        name: nodeName,
+                        type: nodeType,
+                        url: nodeUrl || '',
+                        children: nodeType === 'folder' ? [] : null,
+                        depth: depth,
+                    };
+
+                    while (stack.length > 1 && stack[stack.length - 1].depth >= depth) {
+                        stack.pop();
+                    }
+
+                    const parent = stack[stack.length - 1];
+                    if (parent.children && newNode.type === 'folder') {
+                        parent.children.push(newNode);
+                        stack.push({ depth: depth, children: newNode.children, node: newNode });
+                    } else if (parent.children && newNode.type === 'file') {
+                        parent.children.push(newNode);
+                    } else if (parent.node && parent.node.type === 'folder' && parent.node.children) {
+                        parent.node.children.push(newNode);
+                    }
+                }
+
+                return rootNodes;
+            }
+
+            // ==================== RENDER FILE TREE ====================
+            function renderFileTree(nodes, container, level = 0) {
+                if (!nodes || nodes.length === 0) {
+                    container.innerHTML =
+                        '<div style="padding:24px;text-align:center;color:var(--colorNeutralForegroundDisabled);font-size:var(--fontSizeBase200);">暂无文件</div>';
+                    return;
+                }
+                const ul = document.createElement('ul');
+                ul.className = 'tree-node';
+                ul.setAttribute('role', level === 0 ? 'tree' : 'group');
+
+                nodes.forEach((node, index) => {
+                    const li = document.createElement('li');
+                    li.setAttribute('role', 'treeitem');
+                    li.dataset.nodeType = node.type;
+                    li.dataset.nodeName = node.name;
+                    li.dataset.nodeUrl = node.url || '';
+                    li.dataset.nodeDepth = level;
+
+                    const itemDiv = document.createElement('div');
+                    itemDiv.className = 'tree-node-item';
+                    itemDiv.tabIndex = 0;
+                    itemDiv.dataset.index = index;
+                    itemDiv.dataset.level = level;
+
+                    // Arrow for folders
+                    const arrowSpan = document.createElement('span');
+                    arrowSpan.className = 'tree-node-arrow';
+                    if (node.type === 'folder') {
+                        arrowSpan.classList.add('expanded');
+                        arrowSpan.innerHTML =
+                            '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>';
+                        arrowSpan.setAttribute('aria-label', '折叠文件夹');
+                    } else {
+                        arrowSpan.style.visibility = 'hidden';
+                        arrowSpan.setAttribute('aria-hidden', 'true');
+                    }
+
+                    // Icon
+                    const typeInfo = getFileTypeInfo(node.name, node.type === 'folder');
+                    const iconDiv = document.createElement('span');
+                    iconDiv.className = 'tree-node-icon';
+                    iconDiv.style.backgroundColor = typeInfo.bgColor;
+                    iconDiv.innerHTML = getFileIconSVG(typeInfo.iconSvg, typeInfo.color);
+                    iconDiv.setAttribute('aria-hidden', 'true');
+
+                    // Name
+                    const nameSpan = document.createElement('span');
+                    nameSpan.className = 'tree-node-name';
+                    nameSpan.textContent = node.name;
+                    nameSpan.title = node.name;
+
+                    // Meta
+                    const metaSpan = document.createElement('span');
+                    metaSpan.className = 'tree-node-meta';
+                    if (node.type === 'folder' && node.children) {
+                        const fileCount = countFiles(node);
+                        metaSpan.textContent = fileCount > 0 ? `${fileCount} 个文件` : '空';
+                    } else if (node.type === 'file') {
+                        metaSpan.textContent = getFileSizeString(node.name);
+                    }
+
+                    // Download button for files
+                    if (node.type === 'file' && node.url) {
+                        const downloadBtn = document.createElement('button');
+                        downloadBtn.className = 'tree-node-download';
+                        downloadBtn.innerHTML =
+                            '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>';
+                        downloadBtn.setAttribute('aria-label', `下载 ${node.name}`);
+                        downloadBtn.title = '下载';
+                        downloadBtn.addEventListener('click', (e) => {
+                            e.stopPropagation();
+                            e.preventDefault();
+                            triggerDownload(node);
+                        });
+                        itemDiv.appendChild(downloadBtn);
+                    }
+
+                    itemDiv.appendChild(arrowSpan);
+                    itemDiv.appendChild(iconDiv);
+                    itemDiv.appendChild(nameSpan);
+                    if (node.type === 'folder') {
+                        const countSpan = document.createElement('span');
+                        countSpan.className = 'tree-node-count';
+                        const fc = countFiles(node);
+                        countSpan.textContent = fc;
+                        countSpan.title = `${fc} 个文件`;
+                        itemDiv.appendChild(countSpan);
+                    }
+                    itemDiv.appendChild(metaSpan);
+
+                    // Click handler
+                    itemDiv.addEventListener('click', (e) => {
+                        if (e.target.closest('.tree-node-download')) return;
+                        if (e.target.closest('.tree-node-arrow') && node.type === 'folder') {
+                            toggleFolder(li, node, arrowSpan);
+                            return;
+                        }
+                        if (node.type === 'folder') {
+                            toggleFolder(li, node, arrowSpan);
+                        } else {
+                            selectFile(node, itemDiv);
+                        }
+                    });
+
+                    // Keyboard
+                    itemDiv.addEventListener('keydown', (e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            if (node.type === 'folder') {
+                                toggleFolder(li, node, arrowSpan);
+                            } else {
+                                selectFile(node, itemDiv);
+                            }
+                        }
+                        if (e.key === 'ArrowRight' && node.type === 'folder') {
+                            e.preventDefault();
+                            openFolder(li, node, arrowSpan);
+                        }
+                        if (e.key === 'ArrowLeft' && node.type === 'folder') {
+                            e.preventDefault();
+                            closeFolder(li, node, arrowSpan);
+                        }
+                    });
+
+                    li.appendChild(itemDiv);
+
+                    // Children
+                    if (node.type === 'folder' && node.children && node.children.length > 0) {
+                        const childWrapper = document.createElement('div');
+                        childWrapper.className = 'tree-children open';
+                        const childUl = document.createElement('ul');
+                        childUl.className = 'tree-node';
+                        childUl.setAttribute('role', 'group');
+                        renderFileTreeToList(node.children, childUl, level + 1);
+                        childWrapper.appendChild(childUl);
+                        li.appendChild(childWrapper);
+                        li.dataset.childWrapper = 'true';
+                        li._childWrapper = childWrapper;
+                    }
+
+                    li._nodeData = node;
+                    li._arrowSpan = arrowSpan;
+                    ul.appendChild(li);
+                });
+
+                container.innerHTML = '';
+                container.appendChild(ul);
+
+                // Store references
+                container._allItems = container.querySelectorAll('.tree-node-item');
+                container._allLis = container.querySelectorAll('li[data-node-type]');
+            }
+
+            function renderFileTreeToList(nodes, ul, level) {
+                nodes.forEach((node, index) => {
+                    const li = document.createElement('li');
+                    li.setAttribute('role', 'treeitem');
+                    li.dataset.nodeType = node.type;
+                    li.dataset.nodeName = node.name;
+                    li.dataset.nodeUrl = node.url || '';
+                    li.dataset.nodeDepth = level;
+
+                    const itemDiv = document.createElement('div');
+                    itemDiv.className = 'tree-node-item';
+                    itemDiv.tabIndex = 0;
+
+                    const arrowSpan = document.createElement('span');
+                    arrowSpan.className = 'tree-node-arrow';
+                    if (node.type === 'folder') {
+                        arrowSpan.classList.add('expanded');
+                        arrowSpan.innerHTML =
+                            '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>';
+                        arrowSpan.setAttribute('aria-label', '折叠文件夹');
+                    } else {
+                        arrowSpan.style.visibility = 'hidden';
+                    }
+
+                    const typeInfo = getFileTypeInfo(node.name, node.type === 'folder');
+                    const iconDiv = document.createElement('span');
+                    iconDiv.className = 'tree-node-icon';
+                    iconDiv.style.backgroundColor = typeInfo.bgColor;
+                    iconDiv.innerHTML = getFileIconSVG(typeInfo.iconSvg, typeInfo.color);
+
+                    const nameSpan = document.createElement('span');
+                    nameSpan.className = 'tree-node-name';
+                    nameSpan.textContent = node.name;
+                    nameSpan.title = node.name;
+
+                    const metaSpan = document.createElement('span');
+                    metaSpan.className = 'tree-node-meta';
+                    if (node.type === 'folder' && node.children) {
+                        metaSpan.textContent = `${countFiles(node)} 个文件`;
+                    } else if (node.type === 'file') {
+                        metaSpan.textContent = getFileSizeString(node.name);
+                    }
+
+                    if (node.type === 'file' && node.url) {
+                        const downloadBtn = document.createElement('button');
+                        downloadBtn.className = 'tree-node-download';
+                        downloadBtn.innerHTML =
+                            '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>';
+                        downloadBtn.setAttribute('aria-label', `下载 ${node.name}`);
+                        downloadBtn.title = '下载';
+                        downloadBtn.addEventListener('click', (e) => {
+                            e.stopPropagation();
+                            e.preventDefault();
+                            triggerDownload(node);
+                        });
+                        itemDiv.appendChild(downloadBtn);
+                    }
+
+                    itemDiv.appendChild(arrowSpan);
+                    itemDiv.appendChild(iconDiv);
+                    itemDiv.appendChild(nameSpan);
+                    if (node.type === 'folder') {
+                        const countSpan = document.createElement('span');
+                        countSpan.className = 'tree-node-count';
+                        countSpan.textContent = countFiles(node);
+                        itemDiv.appendChild(countSpan);
+                    }
+                    itemDiv.appendChild(metaSpan);
+
+                    itemDiv.addEventListener('click', (e) => {
+                        if (e.target.closest('.tree-node-download')) return;
+                        if (e.target.closest('.tree-node-arrow') && node.type === 'folder') {
+                            toggleFolder(li, node, arrowSpan);
+                            return;
+                        }
+                        if (node.type === 'folder') {
+                            toggleFolder(li, node, arrowSpan);
+                        } else {
+                            selectFile(node, itemDiv);
+                        }
+                    });
+
+                    itemDiv.addEventListener('keydown', (e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            if (node.type === 'folder') {
+                                toggleFolder(li, node, arrowSpan);
+                            } else {
+                                selectFile(node, itemDiv);
+                            }
+                        }
+                    });
+
+                    li.appendChild(itemDiv);
+                    li._nodeData = node;
+                    li._arrowSpan = arrowSpan;
+
+                    if (node.type === 'folder' && node.children && node.children.length > 0) {
+                        const childWrapper = document.createElement('div');
+                        childWrapper.className = 'tree-children open';
+                        const childUl = document.createElement('ul');
+                        childUl.className = 'tree-node';
+                        childUl.setAttribute('role', 'group');
+                        renderFileTreeToList(node.children, childUl, level + 1);
+                        childWrapper.appendChild(childUl);
+                        li.appendChild(childWrapper);
+                        li._childWrapper = childWrapper;
+                    }
+
+                    ul.appendChild(li);
+                });
+            }
+
+            function countFiles(node) {
+                if (node.type === 'file') return 1;
+                if (!node.children) return 0;
+                return node.children.reduce((sum, child) => sum + countFiles(child), 0);
+            }
+
+            function toggleFolder(li, node, arrowSpan) {
+                const childWrapper = li._childWrapper;
+                if (!childWrapper) return;
+                const isOpen = childWrapper.classList.contains('open');
+                if (isOpen) {
+                    closeFolder(li, node, arrowSpan);
+                } else {
+                    openFolder(li, node, arrowSpan);
+                }
+            }
+
+            function openFolder(li, node, arrowSpan) {
+                const childWrapper = li._childWrapper;
+                if (!childWrapper) return;
+                childWrapper.classList.remove('collapsing');
+                childWrapper.classList.add('open');
+                if (arrowSpan) {
+                    arrowSpan.classList.add('expanded');
+                    arrowSpan.setAttribute('aria-label', '折叠文件夹');
+                }
+            }
+
+            function closeFolder(li, node, arrowSpan) {
+                const childWrapper = li._childWrapper;
+                if (!childWrapper) return;
+                childWrapper.classList.add('collapsing');
+                childWrapper.classList.remove('open');
+                if (arrowSpan) {
+                    arrowSpan.classList.remove('expanded');
+                    arrowSpan.setAttribute('aria-label', '展开文件夹');
+                }
+                setTimeout(() => {
+                    childWrapper.classList.remove('collapsing');
+                }, 300);
+            }
+
+            function selectFile(node, itemDiv) {
+                selectedFileNode = node;
+                // Highlight
+                document.querySelectorAll('.tree-node-item.selected').forEach(el => el.classList.remove(
+                    'selected'));
+                if (itemDiv) itemDiv.classList.add('selected');
+
+                // Update detail panel
+                fileDetailEmpty.style.display = 'none';
+                fileDetailInfo.style.display = 'flex';
+                detailName.textContent = node.name;
+                const typeInfo = getFileTypeInfo(node.name, false);
+                detailType.textContent = typeInfo.label;
+                detailPath.textContent = buildPath(node);
+                detailSize.textContent = getFileSizeString(node.name);
+                detailUrl.textContent = node.url || '（无下载地址）';
+                if (node.url) {
+                    btnDownload.href = node.url;
+                    btnDownload.style.display = 'inline-flex';
+                    btnCopyUrl.style.display = 'inline-flex';
+                } else {
+                    btnDownload.href = '#';
+                    btnDownload.style.display = 'inline-flex';
+                    btnCopyUrl.style.display = 'inline-flex';
+                }
+
+                // Scroll detail into view on mobile
+                if (window.innerWidth <= 768) {
+                    document.getElementById('fileDetailCard').scrollIntoView({ behavior: 'smooth',
+                        block: 'start' });
+                }
+            }
+
+            function buildPath(node) {
+                const parts = [node.name];
+                // Try to find parent chain
+                const allLis = fileTreeContainer.querySelectorAll('li[data-node-type]');
+                let targetLi = null;
+                allLis.forEach(li => {
+                    if (li._nodeData === node) targetLi = li;
+                });
+                if (targetLi) {
+                    let parent = targetLi.parentElement;
+                    while (parent) {
+                        const parentLi = parent.closest('li[data-node-type="folder"]');
+                        if (parentLi && parentLi._nodeData) {
+                            parts.unshift(parentLi._nodeData.name);
+                            parent = parentLi.parentElement;
+                        } else {
+                            break;
+                        }
+                    }
+                }
+                return '/' + parts.join('/');
+            }
+
+            function triggerDownload(node) {
+                if (!node.url) {
+                    showToast('该文件没有配置下载地址');
+                    return;
+                }
+                const a = document.createElement('a');
+                a.href = node.url;
+                a.download = node.name;
+                a.target = '_blank';
+                a.rel = 'noopener';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                showToast(`正在下载: ${node.name}`);
+                selectFile(node, null);
+                // Highlight in tree
+                const allLis = fileTreeContainer.querySelectorAll('li[data-node-type="file"]');
+                allLis.forEach(li => {
+                    if (li._nodeData === node && li.querySelector('.tree-node-item')) {
+                        document.querySelectorAll('.tree-node-item.selected').forEach(el => el.classList
+                            .remove('selected'));
+                        li.querySelector('.tree-node-item').classList.add('selected');
+                    }
+                });
+            }
+
+            // ==================== SEARCH ====================
+            function filterTree(searchTerm) {
+                const allLis = fileTreeContainer.querySelectorAll('li[data-node-type]');
+                const term = searchTerm.toLowerCase().trim();
+                if (!term) {
+                    allLis.forEach(li => { li.style.display = ''; });
+                    // Re-collapse all non-open folders
+                    resetFolderVisibility();
+                    return;
+                }
+                const matchingNodes = new Set();
+                allLis.forEach(li => {
+                    const nodeData = li._nodeData;
+                    if (nodeData && nodeData.name.toLowerCase().includes(term)) {
+                        matchingNodes.add(li);
+                        // Expand ancestors
+                        let parent = li.parentElement;
+                        while (parent) {
+                            const parentLi = parent.closest('li[data-node-type="folder"]');
+                            if (parentLi) {
+                                matchingNodes.add(parentLi);
+                                if (parentLi._arrowSpan && !parentLi._arrowSpan.classList.contains(
+                                        'expanded')) {
+                                    openFolder(parentLi, parentLi._nodeData, parentLi._arrowSpan);
+                                }
+                                parent = parentLi.parentElement;
+                            } else {
+                                break;
+                            }
+                        }
+                    }
+                });
+                allLis.forEach(li => {
+                    if (matchingNodes.has(li)) {
+                        li.style.display = '';
+                    } else if (li.dataset.nodeType === 'folder' && hasMatchingDescendant(li, term)) {
+                        li.style.display = '';
+                        if (li._arrowSpan && !li._arrowSpan.classList.contains('expanded')) {
+                            openFolder(li, li._nodeData, li._arrowSpan);
+                        }
+                    } else if (li.dataset.nodeType === 'folder') {
+                        li.style.display = li.querySelector('li[style=""]') || matchingNodes.has(li) ? '' :
+                            'none';
+                    } else {
+                        li.style.display = 'none';
+                    }
+                });
+            }
+
+            function hasMatchingDescendant(li, term) {
+                const childLis = li.querySelectorAll('li[data-node-type]');
+                for (const child of childLis) {
+                    if (child._nodeData && child._nodeData.name.toLowerCase().includes(term)) return true;
+                }
+                return false;
+            }
+
+            function resetFolderVisibility() {
+                const allLis = fileTreeContainer.querySelectorAll('li[data-node-type="folder"]');
+                allLis.forEach(li => {
+                    li.style.display = '';
+                    if (li._childWrapper && li._childWrapper.classList.contains('open') && li._arrowSpan && !li
+                        ._arrowSpan.classList.contains('expanded')) {
+                        li._arrowSpan.classList.add('expanded');
+                    }
+                });
+            }
+
+            // ==================== TOAST ====================
+            function showToast(message) {
+                const toast = document.createElement('div');
+                toast.className = 'toast';
+                toast.textContent = message;
+                toastContainer.appendChild(toast);
+                setTimeout(() => {
+                    if (toast.parentNode) toast.parentNode.removeChild(toast);
+                }, 2500);
+            }
+
+            // ==================== APPLY MARKDOWN ====================
+            function applyMarkdown(mdText, isReset = false) {
+                try {
+                    fileTreeData = parseMarkdownToTree(mdText);
+                    renderFileTree(fileTreeData, fileTreeContainer);
+                    mdStatusBadge.textContent = '已加载';
+                    mdStatusBadge.style.background = 'var(--colorBrandBackground)';
+                    mdStatusBadge.style.color = '#fff';
+                    if (isReset) {
+                        showToast('已重置为默认配置');
+                    } else {
+                        showToast('配置已应用');
+                    }
+                    // Clear selection
+                    selectedFileNode = null;
+                    fileDetailEmpty.style.display = 'flex';
+                    fileDetailInfo.style.display = 'none';
+                    document.querySelectorAll('.tree-node-item.selected').forEach(el => el.classList.remove(
+                        'selected'));
+                } catch (err) {
+                    mdStatusBadge.textContent = '解析错误';
+                    mdStatusBadge.style.background = 'var(--colorFilePDF)';
+                    mdStatusBadge.style.color = '#fff';
+                    showToast('Markdown 解析失败，请检查格式');
+                    console.error('Markdown parse error:', err);
+                }
+            }
+
+            // ==================== EVENT LISTENERS ====================
+            document.getElementById('btnApplyMd').addEventListener('click', () => {
+                applyMarkdown(mdEditor.value);
+            });
+
+            document.getElementById('btnResetMd').addEventListener('click', () => {
+                mdEditor.value = DEFAULT_MD;
+                applyMarkdown(DEFAULT_MD, true);
+            });
+
+            document.getElementById('btnReset').addEventListener('click', () => {
+                mdEditor.value = DEFAULT_MD;
+                applyMarkdown(DEFAULT_MD, true);
+            });
+
+            searchInput.addEventListener('input', () => {
+                filterTree(searchInput.value);
+            });
+
+            // Expand/Collapse all
+            function expandAllFolders() {
+                const allLis = fileTreeContainer.querySelectorAll('li[data-node-type="folder"]');
+                allLis.forEach(li => {
+                    if (li._childWrapper && li._arrowSpan) {
+                        openFolder(li, li._nodeData, li._arrowSpan);
+                    }
+                });
+                showToast('已全部展开');
+            }
+
+            function collapseAllFolders() {
+                const allLis = fileTreeContainer.querySelectorAll('li[data-node-type="folder"]');
+                allLis.forEach(li => {
+                    if (li._childWrapper && li._arrowSpan) {
+                        closeFolder(li, li._nodeData, li._arrowSpan);
+                    }
+                });
+                showToast('已全部折叠');
+            }
+
+            document.getElementById('btnExpandAll').addEventListener('click', expandAllFolders);
+            document.getElementById('btnCollapseAll').addEventListener('click', collapseAllFolders);
+            document.getElementById('btnExpandAll2').addEventListener('click', expandAllFolders);
+            document.getElementById('btnCollapseAll2').addEventListener('click', collapseAllFolders);
+
+            // Mobile nav toggle
+            function openNav() {
+                fileNav.classList.add('mobile-open');
+                mobileOverlay.classList.add('active');
+                isNavOpen = true;
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeNav() {
+                fileNav.classList.remove('mobile-open');
+                mobileOverlay.classList.remove('active');
+                isNavOpen = false;
+                document.body.style.overflow = '';
+            }
+
+            btnToggleNav.addEventListener('click', () => {
+                if (isNavOpen) closeNav();
+                else openNav();
+            });
+
+            mobileOverlay.addEventListener('click', closeNav);
+
+            // Close nav on window resize to desktop
+            window.addEventListener('resize', () => {
+                if (window.innerWidth > 768 && isNavOpen) {
+                    closeNav();
+                }
+            });
+
+            // Keyboard shortcut to close nav
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && isNavOpen) {
+                    closeNav();
+                }
+            });
+
+            // MD Editor collapse toggle
+            mdEditorHeader.addEventListener('click', () => {
+                isMdCollapsed = !isMdCollapsed;
+                if (isMdCollapsed) {
+                    mdEditorBody.style.display = 'none';
+                    mdEditorHeader.setAttribute('aria-expanded', 'false');
+                } else {
+                    mdEditorBody.style.display = '';
+                    mdEditorHeader.setAttribute('aria-expanded', 'true');
+                }
+            });
+            mdEditorHeader.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    mdEditorHeader.click();
+                }
+            });
+
+            // Copy URL button
+            btnCopyUrl.addEventListener('click', () => {
+                if (selectedFileNode && selectedFileNode.url) {
+                    navigator.clipboard.writeText(selectedFileNode.url).then(() => {
+                        showToast('下载链接已复制到剪贴板');
+                    }).catch(() => {
+                        showToast('复制失败，请手动复制');
+                    });
+                } else {
+                    showToast('没有可复制的链接');
+                }
+            });
+
+            // ==================== INIT ====================
+            function init() {
+                mdEditor.value = DEFAULT_MD;
+                applyMarkdown(DEFAULT_MD, false);
+                isMdCollapsed = false;
+                mdEditorBody.style.display = '';
+                mdEditorHeader.setAttribute('aria-expanded', 'true');
+            }
+
+            init();
+
+            console.log('🚀 文件下载中心已就绪 | Fluent UI Design System | 自动暗色模式');
+            console.log('   系统暗色模式: ' + (window.matchMedia('(prefers-color-scheme: dark)').matches ? '🌙 暗色' :
+                '☀️ 亮色'));
+            console.log('   屏幕宽度: ' + window.innerWidth + 'px');
+        })();
+    </script>
+</body>
+</html>
