@@ -1,0 +1,2312 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FileHub - 文件下载中心</title>
+
+    <!-- Material Symbols Rounded 图标字体 -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+    <!-- Google Fonts - Roboto (MD3 推荐字体) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            /* ========== MD3 亮色主题色彩令牌 ========== */
+            --md-sys-color-primary: #3b5cb8;
+            --md-sys-color-on-primary: #ffffff;
+            --md-sys-color-primary-container: #dbe1ff;
+            --md-sys-color-on-primary-container: #00174b;
+
+            --md-sys-color-secondary: #595d72;
+            --md-sys-color-on-secondary: #ffffff;
+            --md-sys-color-secondary-container: #dde1f9;
+            --md-sys-color-on-secondary-container: #161a2c;
+
+            --md-sys-color-tertiary: #745577;
+            --md-sys-color-on-tertiary: #ffffff;
+            --md-sys-color-tertiary-container: #fdd7fd;
+            --md-sys-color-on-tertiary-container: #2c132f;
+
+            --md-sys-color-error: #ba1a1a;
+            --md-sys-color-on-error: #ffffff;
+            --md-sys-color-error-container: #ffdad6;
+            --md-sys-color-on-error-container: #410002;
+
+            --md-sys-color-surface: #faf8ff;
+            --md-sys-color-on-surface: #1a1b21;
+            --md-sys-color-surface-variant: #e1e2ec;
+            --md-sys-color-on-surface-variant: #44464f;
+            --md-sys-color-surface-container-lowest: #ffffff;
+            --md-sys-color-surface-container-low: #f4f2fb;
+            --md-sys-color-surface-container: #eeecf5;
+            --md-sys-color-surface-container-high: #e8e6ef;
+            --md-sys-color-surface-container-highest: #e2e1e9;
+
+            --md-sys-color-outline: #74767f;
+            --md-sys-color-outline-variant: #c4c5cf;
+            --md-sys-color-outline-strong: #3e4048;
+
+            --md-sys-color-inverse-surface: #2f3037;
+            --md-sys-color-inverse-on-surface: #f1f0f7;
+            --md-sys-color-inverse-primary: #b3c5ff;
+
+            --md-sys-color-scrim: #000000;
+            --md-sys-color-shadow: #000000;
+
+            /* MD3 Elevation - 亮色 */
+            --md-elevation-level0: none;
+            --md-elevation-level1: 0px 1px 2px 0px rgba(0, 0, 0, 0.08), 0px 1px 3px 1px rgba(0, 0, 0, 0.06);
+            --md-elevation-level2: 0px 1px 2px 0px rgba(0, 0, 0, 0.10), 0px 2px 6px 2px rgba(0, 0, 0, 0.06);
+            --md-elevation-level3: 0px 1px 3px 0px rgba(0, 0, 0, 0.12), 0px 4px 8px 3px rgba(0, 0, 0, 0.06);
+            --md-elevation-level4: 0px 2px 3px 0px rgba(0, 0, 0, 0.14), 0px 6px 10px 4px rgba(0, 0, 0, 0.06);
+            --md-elevation-level5: 0px 3px 5px 0px rgba(0, 0, 0, 0.16), 0px 8px 12px 6px rgba(0, 0, 0, 0.06);
+
+            /* MD3 Shape */
+            --md-shape-extra-small: 4px;
+            --md-shape-small: 8px;
+            --md-shape-medium: 12px;
+            --md-shape-large: 16px;
+            --md-shape-extra-large: 28px;
+            --md-shape-full: 9999px;
+
+            /* MD3 过渡 */
+            --md-transition-duration-short: 200ms;
+            --md-transition-duration-medium: 350ms;
+            --md-transition-duration-long: 500ms;
+            --md-easing-standard: cubic-bezier(0.2, 0.0, 0, 1.0);
+            --md-easing-emphasized: cubic-bezier(0.05, 0.7, 0.1, 1.0);
+
+            /* 文件类型指示色 */
+            --file-type-document: #3b5cb8;
+            --file-type-image: #c75b39;
+            --file-type-video: #7c3a5e;
+            --file-type-audio: #5d4ea0;
+            --file-type-archive: #6d5e3f;
+            --file-type-code: #2d6b4f;
+            --file-type-spreadsheet: #3b7340;
+            --file-type-presentation: #b84a2d;
+            --file-type-other: #5f6368;
+        }
+
+        /* ========== 暗色主题 ========== */
+        body.dark-theme {
+            --md-sys-color-primary: #b3c5ff;
+            --md-sys-color-on-primary: #002c79;
+            --md-sys-color-primary-container: #1f44a0;
+            --md-sys-color-on-primary-container: #dbe1ff;
+
+            --md-sys-color-secondary: #c1c5dd;
+            --md-sys-color-on-secondary: #2b2f42;
+            --md-sys-color-secondary-container: #414659;
+            --md-sys-color-on-secondary-container: #dde1f9;
+
+            --md-sys-color-tertiary: #e0bbdf;
+            --md-sys-color-on-tertiary: #422845;
+            --md-sys-color-tertiary-container: #5b3e5d;
+            --md-sys-color-on-tertiary-container: #fdd7fd;
+
+            --md-sys-color-error: #ffb4ab;
+            --md-sys-color-on-error: #690005;
+            --md-sys-color-error-container: #93000a;
+            --md-sys-color-on-error-container: #ffdad6;
+
+            --md-sys-color-surface: #121318;
+            --md-sys-color-on-surface: #e2e1e9;
+            --md-sys-color-surface-variant: #44464f;
+            --md-sys-color-on-surface-variant: #c4c5cf;
+            --md-sys-color-surface-container-lowest: #0d0e13;
+            --md-sys-color-surface-container-low: #1a1b21;
+            --md-sys-color-surface-container: #1e1f25;
+            --md-sys-color-surface-container-high: #292a30;
+            --md-sys-color-surface-container-highest: #34353b;
+
+            --md-sys-color-outline: #8e9099;
+            --md-sys-color-outline-variant: #44464f;
+            --md-sys-color-outline-strong: #babbc4;
+
+            --md-sys-color-inverse-surface: #e2e1e9;
+            --md-sys-color-inverse-on-surface: #2f3037;
+            --md-sys-color-inverse-primary: #3b5cb8;
+
+            --md-sys-color-scrim: #000000;
+            --md-sys-color-shadow: #000000;
+
+            --md-elevation-level1: 0px 1px 2px 0px rgba(0, 0, 0, 0.25), 0px 1px 3px 1px rgba(0, 0, 0, 0.18);
+            --md-elevation-level2: 0px 1px 2px 0px rgba(0, 0, 0, 0.30), 0px 2px 6px 2px rgba(0, 0, 0, 0.18);
+            --md-elevation-level3: 0px 1px 3px 0px rgba(0, 0, 0, 0.35), 0px 4px 8px 3px rgba(0, 0, 0, 0.18);
+            --md-elevation-level4: 0px 2px 3px 0px rgba(0, 0, 0, 0.38), 0px 6px 10px 4px rgba(0, 0, 0, 0.18);
+            --md-elevation-level5: 0px 3px 5px 0px rgba(0, 0, 0, 0.42), 0px 8px 12px 6px rgba(0, 0, 0, 0.18);
+
+            --file-type-document: #b3c5ff;
+            --file-type-image: #ffb59e;
+            --file-type-video: #e8b3d4;
+            --file-type-audio: #c8bfff;
+            --file-type-archive: #dcc78b;
+            --file-type-code: #8cd4a8;
+            --file-type-spreadsheet: #a0d6a5;
+            --file-type-presentation: #ffb39b;
+            --file-type-other: #bdc1c6;
+        }
+
+        /* ========== 全局重置与基础样式 ========== */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+        }
+
+        body {
+            font-family: 'Roboto', system-ui, -apple-system, sans-serif;
+            background-color: var(--md-sys-color-surface);
+            color: var(--md-sys-color-on-surface);
+            line-height: 1.5;
+            min-height: 100vh;
+            overflow-x: hidden;
+            transition: background-color var(--md-transition-duration-medium) var(--md-easing-standard),
+                color var(--md-transition-duration-medium) var(--md-easing-standard);
+            display: flex;
+            flex-direction: column;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        /* ========== MD3 排版层级 ========== */
+        .md-display-small {
+            font-size: 2.25rem;
+            font-weight: 400;
+            line-height: 2.75rem;
+            letter-spacing: 0;
+        }
+        .md-headline-medium {
+            font-size: 1.75rem;
+            font-weight: 400;
+            line-height: 2.25rem;
+            letter-spacing: 0;
+        }
+        .md-headline-small {
+            font-size: 1.5rem;
+            font-weight: 400;
+            line-height: 2rem;
+            letter-spacing: 0;
+        }
+        .md-title-large {
+            font-size: 1.375rem;
+            font-weight: 400;
+            line-height: 1.75rem;
+            letter-spacing: 0;
+        }
+        .md-title-medium {
+            font-size: 1rem;
+            font-weight: 500;
+            line-height: 1.5rem;
+            letter-spacing: 0.009375rem;
+        }
+        .md-title-small {
+            font-size: 0.875rem;
+            font-weight: 500;
+            line-height: 1.25rem;
+            letter-spacing: 0.00625rem;
+        }
+        .md-body-large {
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1.5rem;
+            letter-spacing: 0.03125rem;
+        }
+        .md-body-medium {
+            font-size: 0.875rem;
+            font-weight: 400;
+            line-height: 1.25rem;
+            letter-spacing: 0.015625rem;
+        }
+        .md-body-small {
+            font-size: 0.75rem;
+            font-weight: 400;
+            line-height: 1rem;
+            letter-spacing: 0.025rem;
+        }
+        .md-label-large {
+            font-size: 0.875rem;
+            font-weight: 500;
+            line-height: 1.25rem;
+            letter-spacing: 0.00625rem;
+        }
+        .md-label-medium {
+            font-size: 0.75rem;
+            font-weight: 500;
+            line-height: 1rem;
+            letter-spacing: 0.03125rem;
+        }
+        .md-label-small {
+            font-size: 0.6875rem;
+            font-weight: 500;
+            line-height: 1rem;
+            letter-spacing: 0.03125rem;
+        }
+
+        /* ========== Material Symbols 图标基础样式 ========== */
+        .material-symbols-rounded {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            font-size: 1.25rem;
+            vertical-align: middle;
+            display: inline-block;
+            line-height: 1;
+            flex-shrink: 0;
+        }
+        .material-symbols-rounded.icon-filled {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-rounded.icon-lg {
+            font-size: 1.75rem;
+        }
+        .material-symbols-rounded.icon-xl {
+            font-size: 2.5rem;
+        }
+        .material-symbols-rounded.icon-sm {
+            font-size: 1rem;
+        }
+
+        /* ========== 应用布局 ========== */
+        .app-container {
+            display: flex;
+            flex: 1;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* ========== 顶部应用栏 ========== */
+        .app-bar {
+            position: sticky;
+            top: 0;
+            z-index: 40;
+            background-color: var(--md-sys-color-surface-container);
+            border-bottom: 1px solid var(--md-sys-color-outline-variant);
+            padding: 0 1rem;
+            height: 4rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: background-color var(--md-transition-duration-medium) var(--md-easing-standard),
+                border-color var(--md-transition-duration-medium) var(--md-easing-standard);
+            box-shadow: var(--md-elevation-level1);
+        }
+        .app-bar__brand {
+            display: flex;
+            align-items: center;
+            gap: 0.625rem;
+            font-weight: 600;
+            font-size: 1.25rem;
+            color: var(--md-sys-color-on-surface);
+            letter-spacing: -0.01em;
+            flex-shrink: 0;
+        }
+        .app-bar__brand .brand-icon {
+            width: 2.25rem;
+            height: 2.25rem;
+            border-radius: var(--md-shape-medium);
+            background: var(--md-sys-color-primary-container);
+            color: var(--md-sys-color-on-primary-container);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.375rem;
+        }
+        .app-bar__spacer {
+            flex: 1;
+        }
+        .app-bar__search-wrapper {
+            position: relative;
+            flex: 1;
+            max-width: 28rem;
+            min-width: 10rem;
+        }
+        .app-bar__search {
+            width: 100%;
+            height: 2.75rem;
+            border-radius: var(--md-shape-full);
+            border: 1px solid var(--md-sys-color-outline-variant);
+            background-color: var(--md-sys-color-surface-container-high);
+            color: var(--md-sys-color-on-surface);
+            padding: 0 1rem 0 2.75rem;
+            font-size: 0.9375rem;
+            font-family: inherit;
+            outline: none;
+            transition: all var(--md-transition-duration-short) var(--md-easing-standard);
+        }
+        .app-bar__search:focus {
+            border-color: var(--md-sys-color-primary);
+            background-color: var(--md-sys-color-surface-container-lowest);
+            box-shadow: 0 0 0 3px rgba(59, 92, 184, 0.12);
+        }
+        .app-bar__search::placeholder {
+            color: var(--md-sys-color-on-surface-variant);
+            opacity: 0.7;
+        }
+        .app-bar__search-icon {
+            position: absolute;
+            left: 0.75rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--md-sys-color-on-surface-variant);
+            pointer-events: none;
+            font-size: 1.25rem;
+        }
+        .app-bar__search-clear {
+            position: absolute;
+            right: 0.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--md-sys-color-on-surface-variant);
+            padding: 0.25rem;
+            border-radius: var(--md-shape-full);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            transition: background-color var(--md-transition-duration-short) var(--md-easing-standard);
+        }
+        .app-bar__search-clear.visible {
+            display: flex;
+        }
+        .app-bar__search-clear:hover {
+            background-color: var(--md-sys-color-surface-container-highest);
+        }
+        .app-bar__actions {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            flex-shrink: 0;
+        }
+
+        /* ========== MD3 图标按钮 ========== */
+        .md-icon-btn {
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: var(--md-shape-full);
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            color: var(--md-sys-color-on-surface-variant);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            transition: background-color var(--md-transition-duration-short) var(--md-easing-standard),
+                color var(--md-transition-duration-short) var(--md-easing-standard);
+            flex-shrink: 0;
+            font-family: inherit;
+        }
+        .md-icon-btn:hover {
+            background-color: rgba(68, 70, 79, 0.08);
+        }
+        .md-icon-btn:active {
+            background-color: rgba(68, 70, 79, 0.14);
+        }
+        .md-icon-btn.toggle-active {
+            background-color: var(--md-sys-color-secondary-container);
+            color: var(--md-sys-color-on-secondary-container);
+        }
+        .md-icon-btn.toggle-active:hover {
+            background-color: var(--md-sys-color-secondary-container);
+            filter: brightness(0.95);
+        }
+
+        /* ========== 主内容区 ========== */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            background-color: var(--md-sys-color-surface);
+            transition: background-color var(--md-transition-duration-medium) var(--md-easing-standard);
+        }
+
+        /* ========== 侧边导航栏 ========== */
+        .nav-drawer {
+            width: 17.5rem;
+            flex-shrink: 0;
+            background-color: var(--md-sys-color-surface-container-low);
+            border-right: 1px solid var(--md-sys-color-outline-variant);
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            overflow-x: hidden;
+            transition: all var(--md-transition-duration-medium) var(--md-easing-standard);
+            z-index: 30;
+            position: sticky;
+            top: 4rem;
+            height: calc(100vh - 4rem);
+        }
+        .nav-drawer__section {
+            padding: 0.75rem 0.5rem;
+            border-bottom: 1px solid var(--md-sys-color-outline-variant);
+        }
+        .nav-drawer__section:last-child {
+            border-bottom: none;
+        }
+        .nav-drawer__section-title {
+            padding: 0.375rem 0.75rem;
+            color: var(--md-sys-color-on-surface-variant);
+            font-size: 0.6875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .nav-drawer__item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.625rem 0.75rem;
+            border-radius: var(--md-shape-full);
+            cursor: pointer;
+            transition: all var(--md-transition-duration-short) var(--md-easing-standard);
+            color: var(--md-sys-color-on-surface-variant);
+            position: relative;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        .nav-drawer__item:hover {
+            background-color: rgba(68, 70, 79, 0.08);
+        }
+        .nav-drawer__item.active {
+            background-color: var(--md-sys-color-secondary-container);
+            color: var(--md-sys-color-on-secondary-container);
+            font-weight: 600;
+        }
+        .nav-drawer__item .item-badge {
+            margin-left: auto;
+            background-color: var(--md-sys-color-primary-container);
+            color: var(--md-sys-color-on-primary-container);
+            font-size: 0.6875rem;
+            font-weight: 600;
+            padding: 0.125rem 0.5rem;
+            border-radius: var(--md-shape-full);
+            min-width: 1.5rem;
+            text-align: center;
+        }
+        .nav-drawer__item.active .item-badge {
+            background-color: var(--md-sys-color-primary);
+            color: var(--md-sys-color-on-primary);
+        }
+        .nav-drawer__storage-info {
+            padding: 0.75rem;
+        }
+        .storage-bar {
+            height: 0.5rem;
+            border-radius: var(--md-shape-full);
+            background-color: var(--md-sys-color-surface-variant);
+            overflow: hidden;
+            display: flex;
+            margin-bottom: 0.5rem;
+        }
+        .storage-bar__segment {
+            height: 100%;
+            transition: width var(--md-transition-duration-long) var(--md-easing-emphasized);
+        }
+        .storage-bar__segment.seg-doc {
+            background-color: var(--file-type-document);
+        }
+        .storage-bar__segment.seg-img {
+            background-color: var(--file-type-image);
+        }
+        .storage-bar__segment.seg-vid {
+            background-color: var(--file-type-video);
+        }
+        .storage-bar__segment.seg-aud {
+            background-color: var(--file-type-audio);
+        }
+        .storage-bar__segment.seg-arc {
+            background-color: var(--file-type-archive);
+        }
+        .storage-bar__segment.seg-code {
+            background-color: var(--file-type-code);
+        }
+        .storage-bar__segment.seg-other {
+            background-color: var(--file-type-other);
+        }
+        .storage-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.375rem 0.75rem;
+        }
+        .storage-legend__item {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            font-size: 0.6875rem;
+            color: var(--md-sys-color-on-surface-variant);
+        }
+        .storage-legend__dot {
+            width: 0.5rem;
+            height: 0.5rem;
+            border-radius: var(--md-shape-full);
+            flex-shrink: 0;
+        }
+
+        /* ========== 工具栏区域 ========== */
+        .toolbar {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.25rem;
+            flex-wrap: wrap;
+            border-bottom: 1px solid var(--md-sys-color-outline-variant);
+            background-color: var(--md-sys-color-surface-container-lowest);
+            transition: all var(--md-transition-duration-medium) var(--md-easing-standard);
+            min-height: 3.5rem;
+        }
+        .toolbar__info {
+            font-size: 0.875rem;
+            color: var(--md-sys-color-on-surface-variant);
+            flex-shrink: 0;
+        }
+        .toolbar__spacer {
+            flex: 1;
+            min-width: 0.5rem;
+        }
+        .toolbar__chip-group {
+            display: flex;
+            gap: 0.375rem;
+            flex-wrap: wrap;
+        }
+        .md-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.375rem;
+            padding: 0.375rem 1rem;
+            border-radius: var(--md-shape-small);
+            border: 1px solid var(--md-sys-color-outline-variant);
+            background-color: var(--md-sys-color-surface-container);
+            cursor: pointer;
+            font-size: 0.8125rem;
+            font-weight: 500;
+            color: var(--md-sys-color-on-surface-variant);
+            transition: all var(--md-transition-duration-short) var(--md-easing-standard);
+            white-space: nowrap;
+            font-family: inherit;
+            position: relative;
+            overflow: hidden;
+        }
+        .md-chip:hover {
+            background-color: var(--md-sys-color-surface-container-high);
+        }
+        .md-chip.active {
+            background-color: var(--md-sys-color-primary-container);
+            color: var(--md-sys-color-on-primary-container);
+            border-color: transparent;
+            font-weight: 600;
+        }
+        .md-chip .chip-icon {
+            font-size: 1rem;
+        }
+
+        /* ========== 批量操作栏 ========== */
+        .batch-bar {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.625rem 1.25rem;
+            background-color: var(--md-sys-color-primary-container);
+            color: var(--md-sys-color-on-primary-container);
+            border-radius: var(--md-shape-medium);
+            margin: 0.75rem 1.25rem 0;
+            box-shadow: var(--md-elevation-level2);
+            transition: all var(--md-transition-duration-medium) var(--md-easing-standard);
+            transform-origin: top center;
+            animation: batchBarIn var(--md-transition-duration-medium) var(--md-easing-emphasized);
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        @keyframes batchBarIn {
+            from {
+                opacity: 0;
+                transform: translateY(-0.75rem);
+                max-height: 0;
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+                max-height: 4rem;
+            }
+        }
+        .batch-bar .md-icon-btn {
+            color: var(--md-sys-color-on-primary-container);
+        }
+        .batch-bar .md-icon-btn:hover {
+            background-color: rgba(0, 23, 75, 0.08);
+        }
+        .batch-bar__count {
+            font-weight: 600;
+        }
+
+        /* ========== 文件列表区域 ========== */
+        .file-area {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1rem 1.25rem;
+            display: grid;
+            gap: 0.75rem;
+            align-content: start;
+            transition: all var(--md-transition-duration-medium) var(--md-easing-standard);
+            scroll-behavior: smooth;
+        }
+        /* 网格视图 */
+        .file-area.view-grid {
+            grid-template-columns: repeat(auto-fill, minmax(13.5rem, 1fr));
+        }
+        /* 列表视图 */
+        .file-area.view-list {
+            grid-template-columns: 1fr;
+            gap: 0.25rem;
+        }
+
+        /* ========== 文件卡片（网格视图） ========== */
+        .file-card {
+            background-color: var(--md-sys-color-surface-container);
+            border-radius: var(--md-shape-medium);
+            padding: 1rem;
+            cursor: pointer;
+            position: relative;
+            transition: all var(--md-transition-duration-short) var(--md-easing-standard);
+            border: 2px solid transparent;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            box-shadow: var(--md-elevation-level1);
+            outline: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .file-card:hover {
+            box-shadow: var(--md-elevation-level2);
+            background-color: var(--md-sys-color-surface-container-high);
+            border-color: var(--md-sys-color-outline-variant);
+        }
+        .file-card:focus-visible {
+            border-color: var(--md-sys-color-primary);
+            box-shadow: 0 0 0 4px rgba(59, 92, 184, 0.18);
+        }
+        .file-card.selected {
+            border-color: var(--md-sys-color-primary);
+            background-color: var(--md-sys-color-primary-container);
+            box-shadow: var(--md-elevation-level2);
+        }
+        .file-card__checkbox {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            z-index: 2;
+            width: 1.5rem;
+            height: 1.5rem;
+            border-radius: var(--md-shape-extra-small);
+            cursor: pointer;
+            accent-color: var(--md-sys-color-primary);
+            opacity: 0;
+            transition: opacity var(--md-transition-duration-short) var(--md-easing-standard);
+            pointer-events: auto;
+        }
+        .file-card:hover .file-card__checkbox,
+        .file-card.selected .file-card__checkbox,
+        .file-card__checkbox:checked {
+            opacity: 1;
+        }
+        .file-card__icon-area {
+            width: 3.5rem;
+            height: 3.5rem;
+            border-radius: var(--md-shape-medium);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            position: relative;
+        }
+        .file-card__icon-area.doc {
+            background-color: #e8ecff;
+            color: var(--file-type-document);
+        }
+        .file-card__icon-area.img {
+            background-color: #fde8e0;
+            color: var(--file-type-image);
+        }
+        .file-card__icon-area.vid {
+            background-color: #f3e0ec;
+            color: var(--file-type-video);
+        }
+        .file-card__icon-area.aud {
+            background-color: #ece8f8;
+            color: var(--file-type-audio);
+        }
+        .file-card__icon-area.arc {
+            background-color: #f5efe0;
+            color: var(--file-type-archive);
+        }
+        .file-card__icon-area.code {
+            background-color: #e0f0e6;
+            color: var(--file-type-code);
+        }
+        .file-card__icon-area.other {
+            background-color: #e8eaed;
+            color: var(--file-type-other);
+        }
+        body.dark-theme .file-card__icon-area.doc {
+            background-color: rgba(179, 197, 255, 0.15);
+        }
+        body.dark-theme .file-card__icon-area.img {
+            background-color: rgba(255, 181, 158, 0.15);
+        }
+        body.dark-theme .file-card__icon-area.vid {
+            background-color: rgba(232, 179, 212, 0.15);
+        }
+        body.dark-theme .file-card__icon-area.aud {
+            background-color: rgba(200, 191, 255, 0.15);
+        }
+        body.dark-theme .file-card__icon-area.arc {
+            background-color: rgba(220, 199, 139, 0.15);
+        }
+        body.dark-theme .file-card__icon-area.code {
+            background-color: rgba(140, 212, 168, 0.15);
+        }
+        .file-card__name {
+            font-weight: 500;
+            font-size: 0.875rem;
+            line-height: 1.3;
+            color: var(--md-sys-color-on-surface);
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            flex: 1;
+            min-width: 0;
+        }
+        .file-card__meta {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.75rem;
+            color: var(--md-sys-color-on-surface-variant);
+            flex-wrap: wrap;
+        }
+        .file-card__size {
+            font-weight: 500;
+            white-space: nowrap;
+        }
+        .file-card__date {
+            white-space: nowrap;
+        }
+        .file-card__actions-row {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            margin-top: auto;
+            padding-top: 0.25rem;
+        }
+        .file-card__dl-btn {
+            flex: 1;
+            padding: 0.5rem 0.75rem;
+            border-radius: var(--md-shape-full);
+            border: none;
+            background-color: var(--md-sys-color-primary);
+            color: var(--md-sys-color-on-primary);
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.8125rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.375rem;
+            transition: all var(--md-transition-duration-short) var(--md-easing-standard);
+            font-family: inherit;
+            position: relative;
+            overflow: hidden;
+        }
+        .file-card__dl-btn:hover {
+            filter: brightness(1.08);
+            box-shadow: var(--md-elevation-level1);
+        }
+        .file-card__dl-btn:active {
+            filter: brightness(0.92);
+            transform: scale(0.97);
+        }
+        .file-card__dl-btn.downloading {
+            background-color: var(--md-sys-color-secondary-container);
+            color: var(--md-sys-color-on-secondary-container);
+            pointer-events: none;
+        }
+        .file-card__dl-btn.done {
+            background-color: #2d6b4f;
+            color: #ffffff;
+        }
+
+        /* ========== 文件行（列表视图） ========== */
+        .file-row {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.625rem 1rem;
+            border-radius: var(--md-shape-medium);
+            cursor: pointer;
+            transition: all var(--md-transition-duration-short) var(--md-easing-standard);
+            background-color: transparent;
+            border: 2px solid transparent;
+            min-height: 3.25rem;
+            outline: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .file-row:hover {
+            background-color: var(--md-sys-color-surface-container);
+            border-color: var(--md-sys-color-outline-variant);
+        }
+        .file-row.selected {
+            background-color: var(--md-sys-color-primary-container);
+            border-color: var(--md-sys-color-primary);
+        }
+        .file-row:focus-visible {
+            border-color: var(--md-sys-color-primary);
+            box-shadow: 0 0 0 3px rgba(59, 92, 184, 0.15);
+        }
+        .file-row__checkbox {
+            width: 1.25rem;
+            height: 1.25rem;
+            cursor: pointer;
+            accent-color: var(--md-sys-color-primary);
+            flex-shrink: 0;
+            opacity: 0.6;
+            transition: opacity var(--md-transition-duration-short) var(--md-easing-standard);
+        }
+        .file-row:hover .file-row__checkbox,
+        .file-row.selected .file-row__checkbox,
+        .file-row__checkbox:checked {
+            opacity: 1;
+        }
+        .file-row__icon {
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: var(--md-shape-small);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .file-row__icon.doc {
+            background-color: #e8ecff;
+            color: var(--file-type-document);
+        }
+        .file-row__icon.img {
+            background-color: #fde8e0;
+            color: var(--file-type-image);
+        }
+        .file-row__icon.vid {
+            background-color: #f3e0ec;
+            color: var(--file-type-video);
+        }
+        .file-row__icon.aud {
+            background-color: #ece8f8;
+            color: var(--file-type-audio);
+        }
+        .file-row__icon.arc {
+            background-color: #f5efe0;
+            color: var(--file-type-archive);
+        }
+        .file-row__icon.code {
+            background-color: #e0f0e6;
+            color: var(--file-type-code);
+        }
+        .file-row__icon.other {
+            background-color: #e8eaed;
+            color: var(--file-type-other);
+        }
+        body.dark-theme .file-row__icon.doc {
+            background-color: rgba(179, 197, 255, 0.15);
+        }
+        body.dark-theme .file-row__icon.img {
+            background-color: rgba(255, 181, 158, 0.15);
+        }
+        body.dark-theme .file-row__icon.vid {
+            background-color: rgba(232, 179, 212, 0.15);
+        }
+        body.dark-theme .file-row__icon.aud {
+            background-color: rgba(200, 191, 255, 0.15);
+        }
+        body.dark-theme .file-row__icon.arc {
+            background-color: rgba(220, 199, 139, 0.15);
+        }
+        body.dark-theme .file-row__icon.code {
+            background-color: rgba(140, 212, 168, 0.15);
+        }
+        .file-row__name {
+            flex: 1;
+            min-width: 0;
+            font-weight: 500;
+            font-size: 0.875rem;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            color: var(--md-sys-color-on-surface);
+        }
+        .file-row__type {
+            font-size: 0.75rem;
+            color: var(--md-sys-color-on-surface-variant);
+            width: 4rem;
+            text-align: center;
+            flex-shrink: 0;
+            display: none;
+        }
+        .file-row__size {
+            font-size: 0.8125rem;
+            color: var(--md-sys-color-on-surface-variant);
+            width: 5rem;
+            text-align: right;
+            flex-shrink: 0;
+            font-weight: 500;
+        }
+        .file-row__date {
+            font-size: 0.75rem;
+            color: var(--md-sys-color-on-surface-variant);
+            width: 7rem;
+            text-align: right;
+            flex-shrink: 0;
+            display: none;
+        }
+        .file-row__dl-btn {
+            padding: 0.375rem 1rem;
+            border-radius: var(--md-shape-full);
+            border: none;
+            background-color: var(--md-sys-color-primary);
+            color: var(--md-sys-color-on-primary);
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.8125rem;
+            flex-shrink: 0;
+            transition: all var(--md-transition-duration-short) var(--md-easing-standard);
+            font-family: inherit;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+        .file-row__dl-btn:hover {
+            filter: brightness(1.08);
+            box-shadow: var(--md-elevation-level1);
+        }
+        .file-row__dl-btn:active {
+            filter: brightness(0.92);
+            transform: scale(0.96);
+        }
+        .file-row__dl-btn.downloading {
+            background-color: var(--md-sys-color-secondary-container);
+            color: var(--md-sys-color-on-secondary-container);
+            pointer-events: none;
+        }
+        .file-row__dl-btn.done {
+            background-color: #2d6b4f;
+            color: #ffffff;
+        }
+
+        @media (min-width: 768px) {
+            .file-row__type {
+                display: block;
+            }
+            .file-row__date {
+                display: block;
+            }
+        }
+
+        /* ========== 空状态 ========== */
+        .empty-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem 1rem;
+            text-align: center;
+            grid-column: 1 / -1;
+            color: var(--md-sys-color-on-surface-variant);
+            gap: 0.75rem;
+        }
+        .empty-state__icon {
+            font-size: 4rem;
+            opacity: 0.5;
+            font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 48;
+        }
+        .empty-state__text {
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        /* ========== 下载进度面板 ========== */
+        .download-panel {
+            position: fixed;
+            bottom: 1.25rem;
+            right: 1.25rem;
+            z-index: 50;
+            width: 22rem;
+            max-width: calc(100vw - 2.5rem);
+            background-color: var(--md-sys-color-surface-container-high);
+            border-radius: var(--md-shape-large);
+            box-shadow: var(--md-elevation-level4);
+            border: 1px solid var(--md-sys-color-outline-variant);
+            overflow: hidden;
+            transition: all var(--md-transition-duration-medium) var(--md-easing-emphasized);
+            display: none;
+        }
+        .download-panel.visible {
+            display: block;
+            animation: panelSlideUp var(--md-transition-duration-medium) var(--md-easing-emphasized);
+        }
+        @keyframes panelSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(1.5rem);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .download-panel__header {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid var(--md-sys-color-outline-variant);
+            gap: 0.5rem;
+            font-weight: 600;
+            font-size: 0.9375rem;
+            color: var(--md-sys-color-on-surface);
+        }
+        .download-panel__list {
+            max-height: 18rem;
+            overflow-y: auto;
+            padding: 0.5rem;
+        }
+        .download-panel__item {
+            display: flex;
+            align-items: center;
+            gap: 0.625rem;
+            padding: 0.5rem 0.625rem;
+            border-radius: var(--md-shape-small);
+            transition: background-color var(--md-transition-duration-short) var(--md-easing-standard);
+        }
+        .download-panel__item:hover {
+            background-color: var(--md-sys-color-surface-container);
+        }
+        .download-panel__item-name {
+            flex: 1;
+            min-width: 0;
+            font-size: 0.8125rem;
+            font-weight: 500;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            color: var(--md-sys-color-on-surface);
+        }
+        .download-panel__item-status {
+            font-size: 0.75rem;
+            color: var(--md-sys-color-on-surface-variant);
+            flex-shrink: 0;
+        }
+        .download-panel__progress {
+            width: 3rem;
+            height: 0.25rem;
+            border-radius: var(--md-shape-full);
+            background-color: var(--md-sys-color-surface-variant);
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        .download-panel__progress-fill {
+            height: 100%;
+            background-color: var(--md-sys-color-primary);
+            border-radius: var(--md-shape-full);
+            transition: width 0.15s linear;
+        }
+        .download-panel__clear {
+            padding: 0.5rem 1rem;
+            border-top: 1px solid var(--md-sys-color-outline-variant);
+            text-align: center;
+        }
+        .download-panel__clear button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--md-sys-color-primary);
+            font-weight: 600;
+            font-size: 0.8125rem;
+            font-family: inherit;
+            padding: 0.25rem 0.75rem;
+            border-radius: var(--md-shape-full);
+            transition: background-color var(--md-transition-duration-short) var(--md-easing-standard);
+        }
+        .download-panel__clear button:hover {
+            background-color: rgba(59, 92, 184, 0.08);
+        }
+
+        /* ========== 滚动条美化 ========== */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background-color: var(--md-sys-color-outline-variant);
+            border-radius: var(--md-shape-full);
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background-color: var(--md-sys-color-outline);
+        }
+
+        /* ========== 响应式 ========== */
+        @media (max-width: 1023px) {
+            .nav-drawer {
+                position: fixed;
+                left: -18rem;
+                top: 4rem;
+                height: calc(100vh - 4rem);
+                z-index: 35;
+                box-shadow: var(--md-elevation-level4);
+                border-radius: 0 var(--md-shape-large) var(--md-shape-large) 0;
+                width: 17.5rem;
+            }
+            .nav-drawer.open {
+                left: 0;
+            }
+            .nav-drawer-overlay {
+                position: fixed;
+                inset: 0;
+                background-color: rgba(0, 0, 0, 0.4);
+                z-index: 34;
+                display: none;
+                top: 4rem;
+            }
+            .nav-drawer-overlay.open {
+                display: block;
+            }
+            .app-bar__menu-btn {
+                display: inline-flex !important;
+            }
+            .file-area.view-grid {
+                grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+            }
+        }
+        @media (min-width: 1024px) {
+            .app-bar__menu-btn {
+                display: none !important;
+            }
+            .nav-drawer-overlay {
+                display: none !important;
+            }
+        }
+        @media (max-width: 600px) {
+            .app-bar {
+                padding: 0 0.75rem;
+                height: 3.5rem;
+            }
+            .app-bar__brand {
+                font-size: 1rem;
+                gap: 0.375rem;
+            }
+            .app-bar__brand .brand-icon {
+                width: 1.75rem;
+                height: 1.75rem;
+                font-size: 1rem;
+            }
+            .app-bar__search-wrapper {
+                max-width: none;
+                min-width: 0;
+            }
+            .app-bar__search {
+                height: 2.375rem;
+                font-size: 0.8125rem;
+                padding-left: 2.25rem;
+            }
+            .toolbar {
+                padding: 0.5rem 0.75rem;
+                gap: 0.375rem;
+            }
+            .file-area {
+                padding: 0.5rem;
+                gap: 0.5rem;
+            }
+            .file-area.view-grid {
+                grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr));
+                gap: 0.375rem;
+            }
+            .file-card {
+                padding: 0.625rem;
+                gap: 0.375rem;
+                border-radius: var(--md-shape-small);
+            }
+            .file-card__icon-area {
+                width: 2.5rem;
+                height: 2.5rem;
+                border-radius: var(--md-shape-small);
+            }
+            .file-card__name {
+                font-size: 0.75rem;
+            }
+            .file-card__meta {
+                font-size: 0.6875rem;
+            }
+            .file-card__dl-btn {
+                font-size: 0.6875rem;
+                padding: 0.375rem 0.5rem;
+            }
+            .download-panel {
+                bottom: 0.5rem;
+                right: 0.5rem;
+                width: calc(100vw - 1rem);
+                max-width: none;
+                border-radius: var(--md-shape-large) var(--md-shape-large) 0 0;
+            }
+            .batch-bar {
+                margin: 0.5rem 0.5rem 0;
+                padding: 0.5rem 0.75rem;
+                font-size: 0.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container" id="appContainer">
+        <!-- 侧边导航遮罩层 (移动端) -->
+        <div class="nav-drawer-overlay" id="navOverlay"></div>
+
+        <!-- 侧边导航栏 -->
+        <aside class="nav-drawer" id="navDrawer">
+            <div class="nav-drawer__section">
+                <div class="nav-drawer__section-title">文件分类</div>
+                <div class="nav-drawer__item active" data-filter="all">
+                    <span class="material-symbols-rounded">folder</span>
+                    <span>全部文件</span>
+                    <span class="item-badge" id="badgeAll">0</span>
+                </div>
+                <div class="nav-drawer__item" data-filter="document">
+                    <span class="material-symbols-rounded">description</span>
+                    <span>文档</span>
+                    <span class="item-badge" id="badgeDoc">0</span>
+                </div>
+                <div class="nav-drawer__item" data-filter="image">
+                    <span class="material-symbols-rounded">image</span>
+                    <span>图片</span>
+                    <span class="item-badge" id="badgeImg">0</span>
+                </div>
+                <div class="nav-drawer__item" data-filter="video">
+                    <span class="material-symbols-rounded">movie</span>
+                    <span>视频</span>
+                    <span class="item-badge" id="badgeVid">0</span>
+                </div>
+                <div class="nav-drawer__item" data-filter="audio">
+                    <span class="material-symbols-rounded">music_note</span>
+                    <span>音频</span>
+                    <span class="item-badge" id="badgeAud">0</span>
+                </div>
+                <div class="nav-drawer__item" data-filter="archive">
+                    <span class="material-symbols-rounded">folder_zip</span>
+                    <span>压缩包</span>
+                    <span class="item-badge" id="badgeArc">0</span>
+                </div>
+                <div class="nav-drawer__item" data-filter="code">
+                    <span class="material-symbols-rounded">code</span>
+                    <span>代码</span>
+                    <span class="item-badge" id="badgeCode">0</span>
+                </div>
+            </div>
+            <div class="nav-drawer__section">
+                <div class="nav-drawer__section-title">存储概览</div>
+                <div class="nav-drawer__storage-info">
+                    <div class="storage-bar" id="storageBar">
+                        <span class="storage-bar__segment seg-doc" style="width:0%"></span>
+                        <span class="storage-bar__segment seg-img" style="width:0%"></span>
+                        <span class="storage-bar__segment seg-vid" style="width:0%"></span>
+                        <span class="storage-bar__segment seg-aud" style="width:0%"></span>
+                        <span class="storage-bar__segment seg-arc" style="width:0%"></span>
+                        <span class="storage-bar__segment seg-code" style="width:0%"></span>
+                        <span class="storage-bar__segment seg-other" style="width:0%"></span>
+                    </div>
+                    <div class="storage-legend">
+                        <span class="storage-legend__item"><span class="storage-legend__dot" style="background:var(--file-type-document)"></span>文档</span>
+                        <span class="storage-legend__item"><span class="storage-legend__dot" style="background:var(--file-type-image)"></span>图片</span>
+                        <span class="storage-legend__item"><span class="storage-legend__dot" style="background:var(--file-type-video)"></span>视频</span>
+                        <span class="storage-legend__item"><span class="storage-legend__dot" style="background:var(--file-type-audio)"></span>音频</span>
+                        <span class="storage-legend__item"><span class="storage-legend__dot" style="background:var(--file-type-archive)"></span>压缩</span>
+                        <span class="storage-legend__item"><span class="storage-legend__dot" style="background:var(--file-type-code)"></span>代码</span>
+                    </div>
+                    <div class="md-body-small" style="margin-top:0.5rem;color:var(--md-sys-color-on-surface-variant);" id="storageTotal">
+                        总计: 0 B
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- 主内容区 -->
+        <main class="main-content">
+            <!-- 顶部应用栏 -->
+            <header class="app-bar">
+                <button class="md-icon-btn app-bar__menu-btn" id="menuBtn" aria-label="菜单" style="display:none;">
+                    <span class="material-symbols-rounded">menu</span>
+                </button>
+                <div class="app-bar__brand">
+                    <div class="brand-icon">
+                        <span class="material-symbols-rounded icon-filled">cloud_download</span>
+                    </div>
+                    <span>FileHub</span>
+                </div>
+                <div class="app-bar__spacer"></div>
+                <div class="app-bar__search-wrapper">
+                    <span class="material-symbols-rounded app-bar__search-icon">search</span>
+                    <input type="text" class="app-bar__search" id="searchInput" placeholder="搜索文件名称..." autocomplete="off">
+                    <button class="app-bar__search-clear" id="searchClear" aria-label="清除搜索">
+                        <span class="material-symbols-rounded icon-sm">close</span>
+                    </button>
+                </div>
+                <div class="app-bar__actions">
+                    <button class="md-icon-btn" id="btnSelectAll" aria-label="全选" title="全选">
+                        <span class="material-symbols-rounded">select_all</span>
+                    </button>
+                    <button class="md-icon-btn" id="btnSortToggle" aria-label="排序" title="排序方式">
+                        <span class="material-symbols-rounded">sort</span>
+                    </button>
+                    <button class="md-icon-btn" id="btnViewToggle" aria-label="切换视图" title="切换视图">
+                        <span class="material-symbols-rounded">grid_view</span>
+                    </button>
+                    <button class="md-icon-btn" id="btnThemeToggle" aria-label="切换主题" title="切换深色/浅色主题">
+                        <span class="material-symbols-rounded">light_mode</span>
+                    </button>
+                </div>
+            </header>
+
+            <!-- 工具栏 -->
+            <div class="toolbar" id="toolbar">
+                <span class="toolbar__info md-body-medium" id="toolbarInfo">共 0 个文件</span>
+                <span class="toolbar__spacer"></span>
+                <div class="toolbar__chip-group" id="sortChips">
+                    <button class="md-chip active" data-sort="name-asc">名称 A-Z</button>
+                    <button class="md-chip" data-sort="name-desc">名称 Z-A</button>
+                    <button class="md-chip" data-sort="size-desc">最大优先</button>
+                    <button class="md-chip" data-sort="size-asc">最小优先</button>
+                    <button class="md-chip" data-sort="date-desc">最新优先</button>
+                    <button class="md-chip" data-sort="date-asc">最早优先</button>
+                </div>
+            </div>
+
+            <!-- 批量操作栏 -->
+            <div class="batch-bar" id="batchBar" style="display:none;">
+                <span class="material-symbols-rounded">checklist</span>
+                <span>已选择 <span class="batch-bar__count" id="batchCount">0</span> 个文件</span>
+                <span style="margin-left:auto;font-size:0.8125rem;opacity:0.8;" id="batchSize"></span>
+                <button class="md-icon-btn" id="btnBatchDownload" aria-label="批量下载" title="批量下载">
+                    <span class="material-symbols-rounded">download</span>
+                </button>
+                <button class="md-icon-btn" id="btnBatchClear" aria-label="清除选择" title="清除选择">
+                    <span class="material-symbols-rounded">deselect</span>
+                </button>
+            </div>
+
+            <!-- 文件列表区域 -->
+            <div class="file-area view-grid" id="fileArea" role="list" aria-label="文件列表">
+                <!-- 动态渲染 -->
+            </div>
+        </main>
+    </div>
+
+    <!-- 下载进度面板 -->
+    <div class="download-panel" id="downloadPanel">
+        <div class="download-panel__header">
+            <span class="material-symbols-rounded">download</span>
+            <span>下载队列</span>
+            <span style="margin-left:auto;font-size:0.75rem;color:var(--md-sys-color-on-surface-variant);" id="dlQueueCount">0 项</span>
+            <button class="md-icon-btn icon-sm" id="btnDlPanelClose" aria-label="关闭" style="width:2rem;height:2rem;">
+                <span class="material-symbols-rounded icon-sm">close</span>
+            </button>
+        </div>
+        <div class="download-panel__list" id="dlList">
+            <div style="text-align:center;padding:1.5rem;color:var(--md-sys-color-on-surface-variant);font-size:0.8125rem;">
+                暂无下载任务
+            </div>
+        </div>
+        <div class="download-panel__clear" id="dlClearArea" style="display:none;">
+            <button id="btnDlClear">清除已完成项</button>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            // ==================== 文件数据 ====================
+            const fileData = [
+                { id: 1, name: '项目年度报告.pdf', type: 'document', ext: 'pdf', size: 2458000, date: '2026-05-20',
+                    iconCat: 'doc', iconName: 'picture_as_pdf' },
+                { id: 2, name: '会议纪要_第12周.docx', type: 'document', ext: 'docx', size: 384000, date: '2026-06-10',
+                    iconCat: 'doc', iconName: 'description' },
+                { id: 3, name: '财务数据汇总.xlsx', type: 'document', ext: 'xlsx', size: 1520000, date: '2026-06-05',
+                    iconCat: 'doc', iconName: 'table' },
+                { id: 4, name: '产品发布演示.pptx', type: 'document', ext: 'pptx', size: 8700000, date: '2026-06-01',
+                    iconCat: 'doc', iconName: 'slides' },
+                { id: 5, name: '合同模板_2026版.docx', type: 'document', ext: 'docx', size: 215000, date: '2026-04-28',
+                    iconCat: 'doc', iconName: 'description' },
+                { id: 6, name: '产品宣传海报.jpg', type: 'image', ext: 'jpg', size: 4200000, date: '2026-06-12',
+                iconCat: 'img', iconName: 'image' },
+                { id: 7, name: '公司LOGO_横版.png', type: 'image', ext: 'png', size: 680000, date: '2026-03-15',
+                iconCat: 'img', iconName: 'image' },
+                { id: 8, name: 'UI设计稿_首页.svg', type: 'image', ext: 'svg', size: 320000, date: '2026-06-08',
+                iconCat: 'img', iconName: 'draw' },
+                { id: 9, name: '团队合影_2026.webp', type: 'image', ext: 'webp', size: 5100000, date: '2026-06-13',
+                    iconCat: 'img', iconName: 'photo_camera' },
+                { id: 10, name: '产品介绍视频.mp4', type: 'video', ext: 'mp4', size: 85000000, date: '2026-06-09',
+                    iconCat: 'vid', iconName: 'movie' },
+                { id: 11, name: '操作教程_精简版.mp4', type: 'video', ext: 'mp4', size: 32000000, date: '2026-05-30',
+                    iconCat: 'vid', iconName: 'movie' },
+                { id: 12, name: '品牌宣传片.mov', type: 'video', ext: 'mov', size: 120000000, date: '2026-04-20',
+                    iconCat: 'vid', iconName: 'movie' },
+                { id: 13, name: '播客访谈_第8期.mp3', type: 'audio', ext: 'mp3', size: 28000000, date: '2026-06-11',
+                    iconCat: 'aud', iconName: 'music_note' },
+                { id: 14, name: '会议录音_0612.wav', type: 'audio', ext: 'wav', size: 95000000, date: '2026-06-12',
+                    iconCat: 'aud', iconName: 'mic' },
+                { id: 15, name: '背景音乐_轻柔.m4a', type: 'audio', ext: 'm4a', size: 5400000, date: '2026-05-25',
+                    iconCat: 'aud', iconName: 'music_note' },
+                { id: 16, name: '项目归档_Q1.zip', type: 'archive', ext: 'zip', size: 45000000, date: '2026-04-05',
+                    iconCat: 'arc', iconName: 'folder_zip' },
+                { id: 17, name: '资源素材包.tar.gz', type: 'archive', ext: 'tar.gz', size: 68000000, date: '2026-03-20',
+                    iconCat: 'arc', iconName: 'folder_zip' },
+                { id: 18, name: '备份数据_202606.7z', type: 'archive', ext: '7z', size: 110000000, date: '2026-06-01',
+                    iconCat: 'arc', iconName: 'folder_zip' },
+                { id: 19, name: 'app.js', type: 'code', ext: 'js', size: 156000, date: '2026-06-14', iconCat: 'code',
+                    iconName: 'code' },
+                { id: 20, name: 'styles.css', type: 'code', ext: 'css', size: 89000, date: '2026-06-13',
+                iconCat: 'code', iconName: 'code' },
+                { id: 21, name: 'index.html', type: 'code', ext: 'html', size: 45000, date: '2026-06-14',
+                iconCat: 'code', iconName: 'code' },
+                { id: 22, name: 'config.json', type: 'code', ext: 'json', size: 3200, date: '2026-06-12',
+                iconCat: 'code', iconName: 'data_object' },
+                { id: 23, name: 'README.md', type: 'code', ext: 'md', size: 8500, date: '2026-06-10', iconCat: 'code',
+                    iconName: 'article' },
+                { id: 24, name: 'database_dump.sql', type: 'code', ext: 'sql', size: 2200000, date: '2026-06-08',
+                    iconCat: 'code', iconName: 'database' },
+                { id: 25, name: 'OpenSans-Regular.ttf', type: 'other', ext: 'ttf', size: 340000, date: '2026-02-10',
+                    iconCat: 'other', iconName: 'font_download' },
+                { id: 26, name: '系统镜像_校验.sha256', type: 'other', ext: 'sha256', size: 1200, date: '2026-06-14',
+                    iconCat: 'other', iconName: 'verified' },
+            ];
+
+            // ==================== 状态管理 ====================
+            let currentFilter = 'all';
+            let currentSort = 'name-asc';
+            let currentView = 'grid'; // 'grid' | 'list'
+            let searchQuery = '';
+            let selectedFileIds = new Set();
+            let downloadQueue = []; // { id, name, progress, status: 'pending'|'downloading'|'done'|'error' }
+            let isDarkTheme = false;
+            let lastClickedIndex = -1;
+
+            // ==================== DOM引用 ====================
+            const $ = (sel) => document.querySelector(sel);
+            const $$ = (sel) => document.querySelectorAll(sel);
+
+            const fileArea = $('#fileArea');
+            const searchInput = $('#searchInput');
+            const searchClear = $('#searchClear');
+            const batchBar = $('#batchBar');
+            const batchCount = $('#batchCount');
+            const batchSize = $('#batchSize');
+            const toolbarInfo = $('#toolbarInfo');
+            const downloadPanel = $('#downloadPanel');
+            const dlList = $('#dlList');
+            const dlQueueCount = $('#dlQueueCount');
+            const dlClearArea = $('#dlClearArea');
+            const navDrawer = $('#navDrawer');
+            const navOverlay = $('#navOverlay');
+            const storageBar = $('#storageBar');
+            const storageTotal = $('#storageTotal');
+            const btnViewToggle = $('#btnViewToggle');
+            const btnThemeToggle = $('#btnThemeToggle');
+            const btnSelectAll = $('#btnSelectAll');
+
+            // ==================== 工具函数 ====================
+            function formatBytes(bytes) {
+                if (bytes === 0) return '0 B';
+                const units = ['B', 'KB', 'MB', 'GB', 'TB'];
+                const k = 1024;
+                const i = Math.floor(Math.log(bytes) / Math.log(k));
+                const val = bytes / Math.pow(k, i);
+                return val.toFixed(i === 0 ? 0 : 1) + ' ' + units[i];
+            }
+
+            function formatDate(dateStr) {
+                const d = new Date(dateStr);
+                const now = new Date();
+                const diffMs = now - d;
+                const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+                if (diffDays === 0) return '今天';
+                if (diffDays === 1) return '昨天';
+                if (diffDays < 7) return diffDays + ' 天前';
+                if (diffDays < 30) return Math.floor(diffDays / 7) + ' 周前';
+                const y = d.getFullYear();
+                const m = String(d.getMonth() + 1).padStart(2, '0');
+                const day = String(d.getDate()).padStart(2, '0');
+                return y + '-' + m + '-' + day;
+            }
+
+            function getFileTypeCategory(ext) {
+                const map = {
+                    pdf: 'document',
+                    docx: 'document',
+                    doc: 'document',
+                    xlsx: 'document',
+                    xls: 'document',
+                    pptx: 'document',
+                    ppt: 'document',
+                    txt: 'document',
+                    jpg: 'image',
+                    jpeg: 'image',
+                    png: 'image',
+                    gif: 'image',
+                    svg: 'image',
+                    webp: 'image',
+                    bmp: 'image',
+                    mp4: 'video',
+                    mov: 'video',
+                    avi: 'video',
+                    mkv: 'video',
+                    webm: 'video',
+                    mp3: 'audio',
+                    wav: 'audio',
+                    m4a: 'audio',
+                    flac: 'audio',
+                    ogg: 'audio',
+                    zip: 'archive',
+                    'tar.gz': 'archive',
+                    '7z': 'archive',
+                    rar: 'archive',
+                    gz: 'archive',
+                    js: 'code',
+                    ts: 'code',
+                    css: 'code',
+                    html: 'code',
+                    json: 'code',
+                    md: 'code',
+                    sql: 'code',
+                    py: 'code',
+                    java: 'code',
+                    cpp: 'code',
+                    xml: 'code',
+                    yaml: 'code',
+                    yml: 'code',
+                    sh: 'code',
+                };
+                return map[ext.toLowerCase()] || 'other';
+            }
+
+            // ==================== 过滤与排序 ====================
+            function getFilteredFiles() {
+                let files = [...fileData];
+                if (currentFilter !== 'all') {
+                    files = files.filter(f => f.type === currentFilter);
+                }
+                if (searchQuery.trim()) {
+                    const q = searchQuery.trim().toLowerCase();
+                    files = files.filter(f => f.name.toLowerCase().includes(q) || f.ext.toLowerCase().includes(q));
+                }
+                // 排序
+                files.sort((a, b) => {
+                    switch (currentSort) {
+                        case 'name-asc':
+                            return a.name.localeCompare(b.name, 'zh-Hans-CN', { sensitivity: 'base' });
+                        case 'name-desc':
+                            return b.name.localeCompare(a.name, 'zh-Hans-CN', { sensitivity: 'base' });
+                        case 'size-desc':
+                            return b.size - a.size;
+                        case 'size-asc':
+                            return a.size - b.size;
+                        case 'date-desc':
+                            return new Date(b.date) - new Date(a.date);
+                        case 'date-asc':
+                            return new Date(a.date) - new Date(b.date);
+                        default:
+                            return 0;
+                    }
+                });
+                return files;
+            }
+
+            // ==================== 渲染 ====================
+            function renderFileArea() {
+                const files = getFilteredFiles();
+                fileArea.className = 'file-area ' + (currentView === 'grid' ? 'view-grid' : 'view-list');
+                fileArea.setAttribute('role', 'list');
+
+                if (files.length === 0) {
+                    fileArea.innerHTML = `
+                        <div class="empty-state">
+                            <span class="material-symbols-rounded empty-state__icon">folder_off</span>
+                            <span class="empty-state__text">没有找到匹配的文件</span>
+                            <span class="md-body-small" style="opacity:0.7;">尝试调整搜索条件或筛选类型</span>
+                        </div>`;
+                } else if (currentView === 'grid') {
+                    fileArea.innerHTML = files.map((f, idx) => renderFileCard(f, idx)).join('');
+                } else {
+                    fileArea.innerHTML = files.map((f, idx) => renderFileRow(f, idx)).join('');
+                }
+
+                // 更新选中状态的视觉
+                updateSelectionVisuals();
+                // 更新工具栏信息
+                updateToolbarInfo(files);
+                // 更新存储统计
+                updateStorageStats();
+                // 更新导航徽章
+                updateNavBadges();
+            }
+
+            function renderFileCard(f, idx) {
+                const isSel = selectedFileIds.has(f.id);
+                const selClass = isSel ? ' selected' : '';
+                const dlState = getDownloadState(f.id);
+                let dlBtnClass = '';
+                let dlBtnText = '下载';
+                let dlBtnIcon = 'download';
+                if (dlState === 'downloading') {
+                    dlBtnClass = ' downloading';
+                    dlBtnText = '下载中...';
+                    dlBtnIcon = 'hourglass_top';
+                } else if (dlState === 'done') {
+                    dlBtnClass = ' done';
+                    dlBtnText = '已完成';
+                    dlBtnIcon = 'check_circle';
+                }
+                return `
+                <div class="file-card${selClass}" role="listitem" data-file-id="${f.id}" data-index="${idx}" tabindex="0"
+                     aria-label="${f.name}, ${formatBytes(f.size)}, ${formatDate(f.date)}">
+                    <input type="checkbox" class="file-card__checkbox" data-file-id="${f.id}"
+                           ${isSel ? 'checked' : ''} aria-label="选择 ${f.name}">
+                    <div class="file-card__icon-area ${f.iconCat}">
+                        <span class="material-symbols-rounded icon-xl">${f.iconName}</span>
+                    </div>
+                    <span class="file-card__name" title="${f.name}">${f.name}</span>
+                    <div class="file-card__meta">
+                        <span class="file-card__size">${formatBytes(f.size)}</span>
+                        <span>·</span>
+                        <span class="file-card__date">${formatDate(f.date)}</span>
+                    </div>
+                    <div class="file-card__actions-row">
+                        <button class="file-card__dl-btn${dlBtnClass}" data-dl-id="${f.id}" data-dl-name="${f.name}">
+                            <span class="material-symbols-rounded icon-sm">${dlBtnIcon}</span>
+                            <span>${dlBtnText}</span>
+                        </button>
+                    </div>
+                </div>`;
+            }
+
+            function renderFileRow(f, idx) {
+                const isSel = selectedFileIds.has(f.id);
+                const selClass = isSel ? ' selected' : '';
+                const dlState = getDownloadState(f.id);
+                let dlBtnClass = '';
+                let dlBtnText = '下载';
+                let dlBtnIcon = 'download';
+                if (dlState === 'downloading') {
+                    dlBtnClass = ' downloading';
+                    dlBtnText = '下载中';
+                    dlBtnIcon = 'hourglass_top';
+                } else if (dlState === 'done') {
+                    dlBtnClass = ' done';
+                    dlBtnText = '已完成';
+                    dlBtnIcon = 'check_circle';
+                }
+                return `
+                <div class="file-row${selClass}" role="listitem" data-file-id="${f.id}" data-index="${idx}" tabindex="0"
+                     aria-label="${f.name}, ${formatBytes(f.size)}, ${formatDate(f.date)}">
+                    <input type="checkbox" class="file-row__checkbox" data-file-id="${f.id}"
+                           ${isSel ? 'checked' : ''} aria-label="选择 ${f.name}">
+                    <div class="file-row__icon ${f.iconCat}">
+                        <span class="material-symbols-rounded">${f.iconName}</span>
+                    </div>
+                    <span class="file-row__name" title="${f.name}">${f.name}</span>
+                    <span class="file-row__type">${f.ext.toUpperCase()}</span>
+                    <span class="file-row__size">${formatBytes(f.size)}</span>
+                    <span class="file-row__date">${formatDate(f.date)}</span>
+                    <button class="file-row__dl-btn${dlBtnClass}" data-dl-id="${f.id}" data-dl-name="${f.name}">
+                        <span class="material-symbols-rounded icon-sm">${dlBtnIcon}</span>
+                        <span>${dlBtnText}</span>
+                    </button>
+                </div>`;
+            }
+
+            function getDownloadState(fileId) {
+                const item = downloadQueue.find(d => d.id === fileId);
+                if (!item) return 'none';
+                return item.status;
+            }
+
+            function updateSelectionVisuals() {
+                $$('.file-card, .file-row').forEach(el => {
+                    const fid = parseInt(el.getAttribute('data-file-id'));
+                    if (selectedFileIds.has(fid)) {
+                        el.classList.add('selected');
+                        const cb = el.querySelector('input[type="checkbox"]');
+                        if (cb && !cb.checked) cb.checked = true;
+                    } else {
+                        el.classList.remove('selected');
+                        const cb = el.querySelector('input[type="checkbox"]');
+                        if (cb && cb.checked) cb.checked = false;
+                    }
+                });
+                updateBatchBar();
+            }
+
+            function updateBatchBar() {
+                if (selectedFileIds.size > 0) {
+                    batchBar.style.display = 'flex';
+                    batchCount.textContent = selectedFileIds.size;
+                    let totalSize = 0;
+                    selectedFileIds.forEach(id => {
+                        const f = fileData.find(fd => fd.id === id);
+                        if (f) totalSize += f.size;
+                    });
+                    batchSize.textContent = '共 ' + formatBytes(totalSize);
+                } else {
+                    batchBar.style.display = 'none';
+                }
+            }
+
+            function updateToolbarInfo(files) {
+                const f = files || getFilteredFiles();
+                toolbarInfo.textContent = '共 ' + f.length + ' 个文件';
+            }
+
+            function updateNavBadges() {
+                const allFiles = fileData;
+                const filtered = getFilteredFilesForStats();
+                document.getElementById('badgeAll').textContent = allFiles.length;
+                document.getElementById('badgeDoc').textContent = filtered.doc || 0;
+                document.getElementById('badgeImg').textContent = filtered.img || 0;
+                document.getElementById('badgeVid').textContent = filtered.vid || 0;
+                document.getElementById('badgeAud').textContent = filtered.aud || 0;
+                document.getElementById('badgeArc').textContent = filtered.arc || 0;
+                document.getElementById('badgeCode').textContent = filtered.code || 0;
+            }
+
+            function getFilteredFilesForStats() {
+                const counts = { doc: 0, img: 0, vid: 0, aud: 0, arc: 0, code: 0, other: 0 };
+                let files = [...fileData];
+                if (searchQuery.trim()) {
+                    const q = searchQuery.trim().toLowerCase();
+                    files = files.filter(f => f.name.toLowerCase().includes(q) || f.ext.toLowerCase().includes(q));
+                }
+                files.forEach(f => {
+                    const catMap = { document: 'doc', image: 'img', video: 'vid', audio: 'aud', archive: 'arc',
+                        code: 'code' };
+                    const cat = catMap[f.type] || 'other';
+                    counts[cat] = (counts[cat] || 0) + 1;
+                });
+                return counts;
+            }
+
+            function updateStorageStats() {
+                const files = getFilteredFiles();
+                const catSizes = { doc: 0, img: 0, vid: 0, aud: 0, arc: 0, code: 0, other: 0 };
+                let totalSize = 0;
+                files.forEach(f => {
+                    const catMap = { document: 'doc', image: 'img', video: 'vid', audio: 'aud', archive: 'arc',
+                        code: 'code' };
+                    const cat = catMap[f.type] || 'other';
+                    catSizes[cat] += f.size;
+                    totalSize += f.size;
+                });
+                storageTotal.textContent = '筛选结果总计: ' + formatBytes(totalSize);
+                const segs = storageBar.querySelectorAll('.storage-bar__segment');
+                segs.forEach(seg => {
+                    const cat = seg.classList.contains('seg-doc') ? 'doc' :
+                        seg.classList.contains('seg-img') ? 'img' :
+                        seg.classList.contains('seg-vid') ? 'vid' :
+                        seg.classList.contains('seg-aud') ? 'aud' :
+                        seg.classList.contains('seg-arc') ? 'arc' :
+                        seg.classList.contains('seg-code') ? 'code' : 'other';
+                    const pct = totalSize > 0 ? (catSizes[cat] / totalSize * 100) : 0;
+                    seg.style.width = pct + '%';
+                });
+            }
+
+            // ==================== 下载逻辑 ====================
+            function simulateDownload(fileId, fileName, fileSize) {
+                // 检查是否已在队列中
+                if (downloadQueue.some(d => d.id === fileId && (d.status === 'downloading' || d.status === 'pending'))) {
+                    return;
+                }
+                // 移除之前的完成记录
+                downloadQueue = downloadQueue.filter(d => !(d.id === fileId && d.status === 'done'));
+
+                const dlItem = { id: fileId, name: fileName, size: fileSize, progress: 0, status: 'pending' };
+                downloadQueue.unshift(dlItem);
+                renderDownloadPanel();
+                showDownloadPanel();
+
+                // 开始下载
+                dlItem.status = 'downloading';
+                renderFileArea();
+                renderDownloadPanel();
+
+                const totalSteps = 20;
+                const baseInterval = 80;
+                // 模拟进度，较大文件稍慢
+                const interval = Math.max(40, baseInterval + Math.floor(fileSize / 500000) * 10);
+                let step = 0;
+                const timer = setInterval(() => {
+                    step++;
+                    dlItem.progress = Math.min(100, Math.round((step / totalSteps) * 100));
+                    renderDownloadPanelItem(dlItem);
+                    if (step >= totalSteps) {
+                        clearInterval(timer);
+                        dlItem.status = 'done';
+                        dlItem.progress = 100;
+                        // 实际触发浏览器下载
+                        triggerRealDownload(fileName, fileSize);
+                        renderFileArea();
+                        renderDownloadPanel();
+                        updateDlClearButton();
+                    }
+                }, interval);
+
+                // 存储timer以便可能的取消操作
+                dlItem._timer = timer;
+            }
+
+            function triggerRealDownload(fileName, fileSize) {
+                try {
+                    // 生成模拟文件内容
+                    let content = '';
+                    const ext = fileName.split('.').pop().toLowerCase();
+                    const textExts = ['txt', 'md', 'js', 'css', 'html', 'json', 'xml', 'yaml', 'yml', 'sql', 'sh', 'py',
+                        'java', 'cpp', 'ts', 'svg', 'csv'
+                    ];
+                    if (textExts.includes(ext) || fileSize < 50000) {
+                        // 文本文件：生成有意义的模拟内容
+                        content = generateMockContent(fileName, ext);
+                    } else {
+                        // 二进制文件：生成随机填充
+                        content = 'BINARY_FILE_PLACEHOLDER_' + 'X'.repeat(Math.min(fileSize, 3000));
+                    }
+                    const blob = new Blob([content], { type: 'application/octet-stream' });
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = fileName;
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    setTimeout(() => URL.revokeObjectURL(url), 1000);
+                } catch (e) {
+                    console.warn('下载触发失败:', e);
+                }
+            }
+
+            function generateMockContent(fileName, ext) {
+                const lines = [];
+                lines.push('# ' + fileName);
+                lines.push('# 生成时间: ' + new Date().toISOString());
+                lines.push('');
+                if (['js', 'ts'].includes(ext)) {
+                    lines.push('// JavaScript/TypeScript 模块');
+                    lines.push('const config = {');
+                    lines.push('  appName: "FileHub",');
+                    lines.push('  version: "1.0.0",');
+                    lines.push('  maxFileSize: 100 * 1024 * 1024,');
+                    lines.push('};');
+                    lines.push('export default config;');
+                } else if (ext === 'css') {
+                    lines.push('/* 样式表 */');
+                    lines.push(':root {');
+                    lines.push('  --primary: #3b5cb8;');
+                    lines.push('  --surface: #faf8ff;');
+                    lines.push('}');
+                } else if (ext === 'html') {
+                    lines.push('<!DOCTYPE html>');
+                    lines.push('<html><head><title>' + fileName + '</title></head>');
+                    lines.push('<body><h1>Hello FileHub</h1></body></html>');
+                } else if (ext === 'json') {
+                    lines.push(JSON.stringify({ name: fileName, timestamp: Date.now(), version: '1.0' }, null, 2));
+                } else if (ext === 'md') {
+                    lines.push('## ' + fileName.replace('.md', ''));
+                    lines.push('这是一份Markdown格式的文档。');
+                    lines.push('- 项目: FileHub');
+                    lines.push('- 日期: ' + new Date().toLocaleDateString());
+                } else if (ext === 'sql') {
+                    lines.push('-- SQL 备份');
+                    lines.push('CREATE TABLE files (id INT, name VARCHAR(255), size BIGINT);');
+                    lines.push('INSERT INTO files VALUES (1, \'example.txt\', 1024);');
+                } else if (ext === 'svg') {
+                    lines.push(
+                        '<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><rect width="100" height="100" fill="#3b5cb8"/></svg>'
+                        );
+                } else {
+                    lines.push('文件: ' + fileName);
+                    lines.push('这是由 FileHub 生成的模拟文件内容。');
+                    lines.push('行 3: 示例数据 ' + Math.random().toString(36).substring(7));
+                    lines.push('行 4: 更多示例内容...');
+                }
+                return lines.join('\n');
+            }
+
+            function batchDownload() {
+                if (selectedFileIds.size === 0) return;
+                const ids = Array.from(selectedFileIds);
+                ids.forEach((id, index) => {
+                    const f = fileData.find(fd => fd.id === id);
+                    if (f && !downloadQueue.some(d => d.id === id && d.status === 'downloading')) {
+                        // 错开启动
+                        setTimeout(() => {
+                            simulateDownload(f.id, f.name, f.size);
+                        }, index * 400);
+                    }
+                });
+                selectedFileIds.clear();
+                updateSelectionVisuals();
+                renderFileArea();
+            }
+
+            function renderDownloadPanel() {
+                if (downloadQueue.length === 0) {
+                    dlList.innerHTML =
+                        '<div style="text-align:center;padding:1.5rem;color:var(--md-sys-color-on-surface-variant);font-size:0.8125rem;">暂无下载任务</div>';
+                    dlQueueCount.textContent = '0 项';
+                    dlClearArea.style.display = 'none';
+                } else {
+                    dlQueueCount.textContent = downloadQueue.length + ' 项';
+                    dlList.innerHTML = downloadQueue.map(d => renderDownloadPanelItemHTML(d)).join('');
+                    updateDlClearButton();
+                }
+            }
+
+            function renderDownloadPanelItem(dlItem) {
+                const itemEl = dlList.querySelector(`[data-dl-queue-id="${dlItem.id}"]`);
+                if (itemEl) {
+                    const progressFill = itemEl.querySelector('.download-panel__progress-fill');
+                    const statusEl = itemEl.querySelector('.download-panel__item-status');
+                    if (progressFill) progressFill.style.width = dlItem.progress + '%';
+                    if (statusEl) {
+                        if (dlItem.status === 'done') statusEl.textContent = '完成';
+                        else if (dlItem.status === 'downloading') statusEl.textContent = dlItem.progress + '%';
+                        else statusEl.textContent = '等待中';
+                    }
+                }
+            }
+
+            function renderDownloadPanelItemHTML(dlItem) {
+                let statusText = '等待中';
+                if (dlItem.status === 'downloading') statusText = dlItem.progress + '%';
+                if (dlItem.status === 'done') statusText = '完成';
+                const iconName = dlItem.status === 'done' ? 'check_circle' :
+                    dlItem.status === 'downloading' ? 'downloading' : 'schedule';
+                const iconColor = dlItem.status === 'done' ? 'color:#2d6b4f;' :
+                    dlItem.status === 'downloading' ? 'color:var(--md-sys-color-primary);' : '';
+                return `
+                <div class="download-panel__item" data-dl-queue-id="${dlItem.id}">
+                    <span class="material-symbols-rounded icon-sm" style="${iconColor}">${iconName}</span>
+                    <span class="download-panel__item-name" title="${dlItem.name}">${dlItem.name}</span>
+                    <span class="download-panel__item-status">${statusText}</span>
+                    <div class="download-panel__progress">
+                        <div class="download-panel__progress-fill" style="width:${dlItem.progress}%;"></div>
+                    </div>
+                </div>`;
+            }
+
+            function updateDlClearButton() {
+                const hasDone = downloadQueue.some(d => d.status === 'done');
+                dlClearArea.style.display = hasDone ? 'block' : 'none';
+            }
+
+            function showDownloadPanel() {
+                downloadPanel.classList.add('visible');
+            }
+
+            function hideDownloadPanel() {
+                downloadPanel.classList.remove('visible');
+            }
+
+            // ==================== 事件处理 ====================
+            // 搜索
+            searchInput.addEventListener('input', function() {
+                searchQuery = this.value;
+                searchClear.classList.toggle('visible', searchQuery.length > 0);
+                selectedFileIds.clear();
+                renderFileArea();
+            });
+            searchClear.addEventListener('click', function() {
+                searchInput.value = '';
+                searchQuery = '';
+                searchClear.classList.remove('visible');
+                selectedFileIds.clear();
+                renderFileArea();
+                searchInput.focus();
+            });
+
+            // 文件区域事件委托
+            fileArea.addEventListener('click', function(e) {
+                // 下载按钮点击
+                const dlBtn = e.target.closest('[data-dl-id]');
+                if (dlBtn) {
+                    e.stopPropagation();
+                    e.preventDefault();
+                    const fid = parseInt(dlBtn.getAttribute('data-dl-id'));
+                    const fname = dlBtn.getAttribute('data-dl-name');
+                    const f = fileData.find(fd => fd.id === fid);
+                    if (f && getDownloadState(fid) !== 'downloading') {
+                        simulateDownload(fid, fname, f.size);
+                    }
+                    return;
+                }
+
+                // 复选框点击
+                const cb = e.target.closest('input[type="checkbox"]');
+                if (cb) {
+                    e.stopPropagation();
+                    const fid = parseInt(cb.getAttribute('data-file-id'));
+                    if (cb.checked) {
+                        selectedFileIds.add(fid);
+                    } else {
+                        selectedFileIds.delete(fid);
+                    }
+                    updateSelectionVisuals();
+                    return;
+                }
+
+                // 文件卡片/行点击
+                const fileEl = e.target.closest('[data-file-id]');
+                if (fileEl) {
+                    const fid = parseInt(fileEl.getAttribute('data-file-id'));
+                    const idx = parseInt(fileEl.getAttribute('data-index'));
+                    if (e.shiftKey && lastClickedIndex >= 0) {
+                        // Shift范围选择
+                        const files = getFilteredFiles();
+                        const start = Math.min(lastClickedIndex, idx);
+                        const end = Math.max(lastClickedIndex, idx);
+                        for (let i = start; i <= end; i++) {
+                            if (files[i]) selectedFileIds.add(files[i].id);
+                        }
+                    } else if (e.ctrlKey || e.metaKey) {
+                        // Ctrl切换选择
+                        if (selectedFileIds.has(fid)) {
+                            selectedFileIds.delete(fid);
+                        } else {
+                            selectedFileIds.add(fid);
+                        }
+                    } else {
+                        // 普通点击
+                        if (selectedFileIds.size === 1 && selectedFileIds.has(fid)) {
+                            selectedFileIds.clear();
+                        } else {
+                            selectedFileIds.clear();
+                            selectedFileIds.add(fid);
+                        }
+                    }
+                    lastClickedIndex = idx;
+                    updateSelectionVisuals();
+                    return;
+                }
+            });
+
+            // 键盘导航
+            fileArea.addEventListener('keydown', function(e) {
+                const fileEl = e.target.closest('[data-file-id]');
+                if (!fileEl) return;
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    const fid = parseInt(fileEl.getAttribute('data-file-id'));
+                    if (selectedFileIds.has(fid)) {
+                        selectedFileIds.delete(fid);
+                    } else {
+                        if (!e.ctrlKey && !e.metaKey) selectedFileIds.clear();
+                        selectedFileIds.add(fid);
+                    }
+                    updateSelectionVisuals();
+                }
+            });
+
+            // 全选按钮
+            btnSelectAll.addEventListener('click', function() {
+                const files = getFilteredFiles();
+                if (selectedFileIds.size === files.length && files.length > 0) {
+                    selectedFileIds.clear();
+                } else {
+                    files.forEach(f => selectedFileIds.add(f.id));
+                }
+                updateSelectionVisuals();
+                renderFileArea();
+            });
+
+            // 批量下载
+            $('#btnBatchDownload').addEventListener('click', batchDownload);
+            $('#btnBatchClear').addEventListener('click', function() {
+                selectedFileIds.clear();
+                updateSelectionVisuals();
+                renderFileArea();
+            });
+
+            // 下载面板
+            $('#btnDlPanelClose').addEventListener('click', hideDownloadPanel);
+            $('#btnDlClear').addEventListener('click', function() {
+                downloadQueue = downloadQueue.filter(d => d.status !== 'done' && d.status !== 'error');
+                renderDownloadPanel();
+                renderFileArea();
+                if (downloadQueue.length === 0) hideDownloadPanel();
+            });
+
+            // 视图切换
+            btnViewToggle.addEventListener('click', function() {
+                currentView = currentView === 'grid' ? 'list' : 'grid';
+                const iconEl = this.querySelector('.material-symbols-rounded');
+                iconEl.textContent = currentView === 'grid' ? 'grid_view' : 'view_list';
+                this.setAttribute('aria-label', currentView === 'grid' ? '切换为列表视图' : '切换为网格视图');
+                this.title = currentView === 'grid' ? '切换为列表视图' : '切换为网格视图';
+                renderFileArea();
+            });
+
+            // 主题切换
+            btnThemeToggle.addEventListener('click', function() {
+                isDarkTheme = !isDarkTheme;
+                document.body.classList.toggle('dark-theme', isDarkTheme);
+                const iconEl = this.querySelector('.material-symbols-rounded');
+                iconEl.textContent = isDarkTheme ? 'dark_mode' : 'light_mode';
+                this.setAttribute('aria-label', isDarkTheme ? '切换为浅色主题' : '切换为深色主题');
+                this.title = isDarkTheme ? '切换为浅色主题' : '切换为深色主题';
+                try { localStorage.setItem('filehub-theme', isDarkTheme ? 'dark' : 'light'); } catch (e) {}
+                renderFileArea();
+            });
+
+            // 排序chips
+            $('#sortChips').addEventListener('click', function(e) {
+                const chip = e.target.closest('.md-chip');
+                if (!chip) return;
+                const sortVal = chip.getAttribute('data-sort');
+                if (sortVal && sortVal !== currentSort) {
+                    currentSort = sortVal;
+                    $$('#sortChips .md-chip').forEach(c => c.classList.remove('active'));
+                    chip.classList.add('active');
+                    selectedFileIds.clear();
+                    renderFileArea();
+                }
+            });
+
+            // 侧边导航过滤
+            navDrawer.addEventListener('click', function(e) {
+                const item = e.target.closest('.nav-drawer__item');
+                if (!item) return;
+                const filterVal = item.getAttribute('data-filter');
+                if (filterVal && filterVal !== currentFilter) {
+                    currentFilter = filterVal;
+                    $$('.nav-drawer__item').forEach(i => i.classList.remove('active'));
+                    item.classList.add('active');
+                    selectedFileIds.clear();
+                    renderFileArea();
+                    // 移动端关闭抽屉
+                    if (window.innerWidth < 1024) {
+                        closeNavDrawer();
+                    }
+                }
+            });
+
+            // 移动端菜单
+            $('#menuBtn').addEventListener('click', toggleNavDrawer);
+            navOverlay.addEventListener('click', closeNavDrawer);
+
+            function toggleNavDrawer() {
+                const isOpen = navDrawer.classList.contains('open');
+                if (isOpen) {
+                    closeNavDrawer();
+                } else {
+                    openNavDrawer();
+                }
+            }
+
+            function openNavDrawer() {
+                navDrawer.classList.add('open');
+                navOverlay.classList.add('open');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeNavDrawer() {
+                navDrawer.classList.remove('open');
+                navOverlay.classList.remove('open');
+                document.body.style.overflow = '';
+            }
+
+            // 全局键盘快捷键
+            document.addEventListener('keydown', function(e) {
+                // Escape清除选择
+                if (e.key === 'Escape') {
+                    if (selectedFileIds.size > 0) {
+                        selectedFileIds.clear();
+                        updateSelectionVisuals();
+                        renderFileArea();
+                    }
+                    if (downloadPanel.classList.contains('visible') && downloadQueue.every(d => d.status ===
+                            'done')) {
+                        hideDownloadPanel();
+                    }
+                }
+                // Ctrl+A全选
+                if ((e.ctrlKey || e.metaKey) && e.key === 'a' && document.activeElement === document.body) {
+                    e.preventDefault();
+                    const files = getFilteredFiles();
+                    files.forEach(f => selectedFileIds.add(f.id));
+                    updateSelectionVisuals();
+                    renderFileArea();
+                }
+            });
+
+            // 窗口大小变化时更新
+            let resizeDebounce;
+            window.addEventListener('resize', function() {
+                clearTimeout(resizeDebounce);
+                resizeDebounce = setTimeout(() => {
+                    if (window.innerWidth >= 1024) {
+                        closeNavDrawer();
+                    }
+                    updateStorageStats();
+                }, 200);
+            });
+
+            // ==================== 初始化 ====================
+            function init() {
+                // 恢复主题
+                try {
+                    const savedTheme = localStorage.getItem('filehub-theme');
+                    if (savedTheme === 'dark') {
+                        isDarkTheme = true;
+                        document.body.classList.add('dark-theme');
+                        btnThemeToggle.querySelector('.material-symbols-rounded').textContent = 'dark_mode';
+                        btnThemeToggle.setAttribute('aria-label', '切换为浅色主题');
+                        btnThemeToggle.title = '切换为浅色主题';
+                    }
+                } catch (e) {}
+
+                // 初始渲染
+                renderFileArea();
+                updateStorageStats();
+                updateNavBadges();
+
+                // 如果移动端，确保抽屉关闭
+                if (window.innerWidth < 1024) {
+                    closeNavDrawer();
+                }
+            }
+
+            init();
+            console.log('FileHub - 文件下载中心已就绪');
+            console.log('功能: 搜索过滤 | 类型筛选 | 排序 | 网格/列表视图 | 多选批量下载 | 下载队列 | 深色主题 | MD3设计');
+            console.log('键盘快捷键: Ctrl+A 全选 | Esc 清除选择 | Shift+点击 范围选择 | Ctrl+点击 多选');
+        })();
+    </script>
+</body>
+</html>
